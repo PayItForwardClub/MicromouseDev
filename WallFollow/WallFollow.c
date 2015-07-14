@@ -78,3 +78,8 @@ void pid_Wallfollow_set_follow(WALL_FOLLOW_SELECT follow_sel)
 {
 	e_wall_follow_select = follow_sel;
 }
+
+WALL_FOLLOW_SELECT Get_Pid_Wallfollow()
+{
+	return e_wall_follow_select;
+}

@@ -99,7 +99,7 @@ void main(void)
 	Config_System();
 	speed_control_init();
 	pid_Wallfollow_init(pid_param);
-	bluetooth_init(115200);
+	HostCommInit();
 	qei_init(20);
 	buzzer_init();
 	BattSense_init();

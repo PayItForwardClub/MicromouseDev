@@ -71,3 +71,7 @@ static void battery_Runtimeout(TIMER_CALLBACK_FUNC TimeoutCallback, uint32_t msT
 	battery_Stoptimeout();
 	battery_TimerID = TIMER_RegisterEvent(TimeoutCallback, msTime);
 }
+float GetBatteryVoltage()
+{
+	return BatteryVoltage;
+}
