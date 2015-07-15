@@ -24,34 +24,26 @@ static int32_t rcvMsgByte=0;
 static uint8_t rcvMsg[MAX_MSG_LEN_BYTE];
 static int32_t rcvMsgLen=0;
 
-static void HostCommTimeoutCallBack(void)
+static uint8_t data[MAX_MSG_LEN_BYTE];
+static int32_t len;
+
+void HostCommTimeoutCallBack(void)
 {
 	HostCommFlag = true;
-	TIMER_RegisterEvent(&HostCommTimeoutCallBack, UPDATE_TIME_MS);
-}
-static void HostComm_Stoptimeout(void)
-{
-	if (HostComm_TimerID != INVALID_TIMER_ID)
-		TIMER_UnregisterEvent(HostComm_TimerID);
-	HostComm_TimerID = INVALID_TIMER_ID;
-}
-static void HostComm_Runtimeout(TIMER_CALLBACK_FUNC TimeoutCallback, uint32_t msTime)
-{
-	HostComm_Stoptimeout();
-	HostComm_TimerID = TIMER_RegisterEvent(TimeoutCallback, msTime);
+	HostComm_TimerID = TIMER_RegisterEvent(&HostCommTimeoutCallBack, UPDATE_TIME_MS);
 }
 void HostCommInit()
 {
 	bluetooth_init(115200);
-	HostComm_Runtimeout(HostCommTimeoutCallBack,UPDATE_TIME_MS);
+	if (HostComm_TimerID != INVALID_TIMER_ID)
+		TIMER_UnregisterEvent(HostComm_TimerID);
+	HostComm_TimerID = TIMER_RegisterEvent(&HostCommTimeoutCallBack, UPDATE_TIME_MS);
+
 }
 void HostComm_process(void)
 {
 	if (HostCommFlag)
 	{
-		uint8_t data[MAX_MSG_LEN_BYTE];
-		int32_t len;
-
 		HostCommFlag = false;
 
 		//SENDING: sending frame=1 START BYTE + 4 BATT_VOLT BYTES + 1 STATE BYTE + N DATA BYTES
