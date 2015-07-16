@@ -17,19 +17,21 @@ void ButtonHandler(void)
 			//LED3_ON();
 			break;
 		case SYSTEM_CALIB_SENSOR:
-
 			speed_Enable_Hbridge(false);
 			system_SetState(SYSTEM_SAVE_CALIB_SENSOR);
+			LED2_ON();
 		case SYSTEM_SAVE_CALIB_SENSOR:
 			system_SetState(SYSTEM_ESTIMATE_MOTOR_MODEL);
 			speed_Enable_Hbridge(true);
 			speed_set(MOTOR_LEFT,500);
 			speed_set(MOTOR_RIGHT, 500);
+
 			break;
 		case SYSTEM_ESTIMATE_MOTOR_MODEL:
 //			system_SetState(SYSTEM_SAVE_MOTOR_MODEL);
 			system_SetState(SYSTEM_WAIT_TO_RUN);
 			speed_Enable_Hbridge(false);
+			LED3_ON();
 			break;
 		case SYSTEM_WAIT_TO_RUN:
 			speed_Enable_Hbridge(true);
@@ -103,7 +105,7 @@ void main(void)
 	HostCommInit();
 	qei_init(20);
 	buzzer_init();
-	BattSense_init();
+//	BattSense_init();
 	LED_Display_init();
 	Button_init();
 	IRDetector_init();

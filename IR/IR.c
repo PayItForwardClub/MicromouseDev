@@ -80,7 +80,7 @@ static void IR_Detector_ISR(void)
 			TURN_OFF_IRD4();
 			break;
 	}
-
+ 	ir_Runtimeout(&IR_Timer_Timeout, 1);
 }
 
 static void IR_Timer_Timeout(void)
@@ -105,7 +105,7 @@ static void IR_Timer_Timeout(void)
 			break;
 	}
 	ROM_ADCProcessorTrigger(ADC0_BASE, 2);
-	ir_Runtimeout(&IR_Timer_Timeout, 1);
+
 }
 
 uint32_t IR_GetIrDetectorValue(uint8_t Select)

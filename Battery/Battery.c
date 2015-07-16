@@ -35,6 +35,7 @@ void BattSense_init(void)
 void BattSenseTimerTimout(void)
 {
 	ROM_ADCProcessorTrigger(ADC1_BASE, 3);
+
 }
 
 volatile float BatteryVoltage = 0;

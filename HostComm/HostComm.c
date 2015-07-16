@@ -27,9 +27,11 @@ static int32_t rcvMsgLen=0;
 static uint8_t data[MAX_MSG_LEN_BYTE];
 static int32_t len;
 
-void HostCommTimeoutCallBack(void)
+static void HostCommTimeoutCallBack(void)
 {
 	HostCommFlag = true;
+	if (HostComm_TimerID != INVALID_TIMER_ID)
+		TIMER_UnregisterEvent(HostComm_TimerID);
 	HostComm_TimerID = TIMER_RegisterEvent(&HostCommTimeoutCallBack, UPDATE_TIME_MS);
 }
 void HostCommInit()
@@ -44,6 +46,7 @@ void HostComm_process(void)
 {
 	if (HostCommFlag)
 	{
+		LED1_TOGGLE();
 		HostCommFlag = false;
 
 		//SENDING: sending frame=1 START BYTE + 4 BATT_VOLT BYTES + 1 STATE BYTE + N DATA BYTES

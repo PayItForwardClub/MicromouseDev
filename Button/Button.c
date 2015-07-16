@@ -58,12 +58,10 @@ static void ButtonsISR(void)
 	if (ui32_IntStatus & GPIO_PIN_0)
 	{
 		Button_pressed |= 0x01 << BUTTON_RIGHT;
-
 	}
 	if (ui32_IntStatus & GPIO_PIN_4)
 	{
 		Button_pressed |= 0x01 << BUTTON_LEFT;
-
 	}
 	button_Runtimeout(&ButtonDebounceCallback, BUTTON_DEBOUNCE_MS);
 }
