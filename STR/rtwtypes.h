@@ -19,6 +19,7 @@
 #define __TMWTYPES__
 
 #include <limits.h>
+#include <stdbool.h>
 
 /*=======================================================================* 
  * Target hardware information
