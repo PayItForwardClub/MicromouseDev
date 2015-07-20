@@ -85,6 +85,7 @@ static void IR_Detector_ISR(void)
 
 static void IR_Timer_Timeout(void)
 {
+	ir_TimerID = INVALID_TIMER_ID;
 	switch (ADC_Step)
 	{
 		case 0:
@@ -121,27 +122,35 @@ bool IR_set_calib_value(IR_CALIB select)
 	{
 		case IR_CALIB_BASE_FRONT_LEFT:
 			ir_calib_values.BaseFrontLeft = IR_GetIrDetectorValue(0);
+			bluetooth_print("IR_CALIB_BASE_FRONT_LEFT: %d\r\n", ir_calib_values.BaseFrontLeft);
 			break;
 		case IR_CALIB_BASE_FRONT_RIGHT:
 			ir_calib_values.BaseFrontRight = IR_GetIrDetectorValue(3);
+			bluetooth_print("IR_CALIB_BASE_FRONT_RIGHT: %d\r\n", ir_calib_values.BaseFrontRight);
 			break;
 		case IR_CALIB_BASE_LEFT:
 			ir_calib_values.BaseLeft = IR_GetIrDetectorValue(1);
+			bluetooth_print("IR_CALIB_BASE_LEFT: %d\r\n", ir_calib_values.BaseLeft);
 			break;
 		case IR_CALIB_BASE_RIGHT:
 			ir_calib_values.BaseRight = IR_GetIrDetectorValue(2);
+			bluetooth_print("IR_CALIB_BASE_RIGHT: %d\r\n", ir_calib_values.BaseRight);
 			break;
 		case IR_CALIB_MAX_FRONT_LEFT:
 			ir_calib_values.MaxFrontLeft = IR_GetIrDetectorValue(0);
+			bluetooth_print("IR_CALIB_MAX_FRONT_LEFT: %d\r\n", ir_calib_values.MaxFrontLeft);
 			break;
 		case IR_CALIB_MAX_FRONT_RIGHT:
 			ir_calib_values.MaxFrontRight = IR_GetIrDetectorValue(3);
+			bluetooth_print("IR_CALIB_MAX_FRONT_RIGHT: %d\r\n", ir_calib_values.MaxFrontRight);
 			break;
 		case IR_CALIB_MAX_LEFT:
 			ir_calib_values.MaxLeft = IR_GetIrDetectorValue(1);
+			bluetooth_print("IR_CALIB_MAX_LEFT: %d\r\n", ir_calib_values.MaxLeft);
 			break;
 		case IR_CALIB_MAX_RIGHT:
 			ir_calib_values.MaxRight = IR_GetIrDetectorValue(2);
+			bluetooth_print("IR_CALIB_MAX_RIGHT: %d\r\n", ir_calib_values.MaxRight);
 			break;
 		default:
 			return false;

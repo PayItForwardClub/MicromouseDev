@@ -125,6 +125,8 @@ void speed_set(MOTOR_SELECT Select, int32_t speed)
 static void speed_update_setpoint(void)
 {
 	int i;
+	speed_control_timID = INVALID_TIMER_ID;
+
 	for (i = 0; i < 2; i++)
 	{
 		if (RealSpeedSet[i] + 20 < SetPoint[i])
@@ -146,7 +148,8 @@ static void speed_control_runtimeout(uint32_t ms)
 
 static void speed_control_stoptimeout(void)
 {
-	TIMER_UnregisterEvent(speed_control_timID);
+	if (speed_control_timID != INVALID_TIMER_ID)
+		TIMER_UnregisterEvent(speed_control_timID);
 	speed_control_timID = INVALID_TIMER_ID;
 }
 
