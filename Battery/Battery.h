@@ -10,6 +10,6 @@
 
 
 extern void BattSense_init(void);
-
+extern float GetBatteryVoltage();
 
 #endif /* BATTERY_BATTERY_H_ */

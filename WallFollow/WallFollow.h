@@ -19,5 +19,5 @@ typedef enum
 extern void pid_Wallfollow_init(PID_PARAMETERS pid_param);
 extern void pid_Wallfollow_process(void);
 extern void pid_Wallfollow_set_follow(WALL_FOLLOW_SELECT follow_sel);
-
+extern WALL_FOLLOW_SELECT Get_Pid_Wallfollow();
 #endif /* WALLFOLLOW_WALLFOLLOW_H_ */

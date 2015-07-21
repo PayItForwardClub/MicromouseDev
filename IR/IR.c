@@ -34,9 +34,8 @@ void IRDetector_init(void)
 
 	ROM_ADCSequenceEnable(ADC0_BASE, 2);
  	ADCIntRegister(ADC0_BASE, 2, &IR_Detector_ISR);
+ 	ROM_IntPrioritySet(INT_ADC0SS2,0x80);
  	ROM_ADCIntEnable(ADC0_BASE, 2);
-
- 	Timer_Init();
 
  	ADC_Step = 0;
  	TURN_ON_IRD1();
@@ -80,7 +79,7 @@ static void IR_Detector_ISR(void)
 			TURN_OFF_IRD4();
 			break;
 	}
-	ir_Runtimeout(&IR_Timer_Timeout, 1);
+ 	ir_Runtimeout(&IR_Timer_Timeout, 1);
 }
 
 static void IR_Timer_Timeout(void)
@@ -106,6 +105,7 @@ static void IR_Timer_Timeout(void)
 			break;
 	}
 	ROM_ADCProcessorTrigger(ADC0_BASE, 2);
+
 }
 
 uint32_t IR_GetIrDetectorValue(uint8_t Select)

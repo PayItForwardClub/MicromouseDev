@@ -36,6 +36,7 @@ void BattSenseTimerTimout(void)
 {
 	battery_TimerID = INVALID_TIMER_ID;
 	ROM_ADCProcessorTrigger(ADC1_BASE, 3);
+
 }
 
 volatile float BatteryVoltage = 0;
@@ -71,4 +72,8 @@ static void battery_Runtimeout(TIMER_CALLBACK_FUNC TimeoutCallback, uint32_t msT
 {
 	battery_Stoptimeout();
 	battery_TimerID = TIMER_RegisterEvent(TimeoutCallback, msTime);
+}
+float GetBatteryVoltage()
+{
+	return BatteryVoltage;
 }

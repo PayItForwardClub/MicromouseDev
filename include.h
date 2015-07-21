@@ -43,5 +43,5 @@
 #include "WallFollow/WallFollow.h"
 #include "Buzzer/Buzzer.h"
 #include "Battery/Battery.h"
-
+#include "HostComm/HostComm.h"
 #endif /* INCLUDE_H_ */
