@@ -74,7 +74,7 @@ void pid_Wallfollow_process(void)
 	{
 		ControlFlag = false;
 		pid_wallfollow((float)IR_get_calib_value(IR_CALIB_BASE_LEFT) - (float)IR_GetIrDetectorValue(1), (float)IR_get_calib_value(IR_CALIB_BASE_RIGHT) - (float)IR_GetIrDetectorValue(2), 500);
-		bluetooth_print("IR: %d, %d, %d, %d\r\n", IR_GetIrDetectorValue(0), IR_GetIrDetectorValue(1), IR_GetIrDetectorValue(2), IR_GetIrDetectorValue(3));
+		//bluetooth_print("IR: %d, %d, %d, %d\r\n", IR_GetIrDetectorValue(0), IR_GetIrDetectorValue(1), IR_GetIrDetectorValue(2), IR_GetIrDetectorValue(3));
 	}
 }
 
@@ -83,11 +83,11 @@ void pid_Wallfollow_set_follow(WALL_FOLLOW_SELECT follow_sel)
 	e_wall_follow_select = follow_sel;
 }
 
-<<<<<<< HEAD
+
 WALL_FOLLOW_SELECT Get_Pid_Wallfollow()
 {
 	return e_wall_follow_select;
-=======
+}
 static void pid_StopTimeout(void)
 {
 	if (pid_TimerID != INVALID_TIMER_ID)
@@ -100,5 +100,4 @@ static TIMER_ID pid_Runtimeout(TIMER_CALLBACK_FUNC CallbackFcn, uint32_t msTime)
 	pid_StopTimeout();
 	pid_TimerID = TIMER_RegisterEvent(CallbackFcn, msTime);
 	return pid_TimerID;
->>>>>>> master
 }

@@ -30,7 +30,6 @@ void Timer_Init(void)
 	ROM_TimerLoadSet(TIMER4_BASE, TIMER_A, ROM_SysCtlClockGet() * TIMER_PERIOD_MS/ 1000);	//Interval: TIMER_PERIOD_MS(ms)
 
 	TimerIntRegister(TIMER4_BASE, TIMER_A, &TIMER_ISR);
-	ROM_IntPrioritySet(INT_TIMER4A,0);
 	ROM_IntEnable(INT_TIMER4A);
 	ROM_TimerIntEnable(TIMER4_BASE, TIMER_TIMA_TIMEOUT);
 	ROM_TimerIntClear(TIMER4_BASE, TIMER_TIMA_TIMEOUT);

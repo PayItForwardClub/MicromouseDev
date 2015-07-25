@@ -12,7 +12,9 @@
 #define MAX_MSG_LEN_BYTE 20
 
 #define SET_PID_PARAMS_CMD 1
-#define SET_WALL_FOLLOW_CMD 2
+#define SET_MAZE_ALGORITHM_CMD 2
+
+#define PID_PARAMS_SCALE 1000000000
 
 static TIMER_ID HostComm_TimerID = INVALID_TIMER_ID;
 static bool HostCommFlag = false;
@@ -69,7 +71,7 @@ void HostComm_process(void)
 			WALL_FOLLOW_SELECT wallFollowSel;
 			wallFollowSel = Get_Pid_Wallfollow();
 			data[7]=(uint8_t)wallFollowSel;
-			PIDError = (int32_t)(pid_get_error()*100);
+			PIDError = (int32_t)pid_get_error();
 			data[8]=PIDError>>24;
 			data[9]=PIDError>>16;
 			data[10]=PIDError>>8;
@@ -91,6 +93,7 @@ void HostComm_process(void)
 		len=bluetooth_recv(data,MAX_MSG_LEN_BYTE,false);
 		if (len)
 		{
+
 			int i;
 			for (i=0;i<len;i++)
 			{
@@ -99,6 +102,7 @@ void HostComm_process(void)
 					if (data[i]==START_BYTE)
 					{
 						rcvMsg[rcvMsgByte++] = data[i];
+
 					}
 					continue;
 				}
@@ -106,38 +110,51 @@ void HostComm_process(void)
 
 				if (rcvMsgByte==2)
 				{
-					switch (rcvMsg[2])
+					switch (rcvMsg[1])
 					{
 					case SET_PID_PARAMS_CMD:
 					{
 						rcvMsgLen = 14;//N=12 (4 bytes Kp + 4 bytes Ki + 4 bytes Kd)
+
 						break;
 					}
-					case SET_WALL_FOLLOW_CMD://N=1
+					case SET_MAZE_ALGORITHM_CMD://N=1
 					{
 						rcvMsgLen = 3;
 						break;
 					}
+					default:
+						rcvMsgByte = 0;
 					}
 				}
 
 				if ((rcvMsgByte==rcvMsgLen) && (rcvMsgLen != 0))
 				{
 					rcvMsgByte = 0;
-					switch (rcvMsg[2])
+
+					switch (rcvMsg[1])
 					{
 					case SET_PID_PARAMS_CMD:
 					{
-						float Kp,Ki,Kd;
-						Kp=(rcvMsg[0]<<24|rcvMsg[1]<<16|rcvMsg[2]<<8|rcvMsg[3])*1.0/1000000000;
-						Ki=(rcvMsg[4]<<24|rcvMsg[5]<<16|rcvMsg[6]<<8|rcvMsg[7])*1.0/1000000000;
-						Kd=(rcvMsg[8]<<24|rcvMsg[9]<<16|rcvMsg[10]<<8|rcvMsg[11])*1.0/1000000000;
-						pid_set_k_params(Kp,Ki,Kd);
+						//float Kp,Ki,Kd;
+						//Kp=(rcvMsg[0]<<24|rcvMsg[1]<<16|rcvMsg[2]<<8|rcvMsg[3])*1.0/1000000000;
+						//Ki=(rcvMsg[4]<<24|rcvMsg[5]<<16|rcvMsg[6]<<8|rcvMsg[7])*1.0/1000000000;
+						//Kd=(rcvMsg[8]<<24|rcvMsg[9]<<16|rcvMsg[10]<<8|rcvMsg[11])*1.0/1000000000;
+						//pid_set_k_params(Kp,Ki,Kd);
+					    uint32_t Kp,Ki,Kd;
+						Kp=(rcvMsg[2]<<24|rcvMsg[3]<<16|rcvMsg[4]<<8|rcvMsg[5]);
+						Ki=(rcvMsg[6]<<24|rcvMsg[7]<<16|rcvMsg[8]<<8|rcvMsg[9]);
+						Kd=(rcvMsg[10]<<24|rcvMsg[11]<<16|rcvMsg[12]<<8|rcvMsg[13]);
+						GPIOPinWrite(GPIO_PORTF_BASE,GPIO_PIN_3,0xff);
+						//bluetooth_print("K %d %d %d\n",Kp,Ki,Kd);
+						pid_set_k_params((float)Kp/PID_PARAMS_SCALE,
+								(float)Ki/PID_PARAMS_SCALE,
+								(float)Kd/PID_PARAMS_SCALE);
 						break;
 					}
-					case SET_WALL_FOLLOW_CMD://N=1
+					case SET_MAZE_ALGORITHM_CMD://N=1
 					{
-						pid_Wallfollow_set_follow((WALL_FOLLOW_SELECT)rcvMsg[3]);
+						pid_Wallfollow_set_follow((WALL_FOLLOW_SELECT)rcvMsg[2]);
 						break;
 					}
 					}

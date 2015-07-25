@@ -34,7 +34,6 @@ void IRDetector_init(void)
 
 	ROM_ADCSequenceEnable(ADC0_BASE, 2);
  	ADCIntRegister(ADC0_BASE, 2, &IR_Detector_ISR);
- 	ROM_IntPrioritySet(INT_ADC0SS2,0x80);
  	ROM_ADCIntEnable(ADC0_BASE, 2);
 
  	ADC_Step = 0;
