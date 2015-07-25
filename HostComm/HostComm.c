@@ -7,8 +7,8 @@
 
 #include "../include.h"
 
-#define START_BYTE 0xAA
-#define UPDATE_TIME_MS 40
+#define START_BYTE 0xFF
+#define UPDATE_TIME_MS 50
 #define MAX_MSG_LEN_BYTE 20
 
 #define SET_PID_PARAMS_CMD 1
@@ -29,6 +29,7 @@ static int32_t len;
 
 static void HostCommTimeoutCallBack(void)
 {
+	HostComm_TimerID = INVALID_TIMER_ID;
 	HostCommFlag = true;
 	if (HostComm_TimerID != INVALID_TIMER_ID)
 		TIMER_UnregisterEvent(HostComm_TimerID);
@@ -53,13 +54,13 @@ void HostComm_process(void)
 		data[0]=START_BYTE;
 
 		batteryVoltage =  (int32_t)(GetBatteryVoltage()*100);
-		data[1]=batteryVoltage>>24;
-		data[2]=batteryVoltage>>16;
-		data[3]=batteryVoltage>>8;
-		data[4]=batteryVoltage;
+		data[2]=batteryVoltage>>24;
+		data[3]=batteryVoltage>>16;
+		data[4]=batteryVoltage>>8;
+		data[5]=batteryVoltage;
 
 		state = system_GetState();
-		data[5]=state;
+		data[6]=state;
 		switch(state)
 		{
 		case SYSTEM_RUN_SOLVE_MAZE:
@@ -67,21 +68,22 @@ void HostComm_process(void)
 			int32_t PIDError;
 			WALL_FOLLOW_SELECT wallFollowSel;
 			wallFollowSel = Get_Pid_Wallfollow();
-			data[6]=(uint8_t)wallFollowSel;
+			data[7]=(uint8_t)wallFollowSel;
 			PIDError = (int32_t)(pid_get_error()*100);
-			data[7]=PIDError>>24;
-			data[8]=PIDError>>16;
-			data[9]=PIDError>>8;
-			data[10]=PIDError;
-			len=11;
+			data[8]=PIDError>>24;
+			data[9]=PIDError>>16;
+			data[10]=PIDError>>8;
+			data[11]=PIDError;
+			len=12;
 			break;
 		}
 		default:
 		{
-			len=6;
+			len=7;
 		}
 		}
-
+		//data[len++]='\n';
+		data[1]=len;
 		bluetooth_send(data,len);
 
 

@@ -16,7 +16,7 @@ static void button_Runtimeout(TIMER_CALLBACK_FUNC TimeoutCallback, uint32_t msTi
 
 
 static uint8_t Button_pressed = 0;
-static TIMER_ID button_TimerID;
+static TIMER_ID button_TimerID = INVALID_TIMER_ID;
 
 void Button_init(void)
 {
@@ -68,6 +68,7 @@ static void ButtonsISR(void)
 
 static void ButtonDebounceCallback(void)
 {
+	button_TimerID = INVALID_TIMER_ID;
 	if ((Button_pressed & (0x01 << BUTTON_RIGHT)) && (Button_right_callback != NULL))
 	{
 		if (ROM_GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_0) == 0)

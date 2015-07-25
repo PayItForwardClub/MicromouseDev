@@ -34,6 +34,7 @@ void BattSense_init(void)
 
 void BattSenseTimerTimout(void)
 {
+	battery_TimerID = INVALID_TIMER_ID;
 	ROM_ADCProcessorTrigger(ADC1_BASE, 3);
 
 }
@@ -45,15 +46,15 @@ void BattSenseISR(void)
 	ROM_ADCIntClear(ADC1_BASE, 3);
 	battery_Runtimeout(&BattSenseTimerTimout, 10000);
 	ROM_ADCSequenceDataGet(ADC1_BASE, 3, (uint32_t *)&ADCResult);
-	BatteryVoltage = ((float)ADCResult) / 4096 * 3.3 * (200 + 470) / 200;
+	BatteryVoltage = ((float)ADCResult) / 4096 * 3.3 * (100 + 470) / 100;
 
-	if (BatteryVoltage < (float)7.0)
+	if (BatteryVoltage < (float)7.6)
 	{
 		buzzer_low_battery_shutdown();
 		//shutdown robot here to protect battery
 
 	}
-	else if (BatteryVoltage < (float)7.2)
+	else if (BatteryVoltage < (float)7.4)
 	{
 		//Notify user to shutdown robot
 		buzzer_low_batterry_notify();

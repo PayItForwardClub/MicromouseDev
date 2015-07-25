@@ -22,7 +22,7 @@ void ButtonHandler(void)
 			LED2_ON();
 		case SYSTEM_SAVE_CALIB_SENSOR:
 			system_SetState(SYSTEM_ESTIMATE_MOTOR_MODEL);
-			speed_Enable_Hbridge(true);
+//			speed_Enable_Hbridge(true);
 			speed_set(MOTOR_LEFT,500);
 			speed_set(MOTOR_RIGHT, 500);
 
@@ -34,7 +34,7 @@ void ButtonHandler(void)
 			LED3_ON();
 			break;
 		case SYSTEM_WAIT_TO_RUN:
-			speed_Enable_Hbridge(true);
+//			speed_Enable_Hbridge(true);
 			system_SetState(SYSTEM_RUN_SOLVE_MAZE);
 			break;
 		case SYSTEM_RUN_SOLVE_MAZE:
