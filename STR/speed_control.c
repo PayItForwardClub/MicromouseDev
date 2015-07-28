@@ -35,7 +35,7 @@ void ProcessSpeedControl(void)
 //	SetPoint = 250;
 	if (qei_getVelocity(0, &Velocity[0]) == true)
 	{
-		udk = STR_Indirect(Theta, RealSpeedSet[0], Velocity[0]);
+		udk = STR_Indirect(MOTOR_RIGHT, Theta, RealSpeedSet[0], Velocity[0]);
 		SetPWM(PWM_MOTOR_RIGHT, DEFAULT, udk);
 		Uocluong(udk, Velocity[0], Theta, Theta_);
 #ifdef _DEBUG_SPEED_
@@ -44,7 +44,7 @@ void ProcessSpeedControl(void)
 	}
 	if (qei_getVelocity(1, &Velocity[1]) == true)
 	{
-		udk = STR_Indirect2(Theta2, RealSpeedSet[1], Velocity[1]);
+		udk = STR_Indirect(MOTOR_RIGHT, Theta2, RealSpeedSet[1], Velocity[1]);
 		SetPWM(PWM_MOTOR_LEFT, DEFAULT, udk);
 		Uocluong2(udk, Velocity[1], Theta2, Theta2_);
 #ifdef _DEBUG_SPEED_
@@ -125,6 +125,9 @@ void speed_set(MOTOR_SELECT Select, int32_t speed)
 static void speed_update_setpoint(void)
 {
 	int i;
+
+	speed_control_timID = INVALID_TIMER_ID;
+
 	for (i = 0; i < 2; i++)
 	{
 		if (RealSpeedSet[i] + 20 < SetPoint[i])
@@ -146,7 +149,8 @@ static void speed_control_runtimeout(uint32_t ms)
 
 static void speed_control_stoptimeout(void)
 {
-	TIMER_UnregisterEvent(speed_control_timID);
+	if (speed_control_timID != INVALID_TIMER_ID)
+		TIMER_UnregisterEvent(speed_control_timID);
 	speed_control_timID = INVALID_TIMER_ID;
 }
 

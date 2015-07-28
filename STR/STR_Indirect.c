@@ -11,6 +11,7 @@
 #include "rt_nonfinite.h"
 #include "STR_Indirect.h"
 #include "../define.h"
+#include "speed_control.h"
 
 /* Type Definitions */
 
@@ -23,15 +24,24 @@
 /* Function Declarations */
 
 /* Function Definitions */
-real_T STR_Indirect(real_T Theta[4], real_T uc, real_T y)
+real_T STR_Indirect(MOTOR_SELECT Motor_Sel, real_T Theta[4], real_T uc, real_T y)
 {
   real_T u;
-  static real_T u_ = 0;
-  static real_T uc_ = 0, y_ = 0;
+  static real_T u_[2] = {0, 0};
+  static real_T uc_[2] = {0, 0}, y_[2] = {0, 0};
 
-  u = (((-(Theta[3] / Theta[2]) * u_ + (0.999999956715774 / Theta[2]) * uc) + (3.91619188305815e-08 /
-        Theta[2]) * uc_) - ((-4.12230724487735e-09 - Theta[0]) / Theta[2]) * y) - ((4.24835425529272e-18 -
-    Theta[1]) / Theta[2]) * y_;
+  if (Motor_Sel == MOTOR_RIGHT)
+  {
+	  u = (((-(Theta[3] / Theta[2]) * u_[0] + (0.999999956715774 / Theta[2]) * uc) + (3.91619188305815e-08 /
+			Theta[2]) * uc_[0]) - ((-4.12230724487735e-09 - Theta[0]) / Theta[2]) * y) - ((4.24835425529272e-18 -
+		Theta[1]) / Theta[2]) * y_[0];
+  }
+  else
+  {
+	  u = (((-(Theta[3] / Theta[2]) * u_[1] + (0.999999956715774 / Theta[2]) * uc) + (3.91619188305815e-08 /
+			Theta[2]) * uc_[1]) - ((-4.12230724487735e-09 - Theta[0]) / Theta[2]) * y) - ((4.24835425529272e-18 -
+		Theta[1]) / Theta[2]) * y_[1];
+  }
   if (u > 90.0) {
     u = 90.0;
   } else {
@@ -40,34 +50,19 @@ real_T STR_Indirect(real_T Theta[4], real_T uc, real_T y)
     }
   }
 
-  uc_ = uc;
-  u_ = u;
-  y_ = y;
-
-  return (u_);
-}
-
-real_T STR_Indirect2(real_T Theta[4], real_T uc, real_T y)
-{
-  real_T u;
-  static real_T u_ = 0;
-  static real_T uc_ = 0, y_ = 0;
-
-  u = (((-(Theta[3] / Theta[2]) * u_ + (0.999999956715774 / Theta[2]) * uc) + (3.91619188305815e-08 /
-        Theta[2]) * uc_) - ((-4.12230724487735e-09 - Theta[0]) / Theta[2]) * y) - ((4.24835425529272e-18 -
-    Theta[1]) / Theta[2]) * y_;
-  if (u > 90.0) {
-    u = 90.0;
-  } else {
-    if (u < -90.0) {
-      u = -90.0;
-    }
+  if (Motor_Sel == MOTOR_RIGHT)
+  {
+	  uc_[0] = uc;
+	  u_[0] = u;
+	  y_[0] = y;
+  }
+  else
+  {
+	  uc_[1] = uc;
+	  u_[1] = u;
+	  y_[1] = y;
   }
 
-  uc_ = uc;
-  u_ = u;
-  y_ = y;
-
-  return (u_);
+  return (u);
 }
 /* End of code generation (STR_Indirect.c) */

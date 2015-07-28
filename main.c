@@ -94,13 +94,15 @@ void ButtonRightHandler(void)
 
 void main(void)
 {
-	PID_PARAMETERS pid_param = {.Kp = 1.0, .Kd = 0.0, .Ki = 0.0,
-			.Ts = 20
+	PID_PARAMETERS pid_param = {.Kp = 6, .Kd = 0.0, .Ki = 0.001,
+			.Ts = 0.020, .PID_Saturation = 400
 	};
 
 	system_SetState(SYSTEM_INITIALIZE);
 	Config_System();
+	Timer_Init();
 	speed_control_init();
+	pid_init();
 	pid_Wallfollow_init(pid_param);
 	HostCommInit();
 	qei_init(20);
@@ -109,7 +111,7 @@ void main(void)
 	LED_Display_init();
 	Button_init();
 	IRDetector_init();
-	pid_init();
+
 
 	Timer_Init();
 

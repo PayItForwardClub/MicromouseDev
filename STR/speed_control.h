@@ -8,6 +8,9 @@
 #ifndef STR_SPEED_CONTROL_H_
 #define STR_SPEED_CONTROL_H_
 
+#include <stdint.h>
+#include <stdbool.h>
+
 #define PWM_MOTOR_LEFT			TIMER0_BASE, TIMER_A
 #define PWM_MOTOR_RIGHT			TIMER3_BASE, TIMER_A
 

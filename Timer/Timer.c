@@ -19,7 +19,6 @@ typedef struct
 }TIMEOUT_EVT;
 
 TIMEOUT_EVT timer_event_list[MAX_TIMEOUT_EVT];
-bool HaveTimeoutEvt;
 
 void TIMER_ISR(void);
 
@@ -45,12 +44,11 @@ TIMER_ID TIMER_RegisterEvent(TIMER_CALLBACK_FUNC callback, unsigned long ms)
     {
       if((timer_event_list[i].period_cnt == 0) && (timer_event_list[i].callback == NULL)) break;
     }
-    if(i == MAX_TIMEOUT_EVT) return INVALID_TIMER_ID;
+    if(i == MAX_TIMEOUT_EVT)
+    	return INVALID_TIMER_ID;
 
     timer_event_list[i].period_cnt = (unsigned long)(ms/TIMER_PERIOD_MS);
     timer_event_list[i].callback = callback;
-    HaveTimeoutEvt = true;
-//    ROM_TimerEnable(TIMER4_BASE, TIMER_A);
 
     return (TIMER_ID)i;
 }
@@ -71,30 +69,23 @@ void TIMER_ISR(void)
 {
     int i;
 	ROM_TimerIntClear(TIMER4_BASE, TIMER_TIMA_TIMEOUT);
-	if(HaveTimeoutEvt == true)
+
+	for(i=0; i<MAX_TIMEOUT_EVT; i++)
 	{
-		HaveTimeoutEvt = false;
-		for(i=0; i<MAX_TIMEOUT_EVT; i++)
+		if(timer_event_list[i].period_cnt > 0)
 		{
-			if(timer_event_list[i].period_cnt > 0)
+			timer_event_list[i].period_cnt--;
+			if(timer_event_list[i].period_cnt == 0 && timer_event_list[i].callback != NULL)
 			{
-				HaveTimeoutEvt = true;
-				timer_event_list[i].period_cnt--;
-				if(timer_event_list[i].period_cnt == 0 && timer_event_list[i].callback != NULL)
-				{
-					(timer_event_list[i].callback)();
-					/*
-					 * Only clear timeout callback when period equal to 0
-					 * Another callback could be register in current timeout callback
-					 */
-					if (timer_event_list[i].period_cnt == 0)
-						timer_event_list[i].callback = NULL;
-				}
+				(timer_event_list[i].callback)();
+				/*
+				 * Only clear timeout callback when period equal to 0
+				 * Another callback could be register in current timeout callback
+				 */
+				if (timer_event_list[i].period_cnt == 0)
+					timer_event_list[i].callback = NULL;
 			}
 		}
 	}
-	else
-	{
-//		ROM_TimerDisable(TIMER4_BASE, TIMER_A);
-	}
+
 }

@@ -34,12 +34,27 @@ float pid_process(float error)
 	pid_parameter.u_ = pid_parameter.u;
 	pid_parameter.u = pid_parameter.u_ + pid_parameter.Kp * (pid_parameter.e - pid_parameter.e_)
 			+ pid_parameter.Ki * pid_parameter.Ts * pid_parameter.e
-			+ (pid_parameter.Kd / pid_parameter.Ts) * (pid_parameter.e - 2 * pid_parameter.e_ + pid_parameter.e__);
+			+ (pid_parameter.Kd / pid_parameter.Ts) * (pid_parameter.e - (2 * pid_parameter.e_) + pid_parameter.e__);
+
+	if (pid_parameter.u > pid_parameter.PID_Saturation)
+	{
+		pid_parameter.u = pid_parameter.PID_Saturation;
+	}
+	else if (pid_parameter.u < (-pid_parameter.PID_Saturation))
+	{
+		pid_parameter.u = -pid_parameter.PID_Saturation;
+	}
 
 	return pid_parameter.u;
 }
 
+<<<<<<< HEAD
 float pid_get_error()
 {
 	return pid_parameter.e;
+=======
+void pid_get_parameters(PID_PARAMETERS *pid_param)
+{
+	*pid_param = pid_parameter;
+>>>>>>> origin/SpeedControl
 }

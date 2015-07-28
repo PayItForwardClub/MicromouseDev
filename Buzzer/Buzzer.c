@@ -76,6 +76,9 @@ bool buzzer_low_battery_shutdown(void)
 static void Buzzer_lowbat_notify_handler(void)
 {
 	static uint8_t step = 0, repeat = 0;
+
+	buzzer_TimerID = INVALID_TIMER_ID;
+
 	if (step == 0)
 	{
 		buzzer_setsound(Lowbat_notify_profile[1].Freq);
@@ -102,6 +105,9 @@ static void Buzzer_lowbat_notify_handler(void)
 static void Buzzer_lowbat_shutdown_handler(void)
 {
 	static uint8_t step = 0, repeat = 0;
+
+	buzzer_TimerID = INVALID_TIMER_ID;
+
 	if (step == 0)
 	{
 		buzzer_setsound(Lowbat_shutdown_profile[1].Freq);
@@ -137,6 +143,7 @@ void buzzer_on(uint32_t Freq, uint32_t msTime)
 
 static void buzzer_on_timeout_handler(void)
 {
+	buzzer_TimerID = INVALID_TIMER_ID;
 	buzzer_setsound(0);
 }
 
