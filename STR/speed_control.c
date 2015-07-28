@@ -37,20 +37,30 @@ void ProcessSpeedControl(void)
 //	SetPoint = 250;
 	if (qei_getVelocity(0, &Velocity[0]) == true)
 	{
-		udk = STR_Indirect(MOTOR_RIGHT, Theta, RealSpeedSet[0], Velocity[0]);
-		SetPWM(PWM_MOTOR_RIGHT, DEFAULT, udk);
+		udk = STR_Indirect(MOTOR_LEFT, Theta, RealSpeedSet[0], Velocity[0]);
+
+		//udk = pid_process((float)(RealSpeedSet[0]-Velocity[0]),pid_left);
+		SetPWM(PWM_MOTOR_LEFT, DEFAULT, udk);
+
+		//SetPWM(PWM_MOTOR_LEFT, DEFAULT, 40);
+
+
 		Uocluong(udk, Velocity[0], Theta, Theta_);
 #ifdef _DEBUG_SPEED_
-		bluetooth_print("Right: %d\r\n", Velocity[0]);
+		bluetooth_print("Left: %d\r\n", Velocity[0]);
 #endif
 	}
 	if (qei_getVelocity(1, &Velocity[1]) == true)
 	{
 		udk = STR_Indirect(MOTOR_RIGHT, Theta2, RealSpeedSet[1], Velocity[1]);
-		SetPWM(PWM_MOTOR_LEFT, DEFAULT, udk);
+		//udk = pid_process((float)(RealSpeedSet[1]-Velocity[1]),pid_right);
+
+
+		SetPWM(PWM_MOTOR_RIGHT, DEFAULT, udk);
+
 		Uocluong2(udk, Velocity[1], Theta2, Theta2_);
 #ifdef _DEBUG_SPEED_
-		bluetooth_print("Left: %d\r\n", Velocity[1]);
+		bluetooth_print("Right: %d\r\n", Velocity[1]);
 #endif
 	}
 }
@@ -113,11 +123,11 @@ void SetPWM(uint32_t ulBaseAddr, uint32_t ulTimer, uint32_t ulFrequency, int32_t
 
 void speed_set(MOTOR_SELECT Select, int32_t speed)
 {
-	if (Select == MOTOR_RIGHT)
+	if (Select == MOTOR_LEFT)
 	{
 		SetPoint[0] = speed;
 	}
-	else if (Select == MOTOR_LEFT)
+	else if (Select == MOTOR_RIGHT)
 	{
 		SetPoint[1] = speed;
 	}
@@ -132,10 +142,10 @@ static void speed_update_setpoint(void)
 
 	for (i = 0; i < 2; i++)
 	{
-		if (RealSpeedSet[i] + 20 < SetPoint[i])
-			RealSpeedSet[i] += 20;
-		else if (RealSpeedSet[i] > SetPoint[i] + 20)
-			RealSpeedSet[i] -= 20;
+		if (RealSpeedSet[i] + 50 < SetPoint[i])
+			RealSpeedSet[i] += 50;
+		else if (RealSpeedSet[i] > SetPoint[i] + 50)
+			RealSpeedSet[i] -= 50;
 		else
 			RealSpeedSet[i] = SetPoint[i];
 	}
@@ -163,14 +173,14 @@ void speed_SetMotorModel(MOTOR_SELECT select, real_T Theta[4])
 	{
 		for (i = 0; i < 4; i++)
 		{
-			Theta_[i] = Theta[i];
+			Theta2_[i] = Theta[i];
 		}
 	}
 	else if (select == MOTOR_LEFT)
 	{
 		for (i = 0; i < 4; i++)
 		{
-			Theta2_[i] = Theta[i];
+			Theta_[i] = Theta[i];
 		}
 	}
 }
@@ -182,14 +192,14 @@ void speed_GetMotorModel(MOTOR_SELECT select, real_T Theta[4])
 	{
 		for (i = 0; i < 4; i++)
 		{
-			Theta[i] = Theta_[i];
+			Theta[i] = Theta2_[i];
 		}
 	}
 	else if (select == MOTOR_LEFT)
 	{
 		for (i = 0; i < 4; i++)
 		{
-			Theta[i] = Theta2_[i];
+			Theta[i] = Theta_[i];
 		}
 	}
 }

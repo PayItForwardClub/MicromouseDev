@@ -4,6 +4,10 @@ extern volatile float BatteryVoltage;
 uint8_t IR_Calib_Step = 0;
 static uint32_t IR_vals[4];
 
+PID_PARAMETERS pid_wall = {.Kp = 6, .Kd = 0.0, .Ki = 0.001,
+		.Ts = 0.020, .PID_Saturation = 400,
+		.u=0 , .u_=0 , .e=0 , .e_=0 , .e__=0
+};
 void ButtonLeftHandler(void)
 {
 	switch (system_GetState())
@@ -20,8 +24,8 @@ void ButtonLeftHandler(void)
 		case SYSTEM_SAVE_CALIB_SENSOR:
 			system_SetState(SYSTEM_ESTIMATE_MOTOR_MODEL);
 			speed_Enable_Hbridge(true);
-			speed_set(MOTOR_LEFT, -500);
-			speed_set(MOTOR_RIGHT, -500);
+			speed_set(MOTOR_LEFT, 200);
+			speed_set(MOTOR_RIGHT, 400);
 			break;
 		case SYSTEM_ESTIMATE_MOTOR_MODEL:
 //			system_SetState(SYSTEM_SAVE_MOTOR_MODEL);
@@ -90,16 +94,12 @@ void ButtonRightHandler(void)
 
 void main(void)
 {
-	PID_PARAMETERS pid_param = {.Kp = 6, .Kd = 0.0, .Ki = 0.001,
-			.Ts = 0.020, .PID_Saturation = 400
-	};
-
 	system_SetState(SYSTEM_INITIALIZE);
 	Config_System();
 	Timer_Init();
 	speed_control_init();
 	pid_init();
-	pid_Wallfollow_init(pid_param);
+	pid_Wallfollow_init(pid_wall);
 	HostCommInit();
 	qei_init(20);
 	buzzer_init();
