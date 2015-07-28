@@ -98,9 +98,8 @@ void pid_Wallfollow_process(void)
 			bluetooth_print("U Control: %3d.%03d\r\n", (int32_t)pid_params.u, (int32_t)(pid_params.u * 1000) % 1000);
 		}
 #endif
-=======
+
 		//bluetooth_print("IR: %d, %d, %d, %d\r\n", IR_GetIrDetectorValue(0), IR_GetIrDetectorValue(1), IR_GetIrDetectorValue(2), IR_GetIrDetectorValue(3));
->>>>>>> 615f5bfdbac43dc8a45fd36a85a3b0741cd7632b
 	}
 }
 
@@ -126,8 +125,5 @@ static TIMER_ID pid_Runtimeout(TIMER_CALLBACK_FUNC CallbackFcn, uint32_t msTime)
 	pid_StopTimeout();
 	pid_TimerID = TIMER_RegisterEvent(CallbackFcn, msTime);
 	return pid_TimerID;
-<<<<<<< HEAD
 
-=======
->>>>>>> 615f5bfdbac43dc8a45fd36a85a3b0741cd7632b
 }

@@ -16,16 +16,12 @@ void ButtonLeftHandler(void)
 		case SYSTEM_CALIB_SENSOR:
 			speed_Enable_Hbridge(false);
 			system_SetState(SYSTEM_SAVE_CALIB_SENSOR);
-<<<<<<< HEAD
-=======
-			LED2_ON();
 			break;
->>>>>>> 615f5bfdbac43dc8a45fd36a85a3b0741cd7632b
 		case SYSTEM_SAVE_CALIB_SENSOR:
 			system_SetState(SYSTEM_ESTIMATE_MOTOR_MODEL);
 			speed_Enable_Hbridge(true);
-			speed_set(MOTOR_LEFT,500);
-			speed_set(MOTOR_RIGHT, 500);
+			speed_set(MOTOR_LEFT, -500);
+			speed_set(MOTOR_RIGHT, -500);
 			break;
 		case SYSTEM_ESTIMATE_MOTOR_MODEL:
 //			system_SetState(SYSTEM_SAVE_MOTOR_MODEL);
