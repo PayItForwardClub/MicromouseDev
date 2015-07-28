@@ -4,7 +4,7 @@ extern volatile float BatteryVoltage;
 uint8_t IR_Calib_Step = 0;
 static uint32_t IR_vals[4];
 
-void ButtonHandler(void)
+void ButtonLeftHandler(void)
 {
 	switch (system_GetState())
 	{
@@ -16,6 +16,11 @@ void ButtonHandler(void)
 		case SYSTEM_CALIB_SENSOR:
 			speed_Enable_Hbridge(false);
 			system_SetState(SYSTEM_SAVE_CALIB_SENSOR);
+<<<<<<< HEAD
+=======
+			LED2_ON();
+			break;
+>>>>>>> 615f5bfdbac43dc8a45fd36a85a3b0741cd7632b
 		case SYSTEM_SAVE_CALIB_SENSOR:
 			system_SetState(SYSTEM_ESTIMATE_MOTOR_MODEL);
 			speed_Enable_Hbridge(true);
@@ -33,8 +38,9 @@ void ButtonHandler(void)
 			break;
 		case SYSTEM_RUN_SOLVE_MAZE:
 		case SYSTEM_RUN_IMAGE_PROCESSING:
-			system_SetState(SYSTEM_WAIT_TO_RUN);
-			speed_Enable_Hbridge(false);
+			speed_Enable_Hbridge(true);
+//			system_SetState(SYSTEM_WAIT_TO_RUN);
+//			speed_Enable_Hbridge(false);
 			break;
 		default:
 			break;
@@ -106,7 +112,7 @@ void main(void)
 	Button_init();
 	IRDetector_init();
 
-	ButtonRegisterCallback(BUTTON_LEFT, &ButtonHandler);
+	ButtonRegisterCallback(BUTTON_LEFT, &ButtonLeftHandler);
 	ButtonRegisterCallback(BUTTON_RIGHT, &ButtonRightHandler);
 
 //	buzzer_on(2000, 500);
@@ -116,8 +122,11 @@ void main(void)
 //	speed_set(MOTOR_RIGHT, 100);
 //	speed_Enable_Hbridge(true);
 //	bluetooth_print("AT\r\n");
+
 //	bluetooth_print("AT+NAME=NHH\r\n");
-//	bluetooth_print("AT+PSWD=3393\r\n");
+
+//	bluetooth_print("AT+CMODE=0\r\n");
+//	bluetooth_print("AT+PSWD=1234\r\n");
 //	bluetooth_print("AT+UART=115200,0,0\r\n");
 	pid_Wallfollow_set_follow(WALL_FOLLOW_RIGHT);
 	while (1)

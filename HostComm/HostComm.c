@@ -163,6 +163,7 @@ void HostComm_process(void)
 					case SET_MAZE_ALGORITHM_CMD://N=1
 					{
 //						pid_Wallfollow_set_follow((WALL_FOLLOW_SELECT)rcvMsg[2]);
+						pid_Wallfollow_set_follow((WALL_FOLLOW_SELECT)rcvMsg[2]);
 						break;
 					}
 					}
