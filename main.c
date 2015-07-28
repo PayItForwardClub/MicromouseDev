@@ -1,7 +1,7 @@
 #include "include.h"
 
 extern volatile float BatteryVoltage;
-static uint8_t IR_Calib_Step = 0;
+uint8_t IR_Calib_Step = 0;
 static uint32_t IR_vals[4];
 
 void ButtonHandler(void)
@@ -12,26 +12,20 @@ void ButtonHandler(void)
 			speed_Enable_Hbridge(false);
 			system_SetState(SYSTEM_CALIB_SENSOR);
 			IR_Calib_Step = 0;
-			//LED1_ON();
-			//LED2_ON();
-			//LED3_ON();
 			break;
 		case SYSTEM_CALIB_SENSOR:
 			speed_Enable_Hbridge(false);
 			system_SetState(SYSTEM_SAVE_CALIB_SENSOR);
-			LED2_ON();
 		case SYSTEM_SAVE_CALIB_SENSOR:
 			system_SetState(SYSTEM_ESTIMATE_MOTOR_MODEL);
 			speed_Enable_Hbridge(true);
 			speed_set(MOTOR_LEFT,500);
 			speed_set(MOTOR_RIGHT, 500);
-
 			break;
 		case SYSTEM_ESTIMATE_MOTOR_MODEL:
 //			system_SetState(SYSTEM_SAVE_MOTOR_MODEL);
 			system_SetState(SYSTEM_WAIT_TO_RUN);
 			speed_Enable_Hbridge(false);
-			LED3_ON();
 			break;
 		case SYSTEM_WAIT_TO_RUN:
 			speed_Enable_Hbridge(true);
@@ -88,7 +82,7 @@ void ButtonRightHandler(void)
 				break;
 		}
 		IR_Calib_Step++;
-		IR_Calib_Step %= 4;
+		IR_Calib_Step %= 5;
 	}
 }
 
@@ -112,9 +106,6 @@ void main(void)
 	Button_init();
 	IRDetector_init();
 
-
-	Timer_Init();
-
 	ButtonRegisterCallback(BUTTON_LEFT, &ButtonHandler);
 	ButtonRegisterCallback(BUTTON_RIGHT, &ButtonRightHandler);
 
@@ -132,7 +123,7 @@ void main(void)
 	while (1)
 	{
 		system_Process_System_State();
-		HostComm_process();
+		//HostComm_process();
 
 //		IR_vals[0] = IR_GetIrDetectorValue(0);
 //		IR_vals[1] = IR_GetIrDetectorValue(1);

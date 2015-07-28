@@ -8,6 +8,8 @@
 #include "../include.h"
 #include "speed_control.h"
 
+#define _DEBUG_SPEED_
+
 static real_T Theta[4], Theta_[4] = {-1, 1, 1, 1};
 static real_T Theta2[4], Theta2_[4] = {-1, 1, 1, 1};
 static int32_t SetPoint[2] = {0, 0};

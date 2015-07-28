@@ -16,7 +16,7 @@ static bool ControlFlag = false;
 static uint32_t ui32_msLoop = 0;
 
 static TIMER_ID pid_TimerID = INVALID_TIMER_ID;
-
+static int32_t PrintStep=0;
 void pid_Wallfollow_init(PID_PARAMETERS pid_param)
 {
 	pid_init();
@@ -106,11 +106,11 @@ void pid_Wallfollow_set_follow(WALL_FOLLOW_SELECT follow_sel)
 	e_wall_follow_select = follow_sel;
 }
 
-<<<<<<< HEAD
+
 WALL_FOLLOW_SELECT Get_Pid_Wallfollow()
 {
 	return e_wall_follow_select;
-=======
+}
 static void pid_StopTimeout(void)
 {
 	if (pid_TimerID != INVALID_TIMER_ID)
@@ -123,5 +123,5 @@ static TIMER_ID pid_Runtimeout(TIMER_CALLBACK_FUNC CallbackFcn, uint32_t msTime)
 	pid_StopTimeout();
 	pid_TimerID = TIMER_RegisterEvent(CallbackFcn, msTime);
 	return pid_TimerID;
->>>>>>> origin/SpeedControl
+
 }

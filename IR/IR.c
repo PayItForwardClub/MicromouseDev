@@ -36,11 +36,7 @@ void IRDetector_init(void)
  	ADCIntRegister(ADC0_BASE, 2, &IR_Detector_ISR);
  	ROM_ADCIntEnable(ADC0_BASE, 2);
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> origin/SpeedControl
  	ADC_Step = 0;
  	TURN_ON_IRD1();
  	ir_Runtimeout(&IR_Timer_Timeout, 1);

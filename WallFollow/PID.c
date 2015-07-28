@@ -48,13 +48,12 @@ float pid_process(float error)
 	return pid_parameter.u;
 }
 
-<<<<<<< HEAD
+
 float pid_get_error()
 {
 	return pid_parameter.e;
-=======
+}
 void pid_get_parameters(PID_PARAMETERS *pid_param)
 {
 	*pid_param = pid_parameter;
->>>>>>> origin/SpeedControl
 }

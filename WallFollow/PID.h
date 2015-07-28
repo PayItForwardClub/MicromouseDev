@@ -26,11 +26,10 @@ extern void pid_init(void);
 extern void pid_set_parameters(PID_PARAMETERS pid_param);
 //extern bool pid_wallfollow(float delta_IR_left, float delta_IR_right, float averageSpeed);
 extern float pid_process(float error);
-<<<<<<< HEAD
+
 extern float pid_get_error();
 extern void pid_set_k_params(float Kp,float Ki,float Kd);
-=======
+
 extern void pid_get_parameters(PID_PARAMETERS *pid_param);
 
->>>>>>> origin/SpeedControl
 #endif /* WALLFOLLOW_PID_H_ */
