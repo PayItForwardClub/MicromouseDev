@@ -135,13 +135,13 @@ bool IR_set_calib_value(IR_CALIB select)
 			ir_calib_values.BaseRight = IR_GetIrDetectorValue(2);
 			bluetooth_print("IR_CALIB_BASE_RIGHT: %d\r\n", ir_calib_values.BaseRight);
 			break;
-		case IR_CALIB_MAX_FRONT_LEFT:
+		case IR_CALIB_MIN_FRONT_LEFT:
 			ir_calib_values.MaxFrontLeft = IR_GetIrDetectorValue(0);
-			bluetooth_print("IR_CALIB_MAX_FRONT_LEFT: %d\r\n", ir_calib_values.MaxFrontLeft);
+			bluetooth_print("IR_CALIB_MIN_FRONT_LEFT: %d\r\n", ir_calib_values.MaxFrontLeft);
 			break;
-		case IR_CALIB_MAX_FRONT_RIGHT:
+		case IR_CALIB_MIN_FRONT_RIGHT:
 			ir_calib_values.MaxFrontRight = IR_GetIrDetectorValue(3);
-			bluetooth_print("IR_CALIB_MAX_FRONT_RIGHT: %d\r\n", ir_calib_values.MaxFrontRight);
+			bluetooth_print("IR_CALIB_MIN_FRONT_RIGHT: %d\r\n", ir_calib_values.MaxFrontRight);
 			break;
 		case IR_CALIB_MAX_LEFT:
 			ir_calib_values.MaxLeft = IR_GetIrDetectorValue(1);
@@ -169,9 +169,9 @@ uint32_t IR_get_calib_value(IR_CALIB select)
 			return ir_calib_values.BaseLeft;
 		case IR_CALIB_BASE_RIGHT:
 			return ir_calib_values.BaseRight;
-		case IR_CALIB_MAX_FRONT_LEFT:
+		case IR_CALIB_MIN_FRONT_LEFT:
 			return ir_calib_values.MaxFrontLeft;
-		case IR_CALIB_MAX_FRONT_RIGHT:
+		case IR_CALIB_MIN_FRONT_RIGHT:
 			return ir_calib_values.MaxFrontRight;
 		case IR_CALIB_MAX_LEFT:
 			return ir_calib_values.MaxLeft;

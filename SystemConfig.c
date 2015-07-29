@@ -97,6 +97,7 @@ void system_Process_System_State(void)
 		case SYSTEM_WAIT_TO_RUN:
 			break;
 		case SYSTEM_RUN_SOLVE_MAZE:
+
 			pid_Wallfollow_process();
 			ProcessSpeedControl();
 			break;

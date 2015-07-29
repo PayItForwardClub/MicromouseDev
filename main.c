@@ -4,9 +4,9 @@ extern volatile float BatteryVoltage;
 uint8_t IR_Calib_Step = 0;
 static uint32_t IR_vals[4];
 
-PID_PARAMETERS pid_wall = {.Kp = 6, .Kd = 0.0, .Ki = 0.001,
+PID_PARAMETERS pid_wall = {.Kp = 0.1, .Kd = 0.0, .Ki = 0.0005,
 		.Ts = 0.020, .PID_Saturation = 400,
-		.u=0 , .u_=0 , .e=0 , .e_=0 , .e__=0
+
 };
 void ButtonLeftHandler(void)
 {
@@ -69,22 +69,22 @@ void ButtonRightHandler(void)
 				break;
 			case 2:
 				IR_set_calib_value(IR_CALIB_MAX_LEFT);
-				LED1_ON();
-				LED2_ON();
-				LED3_OFF();
-				break;
-			case 3:
-				IR_set_calib_value(IR_CALIB_MAX_RIGHT);
 				LED1_OFF();
 				LED2_OFF();
 				LED3_ON();
 				break;
-			case 4:
-				IR_set_calib_value(IR_CALIB_MAX_FRONT_LEFT);
-				IR_set_calib_value(IR_CALIB_MAX_FRONT_RIGHT);
+			case 3:
+				IR_set_calib_value(IR_CALIB_MAX_RIGHT);
 				LED1_ON();
+				LED2_ON();
+				LED3_OFF();
+				break;
+			case 4:
+				IR_set_calib_value(IR_CALIB_MIN_FRONT_LEFT);
+				IR_set_calib_value(IR_CALIB_MIN_FRONT_RIGHT);
+				LED1_OFF();
 				LED2_OFF();
-				LED3_ON();
+				LED3_OFF();
 				break;
 		}
 		IR_Calib_Step++;
@@ -128,7 +128,7 @@ void main(void)
 	while (1)
 	{
 		system_Process_System_State();
-		//HostComm_process();
+		HostComm_process();
 
 //		IR_vals[0] = IR_GetIrDetectorValue(0);
 //		IR_vals[1] = IR_GetIrDetectorValue(1);
