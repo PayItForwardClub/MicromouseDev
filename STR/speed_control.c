@@ -9,9 +9,10 @@
 #include "speed_control.h"
 
 //#define _DEBUG_SPEED_
+//#define _DEBUG_THETA_
 
-static real_T Theta[4], Theta_[4] = {-1, 1, 1, 1};
-static real_T Theta2[4], Theta2_[4] = {-1, 1, 1, 1};
+static real_T Theta[4], Theta_[4] = {-1, -1, 1, 1};
+static real_T Theta2[4], Theta2_[4] = {-1, -1, 1, 1};
 static int32_t SetPoint[2] = {0, 0};
 static int32_t RealSpeedSet[2] = {0, 0};
 static float udk = 0;
@@ -63,6 +64,10 @@ void ProcessSpeedControl(void)
 		bluetooth_print("Right: %d\r\n", Velocity[1]);
 #endif
 	}
+#ifdef _DEBUG_THETA_
+	bluetooth_print("Theta: %d %d %d %d\r\n", (int32_t)(Theta[0]*1e3),(int32_t)(Theta[1]*1e3),
+			(int32_t)(Theta[2]*1e2),(int32_t)(Theta[3]*1e2));
+#endif
 }
 
 static void Config_PWM(void)
@@ -142,10 +147,10 @@ static void speed_update_setpoint(void)
 
 	for (i = 0; i < 2; i++)
 	{
-		if (RealSpeedSet[i] + 50 < SetPoint[i])
-			RealSpeedSet[i] += 50;
-		else if (RealSpeedSet[i] > SetPoint[i] + 50)
-			RealSpeedSet[i] -= 50;
+		if (RealSpeedSet[i] + 30 < SetPoint[i])
+			RealSpeedSet[i] += 30;
+		else if (RealSpeedSet[i] > SetPoint[i] + 30)
+			RealSpeedSet[i] -= 30;
 		else
 			RealSpeedSet[i] = SetPoint[i];
 	}
@@ -203,3 +208,4 @@ void speed_GetMotorModel(MOTOR_SELECT select, real_T Theta[4])
 		}
 	}
 }
+

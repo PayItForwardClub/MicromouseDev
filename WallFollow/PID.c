@@ -47,7 +47,14 @@ float pid_process(float error)
 
 	return pid_parameter.u;
 }
-
+void pid_reset()
+{
+	pid_parameter.e = 0;
+	pid_parameter.e_ = 0;
+	pid_parameter.e__ = 0;
+	pid_parameter.u = 0;
+	pid_parameter.u_ = 0;
+}
 
 float pid_get_error()
 {

@@ -1,12 +1,15 @@
 #include "include.h"
 
+#define ESTIMATE_MOTOR_MODEL
+
 extern volatile float BatteryVoltage;
 uint8_t IR_Calib_Step = 0;
 static uint32_t IR_vals[4];
 
 PID_PARAMETERS pid_wall = {.Kp = 0.1, .Kd = 0.0, .Ki = 0.0005,
-		.Ts = 0.020, .PID_Saturation = 400,
-
+		.Ts = 0.020, .PID_Saturation = 200,
+//PID_PARAMETERS pid_wall = {.Kp = 0.3, .Kd = 0.0, .Ki = 0.0005,
+//		.Ts = 0.020, .PID_Saturation = 200,
 };
 void ButtonLeftHandler(void)
 {
@@ -22,20 +25,34 @@ void ButtonLeftHandler(void)
 			system_SetState(SYSTEM_SAVE_CALIB_SENSOR);
 			break;
 		case SYSTEM_SAVE_CALIB_SENSOR:
+
+#ifdef ESTIMATE_MOTOR_MODEL
+
 			system_SetState(SYSTEM_ESTIMATE_MOTOR_MODEL);
 			speed_Enable_Hbridge(true);
 			speed_set(MOTOR_LEFT, 200);
 			speed_set(MOTOR_RIGHT, 400);
+#else
+			loadMotorModel();
+			system_SetState(SYSTEM_WAIT_TO_RUN);
+#endif
 			break;
 		case SYSTEM_ESTIMATE_MOTOR_MODEL:
-//			system_SetState(SYSTEM_SAVE_MOTOR_MODEL);
+#ifdef ESTIMATE_MOTOR_MODEL
+			system_SetState(SYSTEM_SAVE_MOTOR_MODEL);
+#else
 			system_SetState(SYSTEM_WAIT_TO_RUN);
+#endif
 			speed_Enable_Hbridge(false);
 			break;
+		case SYSTEM_SAVE_MOTOR_MODEL:
+#ifdef ESTIMATE_MOTOR_MODEL
+			saveMotorModel();
+#endif
 		case SYSTEM_WAIT_TO_RUN:
-			speed_Enable_Hbridge(true);
+
+			SysCtlDelay(SysCtlClockGet()/3);
 			system_SetState(SYSTEM_RUN_SOLVE_MAZE);
-			break;
 		case SYSTEM_RUN_SOLVE_MAZE:
 		case SYSTEM_RUN_IMAGE_PROCESSING:
 			speed_Enable_Hbridge(true);
@@ -58,28 +75,30 @@ void ButtonRightHandler(void)
 				LED2_OFF();
 				LED3_OFF();
 				IR_set_calib_value(IR_CALIB_BASE_LEFT);
-				IR_set_calib_value(IR_CALIB_BASE_RIGHT);
 				break;
 			case 1:
+				IR_set_calib_value(IR_CALIB_BASE_RIGHT);
+				break;
+			case 2:
 				IR_set_calib_value(IR_CALIB_BASE_FRONT_LEFT);
 				IR_set_calib_value(IR_CALIB_BASE_FRONT_RIGHT);
 				LED1_OFF();
 				LED2_ON();
 				LED3_OFF();
 				break;
-			case 2:
+			case 3:
 				IR_set_calib_value(IR_CALIB_MAX_LEFT);
 				LED1_OFF();
 				LED2_OFF();
 				LED3_ON();
 				break;
-			case 3:
+			case 4:
 				IR_set_calib_value(IR_CALIB_MAX_RIGHT);
 				LED1_ON();
 				LED2_ON();
 				LED3_OFF();
 				break;
-			case 4:
+			case 5:
 				IR_set_calib_value(IR_CALIB_MIN_FRONT_LEFT);
 				IR_set_calib_value(IR_CALIB_MIN_FRONT_RIGHT);
 				LED1_OFF();
@@ -88,14 +107,14 @@ void ButtonRightHandler(void)
 				break;
 		}
 		IR_Calib_Step++;
-		IR_Calib_Step %= 5;
+		IR_Calib_Step %= 6;
 	}
 }
 
-void main(void)
-{
+void main(void){
 	system_SetState(SYSTEM_INITIALIZE);
 	Config_System();
+	EEPROMConfig();
 	Timer_Init();
 	speed_control_init();
 	pid_init();
@@ -125,10 +144,21 @@ void main(void)
 //	bluetooth_print("AT+PSWD=1234\r\n");
 //	bluetooth_print("AT+UART=115200,0,0\r\n");
 	pid_Wallfollow_set_follow(WALL_FOLLOW_RIGHT);
+	qei_setPosLeft(0);
+	qei_setPosRight(0);
 	while (1)
 	{
+	//	bluetooth_print("Left:%d, right:%d\r\n",qei_getPosLeft(),qei_getPosRight());
+	//	bluetooth_print("Right:%d",qei_getPosRight());
+	//	qei_setPosLeft(0);
+	//	qei_setPosRight(0);
+	//	SysCtlDelay(SysCtlClockGet()/15);
+
+
+
 		system_Process_System_State();
-		HostComm_process();
+
+//		HostComm_process();
 
 //		IR_vals[0] = IR_GetIrDetectorValue(0);
 //		IR_vals[1] = IR_GetIrDetectorValue(1);
