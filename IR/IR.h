@@ -37,8 +37,8 @@ typedef enum
 	IR_CALIB_BASE_FRONT_RIGHT,
 	IR_CALIB_MAX_LEFT,
 	IR_CALIB_MAX_RIGHT,
-	IR_CALIB_MIN_FRONT_LEFT,
-	IR_CALIB_MIN_FRONT_RIGHT,
+	IR_CALIB_MAX_FRONT_LEFT,
+	IR_CALIB_MAX_FRONT_RIGHT,
 	IR_CALIB_INVALID = 255
 } IR_CALIB;
 
@@ -58,5 +58,5 @@ extern void IRDetector_init(void);
 extern uint32_t IR_GetIrDetectorValue(uint8_t Select);
 extern uint32_t IR_get_calib_value(IR_CALIB select);
 extern bool IR_set_calib_value(IR_CALIB select);
-
+extern void IR_load_calib_value(int* IRData);
 #endif /* IR_H_ */

@@ -10,6 +10,9 @@
 
 #define BUTTON_DEBOUNCE_MS		10
 
+#define SW1_ON (!GPIOPinRead(GPIO_PORTF_BASE,GPIO_PIN_4))
+#define SW2_ON (!GPIOPinRead(GPIO_PORTF_BASE,GPIO_PIN_0))
+
 typedef enum
 {
 	BUTTON_NONE = 0,
@@ -17,7 +20,7 @@ typedef enum
 	BUTTON_RIGHT
 } BUTTON_TYPE;
 
-
+extern void Switch_init(void);
 extern void Button_init(void);
 extern bool ButtonRegisterCallback(BUTTON_TYPE ButtonSelect, void (*ButtonCallback)());
 

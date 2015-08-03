@@ -1,63 +1,70 @@
 #include "include.h"
 
-#define ESTIMATE_MOTOR_MODEL
+//#define ESTIMATE_MOTOR_MODEL
+
+extern void SetPWM(uint32_t ulBaseAddr, uint32_t ulTimer, uint32_t ulFrequency, int32_t ucDutyCycle);
 
 extern volatile float BatteryVoltage;
 uint8_t IR_Calib_Step = 0;
-static uint32_t IR_vals[4];
 
-PID_PARAMETERS pid_wall = {.Kp = 0.1, .Kd = 0.0, .Ki = 0.0005,
-		.Ts = 0.020, .PID_Saturation = 200,
 //PID_PARAMETERS pid_wall = {.Kp = 0.3, .Kd = 0.0, .Ki = 0.0005,
-//		.Ts = 0.020, .PID_Saturation = 200,
-};
+//		.Ts = 0.020, .PID_Saturation = 200};
+
 void ButtonLeftHandler(void)
 {
 	switch (system_GetState())
 	{
 		case SYSTEM_INITIALIZE:
 			speed_Enable_Hbridge(false);
-			system_SetState(SYSTEM_CALIB_SENSOR);
-			IR_Calib_Step = 0;
+			if (SW1_ON)
+			{
+				system_SetState(SYSTEM_CALIB_SENSOR);
+				IR_Calib_Step = 0;
+			}
+			else
+			{
+
+				loadIRData();
+				system_SetState(SYSTEM_GET_MOTOR_MODEL);
+			}
+
 			break;
 		case SYSTEM_CALIB_SENSOR:
 			speed_Enable_Hbridge(false);
-			system_SetState(SYSTEM_SAVE_CALIB_SENSOR);
+			saveIRData();
+			system_SetState(SYSTEM_GET_MOTOR_MODEL);
 			break;
-		case SYSTEM_SAVE_CALIB_SENSOR:
 
-#ifdef ESTIMATE_MOTOR_MODEL
-
-			system_SetState(SYSTEM_ESTIMATE_MOTOR_MODEL);
-			speed_Enable_Hbridge(true);
-			speed_set(MOTOR_LEFT, 200);
-			speed_set(MOTOR_RIGHT, 400);
-#else
-			loadMotorModel();
-			system_SetState(SYSTEM_WAIT_TO_RUN);
-#endif
+		case SYSTEM_GET_MOTOR_MODEL:
+			if (SW2_ON)
+			{
+				system_SetState(SYSTEM_ESTIMATE_MOTOR_MODEL);
+				speed_Enable_Hbridge(true);
+				speed_set(MOTOR_LEFT,200);
+				speed_set(MOTOR_RIGHT,400);
+			}
+			else
+			{
+				loadMotorModel();
+				system_SetState(SYSTEM_WAIT_TO_RUN);
+			}
 			break;
 		case SYSTEM_ESTIMATE_MOTOR_MODEL:
-#ifdef ESTIMATE_MOTOR_MODEL
-			system_SetState(SYSTEM_SAVE_MOTOR_MODEL);
-#else
-			system_SetState(SYSTEM_WAIT_TO_RUN);
-#endif
 			speed_Enable_Hbridge(false);
+			system_SetState(SYSTEM_SAVE_MOTOR_MODEL);
 			break;
 		case SYSTEM_SAVE_MOTOR_MODEL:
-#ifdef ESTIMATE_MOTOR_MODEL
 			saveMotorModel();
-#endif
+			system_SetState(SYSTEM_WAIT_TO_RUN);
 		case SYSTEM_WAIT_TO_RUN:
-
 			SysCtlDelay(SysCtlClockGet()/3);
 			system_SetState(SYSTEM_RUN_SOLVE_MAZE);
+			qei_setPosLeft(0);
+			qei_setPosRight(0);
 		case SYSTEM_RUN_SOLVE_MAZE:
 		case SYSTEM_RUN_IMAGE_PROCESSING:
 			speed_Enable_Hbridge(true);
-//			system_SetState(SYSTEM_WAIT_TO_RUN);
-//			speed_Enable_Hbridge(false);
+
 			break;
 		default:
 			break;
@@ -99,8 +106,8 @@ void ButtonRightHandler(void)
 				LED3_OFF();
 				break;
 			case 5:
-				IR_set_calib_value(IR_CALIB_MIN_FRONT_LEFT);
-				IR_set_calib_value(IR_CALIB_MIN_FRONT_RIGHT);
+				IR_set_calib_value(IR_CALIB_MAX_FRONT_LEFT);
+				IR_set_calib_value(IR_CALIB_MAX_FRONT_RIGHT);
 				LED1_OFF();
 				LED2_OFF();
 				LED3_OFF();
@@ -117,13 +124,13 @@ void main(void){
 	EEPROMConfig();
 	Timer_Init();
 	speed_control_init();
-	pid_init();
-	pid_Wallfollow_init(pid_wall);
+	pid_Wallfollow_init();
 	HostCommInit();
 	qei_init(20);
 	buzzer_init();
 //	BattSense_init();
 	LED_Display_init();
+	Switch_init();
 	Button_init();
 	IRDetector_init();
 
@@ -143,18 +150,16 @@ void main(void){
 //	bluetooth_print("AT+CMODE=0\r\n");
 //	bluetooth_print("AT+PSWD=1234\r\n");
 //	bluetooth_print("AT+UART=115200,0,0\r\n");
+
 	pid_Wallfollow_set_follow(WALL_FOLLOW_RIGHT);
 	qei_setPosLeft(0);
 	qei_setPosRight(0);
+
 	while (1)
 	{
-	//	bluetooth_print("Left:%d, right:%d\r\n",qei_getPosLeft(),qei_getPosRight());
-	//	bluetooth_print("Right:%d",qei_getPosRight());
-	//	qei_setPosLeft(0);
-	//	qei_setPosRight(0);
-	//	SysCtlDelay(SysCtlClockGet()/15);
-
-
+		//speed_Enable_Hbridge(false);
+		//bluetooth_print("Left:%d, right:%d\r\n",qei_getPosLeft(),qei_getPosRight());
+		//SysCtlDelay(SysCtlClockGet()/15);
 
 		system_Process_System_State();
 

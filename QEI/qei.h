@@ -10,7 +10,8 @@
 
 
 extern void qei_init(uint16_t ms_Timebase);
-extern bool qei_getVelocity(bool Select, int32_t *Velocity);
+bool qei_getVelocityLeft(int32_t *Velocity);
+bool qei_getVelocityRight(int32_t *Velocity);
 int32_t qei_getPosRight();
 int32_t qei_getPosLeft();
 void qei_setPosLeft(int32_t pos);

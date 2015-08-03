@@ -24,7 +24,7 @@ void qei_init(uint16_t ms_Timebase)
     ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_QEI0);
     ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOD);
     ROM_QEIConfigure(QEI0_BASE, QEI_CONFIG_CAPTURE_A_B | QEI_CONFIG_NO_RESET
-    		| QEI_CONFIG_QUADRATURE | QEI_CONFIG_SWAP, 0xFFFFFFFF);
+    		| QEI_CONFIG_QUADRATURE | QEI_CONFIG_NO_SWAP, 0xFFFFFFFF);
     ROM_GPIOPinTypeQEI(GPIO_PORTD_BASE, GPIO_PIN_6 | GPIO_PIN_7);
     ROM_GPIOPinConfigure(GPIO_PD6_PHA0);
     ROM_GPIOPinConfigure(GPIO_PD7_PHB0);
@@ -35,7 +35,7 @@ void qei_init(uint16_t ms_Timebase)
     ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_QEI1);
     ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOC);
     ROM_QEIConfigure(QEI1_BASE, QEI_CONFIG_CAPTURE_A_B | QEI_CONFIG_NO_RESET
-    		| QEI_CONFIG_QUADRATURE | QEI_CONFIG_NO_SWAP, 0xFFFFFFFF);
+    		| QEI_CONFIG_QUADRATURE | QEI_CONFIG_SWAP, 0xFFFFFFFF);
     ROM_GPIOPinTypeQEI(GPIO_PORTC_BASE, GPIO_PIN_5 | GPIO_PIN_6);
     ROM_GPIOPinConfigure(GPIO_PC5_PHA1);
     ROM_GPIOPinConfigure(GPIO_PC6_PHB1);
@@ -67,42 +67,41 @@ static void QEI1_VelocityIsr(void)
 	qei_velocity_timeout[1] = true;
 }
 
-bool qei_getVelocity(bool Select, int32_t *Velocity)
+bool qei_getVelocityLeft(int32_t *Velocity)
 {
-	if (!Select)
+	if (qei_velocity_timeout[1])
 	{
-		if (qei_velocity_timeout[0])
-		{
-			*Velocity = qei_velocity[0];
-			qei_velocity_timeout[0] = false;
-			return true;
-		}
-		else
-			return false;
+		*Velocity = qei_velocity[1];
+		qei_velocity_timeout[1] = false;
+		return true;
 	}
 	else
-		if (qei_velocity_timeout[1])
-		{
-			*Velocity = qei_velocity[1];
-			qei_velocity_timeout[1] = false;
-			return true;
-		}
-		else
-			return false;
+		return false;
+}
+bool qei_getVelocityRight(int32_t *Velocity)
+{
+	if (qei_velocity_timeout[0])
+	{
+		*Velocity = qei_velocity[0];
+		qei_velocity_timeout[0] = false;
+		return true;
+	}
+	else
+		return false;
 }
 int32_t qei_getPosLeft()
 {
-	return ROM_QEIPositionGet(QEI0_BASE);
+	return ROM_QEIPositionGet(QEI1_BASE);
 }
 int32_t qei_getPosRight()
 {
-	return ROM_QEIPositionGet(QEI1_BASE);
+	return ROM_QEIPositionGet(QEI0_BASE);
 }
 void qei_setPosLeft(int32_t pos)
 {
-	ROM_QEIPositionSet(QEI0_BASE,pos);
+	ROM_QEIPositionSet(QEI1_BASE,pos);
 }
 void qei_setPosRight(int32_t pos)
 {
-	ROM_QEIPositionSet(QEI1_BASE,pos);
+	ROM_QEIPositionSet(QEI0_BASE,pos);
 }

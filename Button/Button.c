@@ -8,6 +8,14 @@
 #include "../include.h"
 #include "Button.h"
 
+#define GPIO_PORT_BUTTON GPIO_PORTA_BASE
+#define INT_BUTTON INT_GPIOA
+#define SYSCTRL_PERIPH_BUTTON SYSCTL_PERIPH_GPIOA
+#define GPIO_PIN_BUTTON_RIGHT GPIO_PIN_3
+#define GPIO_PIN_BUTTON_LEFT GPIO_PIN_2
+
+
+
 static void ButtonsISR(void);
 static void (*Button_right_callback)(), (*Button_left_callback)();
 static void ButtonDebounceCallback(void);
@@ -18,7 +26,8 @@ static void button_Runtimeout(TIMER_CALLBACK_FUNC TimeoutCallback, uint32_t msTi
 static uint8_t Button_pressed = 0;
 static TIMER_ID button_TimerID = INVALID_TIMER_ID;
 
-void Button_init(void)
+
+void Switch_init(void)
 {
 	ROM_SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
     HWREG(GPIO_PORTF_BASE + GPIO_O_LOCK) = GPIO_LOCK_KEY;
@@ -27,11 +36,18 @@ void Button_init(void)
 
     ROM_GPIOPinTypeGPIOInput(GPIO_PORTF_BASE, GPIO_PIN_0 | GPIO_PIN_4);
     ROM_GPIOPadConfigSet(GPIO_PORTF_BASE, GPIO_PIN_0 | GPIO_PIN_4, GPIO_STRENGTH_8MA_SC, GPIO_PIN_TYPE_STD_WPU);
-    ROM_GPIOIntTypeSet(GPIO_PORTF_BASE, GPIO_PIN_0 | GPIO_PIN_4, GPIO_FALLING_EDGE);
-	GPIOIntRegister(GPIO_PORTF_BASE, &ButtonsISR);
-	ROM_IntEnable(INT_GPIOF);
-	GPIOIntEnable(GPIO_PORTF_BASE, GPIO_PIN_0 | GPIO_PIN_4);
-	GPIOIntClear(GPIO_PORTF_BASE, GPIO_PIN_0 | GPIO_PIN_4);
+}
+void Button_init(void)
+{
+	ROM_SysCtlPeripheralEnable(SYSCTRL_PERIPH_BUTTON);
+    ROM_GPIOPinTypeGPIOInput(GPIO_PORT_BUTTON, GPIO_PIN_BUTTON_RIGHT|GPIO_PIN_BUTTON_LEFT);
+    ROM_GPIOPadConfigSet(GPIO_PORT_BUTTON, GPIO_PIN_BUTTON_RIGHT|GPIO_PIN_BUTTON_LEFT, GPIO_STRENGTH_8MA_SC, GPIO_PIN_TYPE_STD_WPU);
+
+    ROM_GPIOIntTypeSet(GPIO_PORT_BUTTON, GPIO_PIN_BUTTON_RIGHT|GPIO_PIN_BUTTON_LEFT, GPIO_FALLING_EDGE);
+	GPIOIntRegister(GPIO_PORT_BUTTON, &ButtonsISR);
+	ROM_IntEnable(INT_BUTTON);
+	GPIOIntEnable(GPIO_PORT_BUTTON, GPIO_PIN_BUTTON_RIGHT|GPIO_PIN_BUTTON_LEFT);
+	GPIOIntClear(GPIO_PORT_BUTTON, GPIO_PIN_BUTTON_RIGHT|GPIO_PIN_BUTTON_LEFT);
 }
 
 bool ButtonRegisterCallback(BUTTON_TYPE ButtonSelect, void (*ButtonCallback)())
@@ -52,14 +68,14 @@ bool ButtonRegisterCallback(BUTTON_TYPE ButtonSelect, void (*ButtonCallback)())
 static void ButtonsISR(void)
 {
 	uint32_t ui32_IntStatus;
-	ui32_IntStatus = GPIOIntStatus(GPIO_PORTF_BASE, true);
-	GPIOIntClear(GPIO_PORTF_BASE, ui32_IntStatus);
+	ui32_IntStatus = GPIOIntStatus(GPIO_PORT_BUTTON, true);
+	GPIOIntClear(GPIO_PORT_BUTTON, ui32_IntStatus);
 
-	if (ui32_IntStatus & GPIO_PIN_0)
+	if (ui32_IntStatus & GPIO_PIN_BUTTON_RIGHT)
 	{
 		Button_pressed |= 0x01 << BUTTON_RIGHT;
 	}
-	if (ui32_IntStatus & GPIO_PIN_4)
+	if (ui32_IntStatus & GPIO_PIN_BUTTON_LEFT)
 	{
 		Button_pressed |= 0x01 << BUTTON_LEFT;
 	}
@@ -71,14 +87,14 @@ static void ButtonDebounceCallback(void)
 	button_TimerID = INVALID_TIMER_ID;
 	if ((Button_pressed & (0x01 << BUTTON_RIGHT)) && (Button_right_callback != NULL))
 	{
-		if (ROM_GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_0) == 0)
+		if (ROM_GPIOPinRead(GPIO_PORT_BUTTON, GPIO_PIN_BUTTON_RIGHT) == 0)
 		{
 			Button_right_callback();
 		}
 	}
 	if ((Button_pressed & (0x01 << BUTTON_LEFT)) && (Button_left_callback != NULL))
 	{
-		if (ROM_GPIOPinRead(GPIO_PORTF_BASE, GPIO_PIN_4) == 0)
+		if (ROM_GPIOPinRead(GPIO_PORT_BUTTON, GPIO_PIN_BUTTON_LEFT) == 0)
 		{
 			Button_left_callback();
 		}

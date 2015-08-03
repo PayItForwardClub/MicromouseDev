@@ -17,6 +17,7 @@
 #define PID_PARAMS_SCALE 100000000
 
 extern uint8_t IR_Calib_Step;
+extern PID_PARAMETERS pid_wall;
 
 static TIMER_ID HostComm_TimerID = INVALID_TIMER_ID;
 static bool HostCommFlag = false;
@@ -79,7 +80,7 @@ void HostComm_process(void)
 			WALL_FOLLOW_SELECT wallFollowSel;
 			wallFollowSel = Get_Pid_Wallfollow();
 			data[7]=(uint8_t)wallFollowSel;
-			PIDError = (int32_t)pid_get_error();
+			PIDError = (int32_t)pid_wall.e;
 			data[8]=PIDError>>24;
 			data[9]=PIDError>>16;
 			data[10]=PIDError>>8;
@@ -155,7 +156,7 @@ void HostComm_process(void)
 						Kd=(rcvMsg[10]<<24|rcvMsg[11]<<16|rcvMsg[12]<<8|rcvMsg[13]);
 
 						//bluetooth_print("K %d %d %d\n",Kp,Ki,Kd);
-						pid_set_k_params((float)Kp/PID_PARAMS_SCALE,
+						pid_set_k_params(&pid_wall,(float)Kp/PID_PARAMS_SCALE,
 								(float)Ki/PID_PARAMS_SCALE,
 								(float)Kd/PID_PARAMS_SCALE);
 						break;
