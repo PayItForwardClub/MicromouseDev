@@ -41,7 +41,7 @@ void ButtonLeftHandler(void)
 				system_SetState(SYSTEM_ESTIMATE_MOTOR_MODEL);
 				speed_Enable_Hbridge(true);
 				speed_set(MOTOR_LEFT,200);
-				speed_set(MOTOR_RIGHT,400);
+				speed_set(MOTOR_RIGHT,200);
 			}
 			else
 			{
@@ -124,7 +124,7 @@ void main(void){
 	EEPROMConfig();
 	Timer_Init();
 	speed_control_init();
-	pid_Wallfollow_init();
+	pid_wallfollow_init();
 	HostCommInit();
 	qei_init(20);
 	buzzer_init();
@@ -170,5 +170,4 @@ void main(void){
 //		IR_vals[2] = IR_GetIrDetectorValue(2);
 //		IR_vals[3] = IR_GetIrDetectorValue(3);
 	}
-
 }

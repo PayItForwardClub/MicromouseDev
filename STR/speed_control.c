@@ -147,10 +147,10 @@ static void speed_update_setpoint(void)
 
 	for (i = 0; i < 2; i++)
 	{
-		if (RealSpeedSet[i] + 30 < SetPoint[i])
-			RealSpeedSet[i] += 30;
-		else if (RealSpeedSet[i] > SetPoint[i] + 30)
-			RealSpeedSet[i] -= 30;
+		if (RealSpeedSet[i] + 50 < SetPoint[i])
+			RealSpeedSet[i] += 50;
+		else if (RealSpeedSet[i] > SetPoint[i] + 50)
+			RealSpeedSet[i] -= 50;
 		else
 			RealSpeedSet[i] = SetPoint[i];
 	}
