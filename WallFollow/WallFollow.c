@@ -24,6 +24,11 @@
 //#define _DEBUG_PID_
 //#define _DEBUG_POS_
 
+#define NONE 0
+#define RIGHT 0x01
+#define LEFT 0x02
+#define FRONT 0x04
+
 #define CELL_ENC 13500
 #define AVG_SPEED_FWD 200
 #define AVG_SPEED_BWD 120
@@ -43,9 +48,16 @@ typedef enum{
 	BACKWARD,
 	SIMPLE_FORWARD
 }MOVE;
+typedef enum{
+	UP=0,
+	RIGHT=1,
+	DOWN=2,
+	LEFT=3
+}DIRECTION;
 
-MOVE eMove=FORWARD;
-
+static DIRECTION dir=UP;
+static MOVE eMove=FORWARD;
+static uint8_t availableDir=NONE;
 static void pid_process_callback(void);
 static void pid_StopTimeout(void);
 static TIMER_ID pid_Runtimeout(TIMER_CALLBACK_FUNC CallbackFcn, uint32_t msTime);
@@ -59,6 +71,7 @@ static int32_t CtrlStep=1;
 
 static int32_t robotX=0,robotY=0;
 static int32_t posLeftTmp=0,posRightTmp=0;
+static int32_t encLeftTmp=0,encRightTmp=0;
 
 static int32_t avrSpeedLeft,avrSpeedRight,avrSpeed=AVG_SPEED_FWD;
 static int32_t turnPulse;
@@ -156,7 +169,6 @@ static MOVE getMove(bool isWallLeft,bool isWallFront,bool isWallRight)
 {
 	if (((!isWallRight) && (!isWallLeft)) && (!isWallFront))
 	{
-
 		avrSpeed = 200;
 		return SIMPLE_FORWARD;
 	}
@@ -244,6 +256,17 @@ void ClearPosition()
 	qei_setPosLeft(0);
 	qei_setPosRight(0);
 }
+void updatePos(MOVE move,int CtrlStep,DIRECTION currentDir)
+{
+	switch(move)
+	{
+	case FORWARD:
+	{
+		if (qei_getPosLeft)
+	}
+	}
+}
+
 void pid_Wallfollow_process(void)
 {
 #ifdef _DEBUG_IR_
@@ -306,12 +329,15 @@ void pid_Wallfollow_process(void)
 			}
 
 			eMove=getMove(isWallLeft,isWallFrontRight|isWallFrontLeft,isWallRight);
+
+
 			break;
 		}
 		case TURN_LEFT:
 		{
 			static int vt,vp;
 			LED1_ON();LED2_OFF();LED3_OFF();
+			bluetooth_print("step:%d\r\n",CtrlStep);
 			switch (CtrlStep)
 			{
 			case 1:
@@ -346,38 +372,40 @@ void pid_Wallfollow_process(void)
 						avrSpeed = (avrSpeed+AVG_SPEED_FWD)/2;
 						eMove = FORWARD;
 						pid_reset(&pid_wall);
-
 					}
 					else
 					{
 						CtrlStep++;
-						ClearPosition();
 					}
 
 				}
 				break;
-			case 3://turn 90 degree
+			case 3:
+				posLeftTmp=qei_getPosLeft();
+				posRightTmp=qei_getPosRight();
+				CtrlStep++;
+			case 4://turn 90 degree
 #ifdef TEST_TURNLEFT_MOVE1
 				speed_Enable_Hbridge(false);
 #endif
-				if ((abs(qei_getPosLeft()) + abs(qei_getPosRight()) < 2*turnPulse/3) ||
+				if ((abs(qei_getPosLeft()-posLeftTmp) + abs(qei_getPosRight()-posRightTmp) < 2*turnPulse/3) ||
 						//truong hop nga 3
 						// __| |
 						// __  |
 						//   | |
-						((abs(qei_getPosLeft()) + abs(qei_getPosRight()) < turnPulse)
+						((abs(qei_getPosLeft()-posLeftTmp) + abs(qei_getPosRight()-posRightTmp) < turnPulse)
 								&& (isWallFrontLeft|isWallFrontRight)))
 				{
 					speed_set(MOTOR_RIGHT, avrSpeedRight);
 					speed_set(MOTOR_LEFT, -avrSpeedLeft);
-					if((abs(qei_getPosRight())>(turnPulse*0.8*vp/8)) && (vp<9))
+					if((abs(qei_getPosRight()-posRightTmp)>(turnPulse*0.8*vp/8)) && (vp<9))
 					{
 						if (avrSpeedRight>=10)
 							avrSpeedRight-=10;
 						vp++;
 
 					}
-					if((abs(qei_getPosLeft())>(turnPulse*0.2*vt/8)) && (vt<9))
+					if((abs(qei_getPosLeft()-posLeftTmp)>(turnPulse*0.2*vt/8)) && (vt<9))
 					{
 						if (avrSpeedLeft>=2)
 							avrSpeedLeft-=2;
@@ -386,11 +414,11 @@ void pid_Wallfollow_process(void)
 				}
 				else
 				{
-					ClearPosition();
 					CtrlStep++;
 				}
 				break;
-			case 4:
+
+			case 5:
 #ifdef TEST_TURNLEFT_TURN
 				speed_Enable_Hbridge(false);
 #endif
@@ -401,7 +429,6 @@ void pid_Wallfollow_process(void)
 #endif
 					eMove=getMove(isWallLeft,isWallFrontLeft|isWallFrontRight,isWallRight);
 					pid_reset(&pid_wall);
-					ClearPosition();
 				}
 				break;
 			}
@@ -410,12 +437,11 @@ void pid_Wallfollow_process(void)
 		case TURN_RIGHT:
 		{
 			static int vt,vp;
-
+			bluetooth_print("Step %d\r\n",CtrlStep);
 			LED1_OFF();LED2_OFF();LED3_ON();
 			switch (CtrlStep)
 			{
 			case 1:
-				qei_setPosLeft(0);
 				posLeftTmp=qei_getPosLeft();
 				CtrlStep=2;
 				vt=1;
@@ -448,31 +474,37 @@ void pid_Wallfollow_process(void)
 						eMove = FORWARD;
 						pid_reset(&pid_wall);
 					}
-					CtrlStep=3;
-					ClearPosition();
+					else
+					{
+						CtrlStep++;
+					}
 				}
 				break;
-			case 3://turn 90 degree
+			case 3:
+				posLeftTmp=qei_getPosLeft();
+				posRightTmp=qei_getPosRight();
+				CtrlStep++;
+			case 4://turn 90 degree
 #ifdef TEST_TURNRIGHT_MOVE1
 				speed_Enable_Hbridge(false);
 #endif
-				if ((abs(qei_getPosLeft()) + abs(qei_getPosRight()) < 2*turnPulse/3) ||
+				if ((abs(qei_getPosLeft()-posLeftTmp) + abs(qei_getPosRight()-posRightTmp) < 2*turnPulse/3) ||
 						//truong hop nga 3
 						// | |__
 						// |  __
 						// | |
-						((abs(qei_getPosLeft()) + abs(qei_getPosRight()) < turnPulse)
+						((abs(qei_getPosLeft()-posLeftTmp) + abs(qei_getPosRight()-posRightTmp) < turnPulse)
 								&& (isWallFrontLeft|isWallFrontRight)))
 				{
 					speed_set(MOTOR_LEFT, avrSpeedLeft);
 					speed_set(MOTOR_RIGHT, -avrSpeedRight);
-					if((abs(qei_getPosLeft())>(turnPulse*0.8*vp/8)) && (vp<9))
+					if((abs(qei_getPosLeft()-posLeftTmp)>(turnPulse*0.8*vp/8)) && (vp<9))
 					{
 						if (avrSpeedLeft>=10)
 							avrSpeedLeft-=10;
 						vp++;
 					}
-					if((abs(qei_getPosRight())>(turnPulse*0.2*vt/8)) && (vt<9))
+					if((abs(qei_getPosRight()-posRightTmp)>(turnPulse*0.2*vt/8)) && (vt<9))
 					{
 						if (avrSpeedLeft>=2)
 							avrSpeedLeft-=2;
@@ -481,12 +513,10 @@ void pid_Wallfollow_process(void)
 				}
 				else
 				{
-					ClearPosition();
-					CtrlStep=4;
-
+					CtrlStep++;
 				}
 				break;
-			case 4://go straight
+			case 5://go straight
 #ifdef TEST_TURNRIGHT_TURN
 				speed_Enable_Hbridge(false);
 #endif
@@ -497,7 +527,7 @@ void pid_Wallfollow_process(void)
 #endif
 					eMove=getMove(isWallLeft,isWallFrontLeft|isWallFrontRight,isWallRight);
 					pid_reset(&pid_wall);
-					ClearPosition();
+
 				}
 				break;
 			}
@@ -510,7 +540,6 @@ void pid_Wallfollow_process(void)
 			{
 			case 1:
 			{
-				ClearPosition();
 				posLeftTmp = qei_getPosLeft();
 				CtrlStep++;
 			}
@@ -521,16 +550,19 @@ void pid_Wallfollow_process(void)
 						(IRFrontLeft<IR_get_calib_value(IR_CALIB_BASE_FRONT_LEFT)))
 				{
 					CtrlStep++;
-					ClearPosition();
 				}
 				break;
 			}
 			case 3:
+				posLeftTmp=qei_getPosLeft();
+				posRightTmp=qei_getPosRight();
+				CtrlStep++;
+			case 4:
 			{
 #ifdef TEST_TURNBACK_FWD
 				speed_Enable_Hbridge(false);
 #endif
-				if ((abs(qei_getPosLeft())+abs(qei_getPosRight()))<turnPulse)
+				if ((abs(qei_getPosLeft()-posLeftTmp)+abs(qei_getPosRight()-posRightTmp))<turnPulse)
 				{
 					speed_set(MOTOR_RIGHT, avrSpeedRight);
 					speed_set(MOTOR_LEFT, avrSpeedLeft);
@@ -538,17 +570,20 @@ void pid_Wallfollow_process(void)
 				else
 				{
 					CtrlStep++;
-					ClearPosition();
 				}
 				break;
 			}
-			case 4:
+			case 5:
+				posLeftTmp=qei_getPosLeft();
+				posRightTmp=qei_getPosRight();
+				CtrlStep++;
+			case 6:
 			{
 #ifdef TEST_TURNBACK_TURN1
 				speed_Enable_Hbridge(false);
 #endif
 				LED1_OFF();LED2_OFF();LED3_OFF();
-				if (((abs(qei_getPosLeft())+abs(qei_getPosRight()))<turnPulse) &&
+				if (((abs(qei_getPosLeft()-posLeftTmp)+abs(qei_getPosRight()-posRightTmp))<turnPulse) &&
 						(isWallFrontLeft|isWallFrontRight))
 				{
 					speed_set(MOTOR_RIGHT, -avrSpeedLeft);
@@ -557,17 +592,16 @@ void pid_Wallfollow_process(void)
 				else
 				{
 					CtrlStep++;
-					ClearPosition();
 				}
 				break;
 			}
 
-			case 5:
+			case 7:
 			{
 #ifdef TEST_TURNBACK_TURN2
 				speed_Enable_Hbridge(false);
 #endif
-				bluetooth_print("3 %d %d\r\n", (int32_t)qei_getPosLeft(), (int32_t)qei_getPosRight());
+				//bluetooth_print("3 %d %d\r\n", (int32_t)qei_getPosLeft(), (int32_t)qei_getPosRight());
 				if (move(-bwdPulseLeft,-bwdPulseRight,AVG_SPEED_BWD+20,AVG_SPEED_BWD-20))
 				{
 #ifdef TEST_TURNBACK_BACKWARD
