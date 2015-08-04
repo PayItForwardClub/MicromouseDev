@@ -1,0 +1,12 @@
+.\objects\control_initialize.o: Source\STR\Control_initialize.c
+.\objects\control_initialize.o: .\Include\rt_nonfinite.h
+.\objects\control_initialize.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\control_initialize.o: .\Include\rtwtypes.h
+.\objects\control_initialize.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\limits.h
+.\objects\control_initialize.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\control_initialize.o: .\Include\Uocluong.h
+.\objects\control_initialize.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\objects\control_initialize.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\control_initialize.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\control_initialize.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\control_initialize.o: .\Include\Control_initialize.h

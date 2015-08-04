@@ -1,0 +1,14 @@
+.\objects\str_indirect.o: Source\STR\STR_Indirect.c
+.\objects\str_indirect.o: .\Include\rt_nonfinite.h
+.\objects\str_indirect.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\str_indirect.o: .\Include\rtwtypes.h
+.\objects\str_indirect.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\limits.h
+.\objects\str_indirect.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\str_indirect.o: .\Include\STR_Indirect.h
+.\objects\str_indirect.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\objects\str_indirect.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\str_indirect.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\str_indirect.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\str_indirect.o: .\Include\speed_control.h
+.\objects\str_indirect.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\str_indirect.o: .\Include\define.h

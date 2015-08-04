@@ -1,0 +1,1738 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html><head>
+<title>Static Call Graph - [.\Objects\KB.axf]</title></head>
+<body><HR>
+<H1>Static Call Graph for image .\Objects\KB.axf</H1><HR>
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5050106: Last Updated: Mon Aug 03 01:11:34 2015
+<BR><P>
+<H3>Maximum Stack Usage =        696 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+Call chain for Maximum Stack Depth:</H3>
+__rt_entry_main &rArr; main &rArr; system_Process_System_State &rArr; ProcessSpeedControl &rArr; Uocluong2 &rArr; __aeabi_dmul
+<P>
+<H3>
+Functions with no stack information
+</H3><UL>
+ <LI><a href="#[3]">Reset_Handler</a>
+ <LI><a href="#[2b]">__user_initial_stackheap</a>
+ <LI><a href="#[4]">NmiSR</a>
+ <LI><a href="#[5]">FaultISR</a>
+ <LI><a href="#[6]">IntDefaultHandler</a>
+</UL>
+</UL>
+<P>
+<H3>
+Mutually Recursive functions
+</H3> <LI><a href="#[29]">SysCtlDelay</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[29]">SysCtlDelay</a><BR>
+ <LI><a href="#[4]">NmiSR</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[4]">NmiSR</a><BR>
+ <LI><a href="#[5]">FaultISR</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[5]">FaultISR</a><BR>
+ <LI><a href="#[6]">IntDefaultHandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[6]">IntDefaultHandler</a><BR>
+ <LI><a href="#[40]">UARTCharGet</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[40]">UARTCharGet</a><BR>
+ <LI><a href="#[91]">UARTConfigSetExpClk</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[91]">UARTConfigSetExpClk</a><BR>
+</UL>
+<P>
+<H3>
+Function Pointers
+</H3><UL>
+ <LI><a href="#[8]">BattSenseISR</a> from battery.o(i.BattSenseISR) referenced from battery.o(i.BattSense_init)
+ <LI><a href="#[7]">BattSenseTimerTimeout</a> from battery.o(i.BattSenseTimerTimeout) referenced from battery.o(i.BattSenseISR)
+ <LI><a href="#[7]">BattSenseTimerTimeout</a> from battery.o(i.BattSenseTimerTimeout) referenced from battery.o(i.BattSense_init)
+ <LI><a href="#[10]">Bluetooth_RxHandler</a> from bluetooth.o(i.Bluetooth_RxHandler) referenced from bluetooth.o(i.bluetooth_init)
+ <LI><a href="#[a]">ButtonDebounceCallback</a> from button.o(i.ButtonDebounceCallback) referenced from button.o(i.ButtonsISR)
+ <LI><a href="#[11]">ButtonHandler</a> from main.o(i.ButtonHandler) referenced from main.o(i.main)
+ <LI><a href="#[12]">ButtonRightHandler</a> from main.o(i.ButtonRightHandler) referenced from main.o(i.main)
+ <LI><a href="#[9]">ButtonsISR</a> from button.o(i.ButtonsISR) referenced from button.o(i.Button_init)
+ <LI><a href="#[b]">Buzzer_lowbat_notify_handler</a> from buzzer.o(i.Buzzer_lowbat_notify_handler) referenced from buzzer.o(i.Buzzer_lowbat_notify_handler)
+ <LI><a href="#[b]">Buzzer_lowbat_notify_handler</a> from buzzer.o(i.Buzzer_lowbat_notify_handler) referenced from buzzer.o(i.buzzer_low_batterry_notify)
+ <LI><a href="#[c]">Buzzer_lowbat_shutdown_handler</a> from buzzer.o(i.Buzzer_lowbat_shutdown_handler) referenced from buzzer.o(i.Buzzer_lowbat_shutdown_handler)
+ <LI><a href="#[c]">Buzzer_lowbat_shutdown_handler</a> from buzzer.o(i.Buzzer_lowbat_shutdown_handler) referenced from buzzer.o(i.buzzer_low_battery_shutdown)
+ <LI><a href="#[5]">FaultISR</a> from startup_rvmdk.o(RESET) referenced from startup_rvmdk.o(RESET)
+ <LI><a href="#[d]">IR_Detector_ISR</a> from ir.o(i.IR_Detector_ISR) referenced from ir.o(i.IRDetector_init)
+ <LI><a href="#[e]">IR_Timer_Timeout</a> from ir.o(i.IR_Timer_Timeout) referenced from ir.o(i.IRDetector_init)
+ <LI><a href="#[e]">IR_Timer_Timeout</a> from ir.o(i.IR_Timer_Timeout) referenced from ir.o(i.IR_Detector_ISR)
+ <LI><a href="#[6]">IntDefaultHandler</a> from startup_rvmdk.o(RESET) referenced 114 times from startup_rvmdk.o(RESET)
+ <LI><a href="#[4]">NmiSR</a> from startup_rvmdk.o(RESET) referenced from startup_rvmdk.o(RESET)
+ <LI><a href="#[13]">Pid_process_callback</a> from wallfollow.o(i.Pid_process_callback) referenced from wallfollow.o(i.pid_Wallfollow_init)
+ <LI><a href="#[14]">QEI0_VelocityIsr</a> from qei.o(i.QEI0_VelocityIsr) referenced from qei.o(i.qei_init)
+ <LI><a href="#[15]">QEI1_VelocityIsr</a> from qei.o(i.QEI1_VelocityIsr) referenced from qei.o(i.qei_init)
+ <LI><a href="#[3]">Reset_Handler</a> from startup_rvmdk.o(RESET) referenced from startup_rvmdk.o(RESET)
+ <LI><a href="#[17]">SysTickIntHandle</a> from systemconfig.o(i.SysTickIntHandle) referenced from systemconfig.o(i.system_SystickConfig)
+ <LI><a href="#[f]">TIMER_ISR</a> from timer.o(i.TIMER_ISR) referenced from timer.o(i.Timer_Init)
+ <LI><a href="#[16]">speed_update_setpoint</a> from speed_control.o(i.speed_update_setpoint) referenced from speed_control.o(i.speed_control_runtimeout)
+</UL>
+<P>
+<H3>
+Global Symbols
+</H3>
+<P><STRONG><a name="[3]"></a>Reset_Handler</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup_rvmdk.o(RESET))
+<BR><BR>[Calls]<UL><LI><a href="#[18]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__main
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_rvmdk.o(RESET)
+</UL>
+<P><STRONG><a name="[18]"></a>__main</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, __main.o(!!!main))
+<BR><BR>[Calls]<UL><LI><a href="#[1a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry
+<LI><a href="#[19]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
+</UL>
+<BR>[Called By]<UL><LI><a href="#[3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Reset_Handler
+</UL>
+
+<P><STRONG><a name="[19]"></a>__scatterload</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __scatter.o(!!!scatter))
+<BR><BR>[Called By]<UL><LI><a href="#[18]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__main
+</UL>
+
+<P><STRONG><a name="[1b]"></a>__scatterload_rt2</STRONG> (Thumb, 44 bytes, Stack size unknown bytes, __scatter.o(!!!scatter), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[1a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry
+</UL>
+
+<P><STRONG><a name="[cd]"></a>__scatterload_rt2_thumb_only</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __scatter.o(!!!scatter), UNUSED)
+
+<P><STRONG><a name="[ce]"></a>__scatterload_null</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __scatter.o(!!!scatter), UNUSED)
+
+<P><STRONG><a name="[cf]"></a>__decompress</STRONG> (Thumb, 90 bytes, Stack size unknown bytes, __dczerorl2.o(!!dczerorl2), UNUSED)
+
+<P><STRONG><a name="[d0]"></a>__decompress1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __dczerorl2.o(!!dczerorl2), UNUSED)
+
+<P><STRONG><a name="[d1]"></a>__scatterload_zeroinit</STRONG> (Thumb, 28 bytes, Stack size unknown bytes, __scatter_zi.o(!!handler_zi), UNUSED)
+
+<P><STRONG><a name="[21]"></a>__rt_lib_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit.o(.ARM.Collect$$libinit$$00000000))
+<BR><BR>[Called By]<UL><LI><a href="#[20]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_li
+</UL>
+
+<P><STRONG><a name="[1c]"></a>__rt_lib_init_fp_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000001))
+<BR><BR>[Calls]<UL><LI><a href="#[1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_init
+</UL>
+
+<P><STRONG><a name="[d2]"></a>__rt_lib_init_alloca_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000002E))
+
+<P><STRONG><a name="[d3]"></a>__rt_lib_init_argv_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000002C))
+
+<P><STRONG><a name="[d4]"></a>__rt_lib_init_atexit_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000001B))
+
+<P><STRONG><a name="[d5]"></a>__rt_lib_init_clock_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000021))
+
+<P><STRONG><a name="[d6]"></a>__rt_lib_init_cpp_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000032))
+
+<P><STRONG><a name="[d7]"></a>__rt_lib_init_exceptions_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000030))
+
+<P><STRONG><a name="[d8]"></a>__rt_lib_init_fp_trap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000001F))
+
+<P><STRONG><a name="[d9]"></a>__rt_lib_init_getenv_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000023))
+
+<P><STRONG><a name="[da]"></a>__rt_lib_init_heap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000000A))
+
+<P><STRONG><a name="[db]"></a>__rt_lib_init_lc_collate_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000011))
+
+<P><STRONG><a name="[dc]"></a>__rt_lib_init_lc_ctype_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000013))
+
+<P><STRONG><a name="[dd]"></a>__rt_lib_init_lc_monetary_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000015))
+
+<P><STRONG><a name="[de]"></a>__rt_lib_init_lc_numeric_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000017))
+
+<P><STRONG><a name="[df]"></a>__rt_lib_init_lc_time_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000019))
+
+<P><STRONG><a name="[e0]"></a>__rt_lib_init_preinit_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000004))
+
+<P><STRONG><a name="[e1]"></a>__rt_lib_init_rand_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000000E))
+
+<P><STRONG><a name="[e2]"></a>__rt_lib_init_return</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000033))
+
+<P><STRONG><a name="[e3]"></a>__rt_lib_init_signal_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000001D))
+
+<P><STRONG><a name="[e4]"></a>__rt_lib_init_stdio_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$00000025))
+
+<P><STRONG><a name="[e5]"></a>__rt_lib_init_user_alloc_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libinit2.o(.ARM.Collect$$libinit$$0000000C))
+
+<P><STRONG><a name="[26]"></a>__rt_lib_shutdown</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown.o(.ARM.Collect$$libshutdown$$00000000))
+<BR><BR>[Called By]<UL><LI><a href="#[25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit_ls
+</UL>
+
+<P><STRONG><a name="[e6]"></a>__rt_lib_shutdown_fp_trap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000006))
+
+<P><STRONG><a name="[e7]"></a>__rt_lib_shutdown_heap_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000E))
+
+<P><STRONG><a name="[e8]"></a>__rt_lib_shutdown_return</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000F))
+
+<P><STRONG><a name="[e9]"></a>__rt_lib_shutdown_signal_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000009))
+
+<P><STRONG><a name="[ea]"></a>__rt_lib_shutdown_stdio_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$00000003))
+
+<P><STRONG><a name="[eb]"></a>__rt_lib_shutdown_user_alloc_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, libshutdown2.o(.ARM.Collect$$libshutdown$$0000000B))
+
+<P><STRONG><a name="[1a]"></a>__rt_entry</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry.o(.ARM.Collect$$rtentry$$00000000))
+<BR><BR>[Called By]<UL><LI><a href="#[18]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__main
+<LI><a href="#[1b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload_rt2
+</UL>
+
+<P><STRONG><a name="[ec]"></a>__rt_entry_presh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000002))
+
+<P><STRONG><a name="[1e]"></a>__rt_entry_sh</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry4.o(.ARM.Collect$$rtentry$$00000004))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
+<LI>Call Chain = __rt_entry_sh &rArr; __user_setup_stackheap
+</UL>
+<BR>[Calls]<UL><LI><a href="#[1f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
+</UL>
+
+<P><STRONG><a name="[20]"></a>__rt_entry_li</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000A))
+<BR><BR>[Calls]<UL><LI><a href="#[21]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_init
+</UL>
+
+<P><STRONG><a name="[ed]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
+
+<P><STRONG><a name="[22]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
+<BR><BR>[Stack]<UL><LI>Max Depth = 696 + Unknown Stack Size
+<LI>Call Chain = __rt_entry_main &rArr; main &rArr; system_Process_System_State &rArr; ProcessSpeedControl &rArr; Uocluong2 &rArr; __aeabi_dmul
+</UL>
+<BR>[Calls]<UL><LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
+</UL>
+
+<P><STRONG><a name="[ee]"></a>__rt_entry_postli_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000C))
+
+<P><STRONG><a name="[2c]"></a>__rt_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit.o(.ARM.Collect$$rtexit$$00000000))
+<BR><BR>[Called By]<UL><LI><a href="#[24]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
+</UL>
+
+<P><STRONG><a name="[25]"></a>__rt_exit_ls</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit2.o(.ARM.Collect$$rtexit$$00000003))
+<BR><BR>[Calls]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_shutdown
+</UL>
+
+<P><STRONG><a name="[ef]"></a>__rt_exit_prels_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit2.o(.ARM.Collect$$rtexit$$00000002))
+
+<P><STRONG><a name="[27]"></a>__rt_exit_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rtexit2.o(.ARM.Collect$$rtexit$$00000004))
+<BR><BR>[Calls]<UL><LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_exit
+</UL>
+
+<P><STRONG><a name="[29]"></a>SysCtlDelay</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, sysctl.o(.emb_text))
+<BR><BR>[Calls]<UL><LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlDelay
+</UL>
+<BR>[Called By]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EEPROMProgram
+<LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EEPROMInit
+<LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlClockSet
+<LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlDelay
+<LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[2b]"></a>__user_initial_stackheap</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup_rvmdk.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[1f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
+</UL>
+
+<P><STRONG><a name="[9c]"></a>__aeabi_memcpy4</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, rt_memcpy_w.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = __aeabi_memcpy4
+</UL>
+<BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ir_SavetoParams
+<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ir_LoadfromParams
+<LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_Wallfollow_init
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_set_parameters
+</UL>
+
+<P><STRONG><a name="[f0]"></a>__aeabi_memcpy8</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, rt_memcpy_w.o(.text), UNUSED)
+
+<P><STRONG><a name="[f1]"></a>__rt_memcpy_w</STRONG> (Thumb, 100 bytes, Stack size 8 bytes, rt_memcpy_w.o(.text), UNUSED)
+
+<P><STRONG><a name="[f2]"></a>_memcpy_lastbytes_aligned</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rt_memcpy_w.o(.text), UNUSED)
+
+<P><STRONG><a name="[aa]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size 4 bytes, rt_memclr_w.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = __aeabi_memclr4
+</UL>
+<BR>[Called By]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_init
+</UL>
+
+<P><STRONG><a name="[f3]"></a>__aeabi_memclr8</STRONG> (Thumb, 0 bytes, Stack size 4 bytes, rt_memclr_w.o(.text), UNUSED)
+
+<P><STRONG><a name="[f4]"></a>__rt_memclr_w</STRONG> (Thumb, 78 bytes, Stack size 4 bytes, rt_memclr_w.o(.text), UNUSED)
+
+<P><STRONG><a name="[f5]"></a>_memset_w</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rt_memclr_w.o(.text), UNUSED)
+
+<P><STRONG><a name="[f6]"></a>__use_two_region_memory</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
+
+<P><STRONG><a name="[f7]"></a>__rt_heap_escrow$2region</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
+
+<P><STRONG><a name="[f8]"></a>__rt_heap_expand$2region</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
+
+<P><STRONG><a name="[1f]"></a>__user_setup_stackheap</STRONG> (Thumb, 74 bytes, Stack size 8 bytes, sys_stackheap_outer.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
+<LI>Call Chain = __user_setup_stackheap
+</UL>
+<BR>[Calls]<UL><LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_initial_stackheap
+<LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_perproc_libspace
+</UL>
+<BR>[Called By]<UL><LI><a href="#[1e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_sh
+</UL>
+
+<P><STRONG><a name="[24]"></a>exit</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, exit.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[2c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit
+</UL>
+<BR>[Called By]<UL><LI><a href="#[22]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
+</UL>
+
+<P><STRONG><a name="[f9]"></a>__user_libspace</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, libspace.o(.text), UNUSED)
+
+<P><STRONG><a name="[2a]"></a>__user_perproc_libspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, libspace.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[1f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
+</UL>
+
+<P><STRONG><a name="[fa]"></a>__user_perthread_libspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, libspace.o(.text), UNUSED)
+
+<P><STRONG><a name="[28]"></a>_sys_exit</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, sys_exit.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit_exit
+</UL>
+
+<P><STRONG><a name="[fb]"></a>__I$use$semihosting</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
+
+<P><STRONG><a name="[fc]"></a>__use_no_semihosting_swi</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
+
+<P><STRONG><a name="[39]"></a>ADCHardwareOversampleConfigure</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, adc.o(i.ADCHardwareOversampleConfigure))
+<BR><BR>[Called By]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IRDetector_init
+<LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BattSense_init
+</UL>
+
+<P><STRONG><a name="[fd]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, indicate_semi.o(.text), UNUSED)
+
+<P><STRONG><a name="[30]"></a>ADCIntClear</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, adc.o(i.ADCIntClear))
+<BR><BR>[Called By]<UL><LI><a href="#[d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IR_Detector_ISR
+<LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BattSenseISR
+</UL>
+
+<P><STRONG><a name="[3d]"></a>ADCIntEnable</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, adc.o(i.ADCIntEnable))
+<BR><BR>[Called By]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IRDetector_init
+<LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BattSense_init
+</UL>
+
+<P><STRONG><a name="[2d]"></a>ADCIntRegister</STRONG> (Thumb, 84 bytes, Stack size 16 bytes, adc.o(i.ADCIntRegister))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = ADCIntRegister &rArr; IntRegister
+</UL>
+<BR>[Calls]<UL><LI><a href="#[2f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntEnable
+<LI><a href="#[2e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntRegister
+</UL>
+<BR>[Called By]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IRDetector_init
+<LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BattSense_init
+</UL>
+
+<P><STRONG><a name="[35]"></a>ADCProcessorTrigger</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, adc.o(i.ADCProcessorTrigger))
+<BR><BR>[Called By]<UL><LI><a href="#[e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IR_Timer_Timeout
+<LI><a href="#[7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BattSenseTimerTimeout
+</UL>
+
+<P><STRONG><a name="[3a]"></a>ADCSequenceConfigure</STRONG> (Thumb, 78 bytes, Stack size 8 bytes, adc.o(i.ADCSequenceConfigure))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = ADCSequenceConfigure
+</UL>
+<BR>[Called By]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IRDetector_init
+<LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BattSense_init
+</UL>
+
+<P><STRONG><a name="[32]"></a>ADCSequenceDataGet</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, adc.o(i.ADCSequenceDataGet))
+<BR><BR>[Called By]<UL><LI><a href="#[d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IR_Detector_ISR
+<LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BattSenseISR
+</UL>
+
+<P><STRONG><a name="[3c]"></a>ADCSequenceEnable</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, adc.o(i.ADCSequenceEnable))
+<BR><BR>[Called By]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IRDetector_init
+<LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BattSense_init
+</UL>
+
+<P><STRONG><a name="[3b]"></a>ADCSequenceStepConfigure</STRONG> (Thumb, 154 bytes, Stack size 4 bytes, adc.o(i.ADCSequenceStepConfigure))
+<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = ADCSequenceStepConfigure
+</UL>
+<BR>[Called By]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IRDetector_init
+<LI><a href="#[e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IR_Timer_Timeout
+<LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BattSense_init
+</UL>
+
+<P><STRONG><a name="[8]"></a>BattSenseISR</STRONG> (Thumb, 126 bytes, Stack size 8 bytes, battery.o(i.BattSenseISR))
+<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = BattSenseISR &rArr; buzzer_low_battery_shutdown &rArr; buzzer_Runtimeout &rArr; buzzer_Stoptimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[33]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_low_battery_shutdown
+<LI><a href="#[34]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_low_batterry_notify
+<LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCSequenceDataGet
+<LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCIntClear
+<LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;battery_Runtimeout
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> battery.o(i.BattSense_init)
+</UL>
+<P><STRONG><a name="[7]"></a>BattSenseTimerTimeout</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, battery.o(i.BattSenseTimerTimeout))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = BattSenseTimerTimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCProcessorTrigger
+</UL>
+<BR>[Address Reference Count : 2]<UL><LI> battery.o(i.BattSenseISR)
+<LI> battery.o(i.BattSense_init)
+</UL>
+<P><STRONG><a name="[36]"></a>BattSense_init</STRONG> (Thumb, 92 bytes, Stack size 8 bytes, battery.o(i.BattSense_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = BattSense_init &rArr; GPIOPinTypeADC &rArr; GPIOPadConfigSet
+</UL>
+<BR>[Calls]<UL><LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlPeripheralEnable
+<LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeADC
+<LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCSequenceStepConfigure
+<LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCSequenceEnable
+<LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCSequenceConfigure
+<LI><a href="#[2d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCIntRegister
+<LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCIntEnable
+<LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCHardwareOversampleConfigure
+<LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;battery_Runtimeout
+</UL>
+<BR>[Called By]<UL><LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[11]"></a>ButtonHandler</STRONG> (Thumb, 176 bytes, Stack size 8 bytes, main.o(i.ButtonHandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = ButtonHandler &rArr; speed_set &rArr; speed_control_runtimeout &rArr; speed_control_stoptimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinWrite
+<LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_SetState
+<LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_GetState
+<LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speed_set
+<LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speed_Enable_Hbridge
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> main.o(i.main)
+</UL>
+<P><STRONG><a name="[a4]"></a>ButtonRegisterCallback</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, button.o(i.ButtonRegisterCallback))
+<BR><BR>[Called By]<UL><LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[12]"></a>ButtonRightHandler</STRONG> (Thumb, 292 bytes, Stack size 8 bytes, main.o(i.ButtonRightHandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 176<LI>Call Chain = ButtonRightHandler &rArr; IR_set_calib_value &rArr; ir_SavetoParams &rArr; param_Set &rArr; EEPROMWrite &rArr; EEPROMProgram
+</UL>
+<BR>[Calls]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinWrite
+<LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IR_set_calib_value
+<LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_GetState
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> main.o(i.main)
+</UL>
+<P><STRONG><a name="[49]"></a>Button_init</STRONG> (Thumb, 102 bytes, Stack size 8 bytes, button.o(i.Button_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = Button_init &rArr; param_Get &rArr; EEPROMReadWords
+</UL>
+<BR>[Calls]<UL><LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeGPIOInput
+<LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPadConfigSet
+<LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOIntTypeSet
+<LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOIntRegister
+<LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOIntEnable
+<LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOIntClear
+<LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;param_Get
+<LI><a href="#[2f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntEnable
+<LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlPeripheralEnable
+</UL>
+<BR>[Called By]<UL><LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[5e]"></a>Config_System</STRONG> (Thumb, 72 bytes, Stack size 8 bytes, systemconfig.o(i.Config_System))
+<BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = Config_System &rArr; GPIOPinTypeGPIOOutput &rArr; GPIOPadConfigSet
+</UL>
+<BR>[Calls]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPadConfigSet
+<LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinWrite
+<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeGPIOOutput
+<LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlPeripheralEnable
+<LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlClockSet
+<LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FPULazyStackingEnable
+<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FPUEnable
+<LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_SystickConfig
+</UL>
+<BR>[Called By]<UL><LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[63]"></a>Control_initialize</STRONG> (Thumb, 10 bytes, Stack size 8 bytes, control_initialize.o(i.Control_initialize))
+<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = Control_initialize &rArr; rt_InitInfAndNaN &rArr; rtGetNaN &rArr; __aeabi_f2d
+</UL>
+<BR>[Calls]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_InitInfAndNaN
+</UL>
+<BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speed_control_init
+</UL>
+
+<P><STRONG><a name="[65]"></a>EEPROMInit</STRONG> (Thumb, 60 bytes, Stack size 8 bytes, eeprom.o(i.EEPROMInit))
+<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = EEPROMInit &rArr; SysCtlPeripheralReset
+</UL>
+<BR>[Calls]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlPeripheralReset
+<LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlDelay
+</UL>
+<BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EEPROM_Init
+</UL>
+
+<P><STRONG><a name="[67]"></a>EEPROMProgram</STRONG> (Thumb, 334 bytes, Stack size 40 bytes, eeprom.o(i.EEPROMProgram))
+<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = EEPROMProgram
+</UL>
+<BR>[Calls]<UL><LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlDelay
+</UL>
+<BR>[Called By]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EEPROMWrite
+</UL>
+
+<P><STRONG><a name="[69]"></a>EEPROMRead</STRONG> (Thumb, 48 bytes, Stack size 0 bytes, eeprom.o(i.EEPROMRead))
+<BR><BR>[Called By]<UL><LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EEPROMReadWords
+</UL>
+
+<P><STRONG><a name="[68]"></a>EEPROMReadWords</STRONG> (Thumb, 50 bytes, Stack size 24 bytes, eeprom.o(i.EEPROMReadWords))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = EEPROMReadWords
+</UL>
+<BR>[Calls]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EEPROMRead
+</UL>
+<BR>[Called By]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;param_Get
+</UL>
+
+<P><STRONG><a name="[6a]"></a>EEPROMWrite</STRONG> (Thumb, 50 bytes, Stack size 24 bytes, eeprom.o(i.EEPROMWrite))
+<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = EEPROMWrite &rArr; EEPROMProgram
+</UL>
+<BR>[Calls]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EEPROMProgram
+</UL>
+<BR>[Called By]<UL><LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;param_Set
+</UL>
+
+<P><STRONG><a name="[6b]"></a>EEPROM_Init</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, eeprom.o(i.EEPROM_Init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = EEPROM_Init &rArr; EEPROMInit &rArr; SysCtlPeripheralReset
+</UL>
+<BR>[Calls]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EEPROMInit
+<LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlPeripheralEnable
+</UL>
+<BR>[Called By]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;param_init
+</UL>
+
+<P><STRONG><a name="[5f]"></a>FPUEnable</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, fpu.o(i.FPUEnable))
+<BR><BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Config_System
+</UL>
+
+<P><STRONG><a name="[60]"></a>FPULazyStackingEnable</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, fpu.o(i.FPULazyStackingEnable))
+<BR><BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Config_System
+</UL>
+
+<P><STRONG><a name="[6c]"></a>GPIODirModeSet</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, gpio.o(i.GPIODirModeSet))
+<BR><BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeQEI
+<LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeTimer
+<LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeGPIOInput
+<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeGPIOOutput
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeUART
+<LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeADC
+</UL>
+
+<P><STRONG><a name="[4f]"></a>GPIOIntClear</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, gpio.o(i.GPIOIntClear))
+<BR><BR>[Called By]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Button_init
+<LI><a href="#[9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ButtonsISR
+</UL>
+
+<P><STRONG><a name="[4e]"></a>GPIOIntEnable</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, gpio.o(i.GPIOIntEnable))
+<BR><BR>[Called By]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Button_init
+</UL>
+
+<P><STRONG><a name="[4d]"></a>GPIOIntRegister</STRONG> (Thumb, 70 bytes, Stack size 8 bytes, gpio.o(i.GPIOIntRegister))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = GPIOIntRegister &rArr; IntRegister
+</UL>
+<BR>[Calls]<UL><LI><a href="#[2f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntEnable
+<LI><a href="#[2e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntRegister
+</UL>
+<BR>[Called By]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Button_init
+</UL>
+
+<P><STRONG><a name="[51]"></a>GPIOIntStatus</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, gpio.o(i.GPIOIntStatus))
+<BR><BR>[Called By]<UL><LI><a href="#[9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ButtonsISR
+</UL>
+
+<P><STRONG><a name="[4c]"></a>GPIOIntTypeSet</STRONG> (Thumb, 80 bytes, Stack size 0 bytes, gpio.o(i.GPIOIntTypeSet))
+<BR><BR>[Called By]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Button_init
+</UL>
+
+<P><STRONG><a name="[4b]"></a>GPIOPadConfigSet</STRONG> (Thumb, 312 bytes, Stack size 24 bytes, gpio.o(i.GPIOPadConfigSet))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = GPIOPadConfigSet
+</UL>
+<BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeQEI
+<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qei_init
+<LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeTimer
+<LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeGPIOInput
+<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Button_init
+<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeGPIOOutput
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeUART
+<LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeADC
+<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Config_System
+</UL>
+
+<P><STRONG><a name="[56]"></a>GPIOPinConfigure</STRONG> (Thumb, 60 bytes, Stack size 0 bytes, gpio.o(i.GPIOPinConfigure))
+<BR><BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qei_init
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_init
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bluetooth_init
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Config_PWM
+</UL>
+
+<P><STRONG><a name="[42]"></a>GPIOPinRead</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, gpio.o(i.GPIOPinRead))
+<BR><BR>[Called By]<UL><LI><a href="#[a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ButtonDebounceCallback
+</UL>
+
+<P><STRONG><a name="[38]"></a>GPIOPinTypeADC</STRONG> (Thumb, 28 bytes, Stack size 12 bytes, gpio.o(i.GPIOPinTypeADC))
+<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = GPIOPinTypeADC &rArr; GPIOPadConfigSet
+</UL>
+<BR>[Calls]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPadConfigSet
+<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIODirModeSet
+</UL>
+<BR>[Called By]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IRDetector_init
+<LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BattSense_init
+</UL>
+
+<P><STRONG><a name="[4a]"></a>GPIOPinTypeGPIOInput</STRONG> (Thumb, 28 bytes, Stack size 12 bytes, gpio.o(i.GPIOPinTypeGPIOInput))
+<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = GPIOPinTypeGPIOInput &rArr; GPIOPadConfigSet
+</UL>
+<BR>[Calls]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPadConfigSet
+<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIODirModeSet
+</UL>
+<BR>[Called By]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Button_init
+</UL>
+
+<P><STRONG><a name="[5d]"></a>GPIOPinTypeGPIOOutput</STRONG> (Thumb, 28 bytes, Stack size 12 bytes, gpio.o(i.GPIOPinTypeGPIOOutput))
+<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = GPIOPinTypeGPIOOutput &rArr; GPIOPadConfigSet
+</UL>
+<BR>[Calls]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPadConfigSet
+<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIODirModeSet
+</UL>
+<BR>[Called By]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IRDetector_init
+<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Display_init
+<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Config_System
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Config_PWM
+</UL>
+
+<P><STRONG><a name="[6d]"></a>GPIOPinTypeQEI</STRONG> (Thumb, 28 bytes, Stack size 12 bytes, gpio.o(i.GPIOPinTypeQEI))
+<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = GPIOPinTypeQEI &rArr; GPIOPadConfigSet
+</UL>
+<BR>[Calls]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPadConfigSet
+<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIODirModeSet
+</UL>
+<BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qei_init
+</UL>
+
+<P><STRONG><a name="[57]"></a>GPIOPinTypeTimer</STRONG> (Thumb, 28 bytes, Stack size 12 bytes, gpio.o(i.GPIOPinTypeTimer))
+<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = GPIOPinTypeTimer &rArr; GPIOPadConfigSet
+</UL>
+<BR>[Calls]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPadConfigSet
+<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIODirModeSet
+</UL>
+<BR>[Called By]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_init
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Config_PWM
+</UL>
+
+<P><STRONG><a name="[6e]"></a>GPIOPinTypeUART</STRONG> (Thumb, 28 bytes, Stack size 12 bytes, gpio.o(i.GPIOPinTypeUART))
+<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = GPIOPinTypeUART &rArr; GPIOPadConfigSet
+</UL>
+<BR>[Calls]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPadConfigSet
+<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIODirModeSet
+</UL>
+<BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bluetooth_init
+</UL>
+
+<P><STRONG><a name="[46]"></a>GPIOPinWrite</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, gpio.o(i.GPIOPinWrite))
+<BR><BR>[Called By]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IRDetector_init
+<LI><a href="#[d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IR_Detector_ISR
+<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Display_init
+<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Config_System
+<LI><a href="#[12]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ButtonRightHandler
+<LI><a href="#[11]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ButtonHandler
+<LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speed_Enable_Hbridge
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Config_PWM
+</UL>
+
+<P><STRONG><a name="[6f]"></a>IRDetector_init</STRONG> (Thumb, 136 bytes, Stack size 8 bytes, ir.o(i.IRDetector_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = IRDetector_init &rArr; ir_LoadfromParams &rArr; param_Get &rArr; EEPROMReadWords
+</UL>
+<BR>[Calls]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinWrite
+<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeGPIOOutput
+<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ir_Runtimeout
+<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ir_LoadfromParams
+<LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlPeripheralEnable
+<LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeADC
+<LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCSequenceStepConfigure
+<LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCSequenceEnable
+<LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCSequenceConfigure
+<LI><a href="#[2d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCIntRegister
+<LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCIntEnable
+<LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCHardwareOversampleConfigure
+</UL>
+<BR>[Called By]<UL><LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[72]"></a>IR_GetIrDetectorValue</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, ir.o(i.IR_GetIrDetectorValue))
+<BR><BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IR_set_calib_value
+</UL>
+
+<P><STRONG><a name="[48]"></a>IR_set_calib_value</STRONG> (Thumb, 132 bytes, Stack size 8 bytes, ir.o(i.IR_set_calib_value))
+<BR><BR>[Stack]<UL><LI>Max Depth = 168<LI>Call Chain = IR_set_calib_value &rArr; ir_SavetoParams &rArr; param_Set &rArr; EEPROMWrite &rArr; EEPROMProgram
+</UL>
+<BR>[Calls]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IR_GetIrDetectorValue
+<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ir_SavetoParams
+</UL>
+<BR>[Called By]<UL><LI><a href="#[12]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ButtonRightHandler
+</UL>
+
+<P><STRONG><a name="[2f]"></a>IntEnable</STRONG> (Thumb, 92 bytes, Stack size 0 bytes, interrupt.o(i.IntEnable))
+<BR><BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEIIntRegister
+<LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOIntRegister
+<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Button_init
+<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTIntRegister
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bluetooth_init
+<LI><a href="#[2d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCIntRegister
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerIntRegister
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer_Init
+</UL>
+
+<P><STRONG><a name="[2e]"></a>IntRegister</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, interrupt.o(i.IntRegister))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = IntRegister
+</UL>
+<BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEIIntRegister
+<LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOIntRegister
+<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTIntRegister
+<LI><a href="#[2d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCIntRegister
+<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTickIntRegister
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerIntRegister
+</UL>
+
+<P><STRONG><a name="[74]"></a>LED_Display_init</STRONG> (Thumb, 86 bytes, Stack size 8 bytes, systemconfig.o(i.LED_Display_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = LED_Display_init &rArr; GPIOPinTypeGPIOOutput &rArr; GPIOPadConfigSet
+</UL>
+<BR>[Calls]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinWrite
+<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeGPIOOutput
+<LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlPeripheralEnable
+</UL>
+<BR>[Called By]<UL><LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[75]"></a>ProcessSpeedControl</STRONG> (Thumb, 260 bytes, Stack size 32 bytes, speed_control.o(i.ProcessSpeedControl))
+<BR><BR>[Stack]<UL><LI>Max Depth = 624<LI>Call Chain = ProcessSpeedControl &rArr; Uocluong2 &rArr; __aeabi_dmul
+</UL>
+<BR>[Calls]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qei_getVelocity
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uocluong2
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uocluong
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;STR_Indirect
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPWM
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2iz
+</UL>
+<BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_Process_System_State
+</UL>
+
+<P><STRONG><a name="[ab]"></a>QEIConfigure</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, qei.o(i.QEIConfigure))
+<BR><BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qei_init
+</UL>
+
+<P><STRONG><a name="[80]"></a>QEIDirectionGet</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, qei.o(i.QEIDirectionGet))
+<BR><BR>[Called By]<UL><LI><a href="#[15]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEI1_VelocityIsr
+<LI><a href="#[14]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEI0_VelocityIsr
+</UL>
+
+<P><STRONG><a name="[ae]"></a>QEIEnable</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, qei.o(i.QEIEnable))
+<BR><BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qei_init
+</UL>
+
+<P><STRONG><a name="[7e]"></a>QEIIntClear</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, qei.o(i.QEIIntClear))
+<BR><BR>[Called By]<UL><LI><a href="#[15]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEI1_VelocityIsr
+<LI><a href="#[14]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEI0_VelocityIsr
+</UL>
+
+<P><STRONG><a name="[af]"></a>QEIIntEnable</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, qei.o(i.QEIIntEnable))
+<BR><BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qei_init
+</UL>
+
+<P><STRONG><a name="[81]"></a>QEIIntRegister</STRONG> (Thumb, 76 bytes, Stack size 16 bytes, qei.o(i.QEIIntRegister))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = QEIIntRegister &rArr; IntRegister
+</UL>
+<BR>[Calls]<UL><LI><a href="#[2f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntEnable
+<LI><a href="#[2e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntRegister
+</UL>
+<BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qei_init
+</UL>
+
+<P><STRONG><a name="[7d]"></a>QEIIntStatus</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, qei.o(i.QEIIntStatus))
+<BR><BR>[Called By]<UL><LI><a href="#[15]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEI1_VelocityIsr
+<LI><a href="#[14]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEI0_VelocityIsr
+</UL>
+
+<P><STRONG><a name="[ac]"></a>QEIVelocityConfigure</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, qei.o(i.QEIVelocityConfigure))
+<BR><BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qei_init
+</UL>
+
+<P><STRONG><a name="[ad]"></a>QEIVelocityEnable</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, qei.o(i.QEIVelocityEnable))
+<BR><BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qei_init
+</UL>
+
+<P><STRONG><a name="[7f]"></a>QEIVelocityGet</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, qei.o(i.QEIVelocityGet))
+<BR><BR>[Called By]<UL><LI><a href="#[15]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEI1_VelocityIsr
+<LI><a href="#[14]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEI0_VelocityIsr
+</UL>
+
+<P><STRONG><a name="[78]"></a>STR_Indirect</STRONG> (Thumb, 1120 bytes, Stack size 112 bytes, str_indirect.o(i.STR_Indirect))
+<BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = STR_Indirect &rArr; __aeabi_dmul
+</UL>
+<BR>[Calls]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdrcmple
+<LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdcmple
+<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdcmpeq
+<LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
+<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dneg
+</UL>
+<BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProcessSpeedControl
+</UL>
+
+<P><STRONG><a name="[61]"></a>SysCtlClockSet</STRONG> (Thumb, 270 bytes, Stack size 8 bytes, sysctl.o(i.SysCtlClockSet))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = SysCtlClockSet
+</UL>
+<BR>[Calls]<UL><LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlDelay
+</UL>
+<BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Config_System
+</UL>
+
+<P><STRONG><a name="[37]"></a>SysCtlPeripheralEnable</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, sysctl.o(i.SysCtlPeripheralEnable))
+<BR><BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qei_init
+<LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EEPROM_Init
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_init
+<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Button_init
+<LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IRDetector_init
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bluetooth_init
+<LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BattSense_init
+<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Display_init
+<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Config_System
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer_Init
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Config_PWM
+</UL>
+
+<P><STRONG><a name="[66]"></a>SysCtlPeripheralReset</STRONG> (Thumb, 56 bytes, Stack size 4 bytes, sysctl.o(i.SysCtlPeripheralReset))
+<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = SysCtlPeripheralReset
+</UL>
+<BR>[Called By]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EEPROMInit
+</UL>
+
+<P><STRONG><a name="[bb]"></a>SysTickEnable</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, systick.o(i.SysTickEnable))
+<BR><BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_SystickConfig
+</UL>
+
+<P><STRONG><a name="[ba]"></a>SysTickIntEnable</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, systick.o(i.SysTickIntEnable))
+<BR><BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_SystickConfig
+</UL>
+
+<P><STRONG><a name="[8b]"></a>SysTickIntRegister</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, systick.o(i.SysTickIntRegister))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = SysTickIntRegister &rArr; IntRegister
+</UL>
+<BR>[Calls]<UL><LI><a href="#[2e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntRegister
+</UL>
+<BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_SystickConfig
+</UL>
+
+<P><STRONG><a name="[b9]"></a>SysTickPeriodSet</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, systick.o(i.SysTickPeriodSet))
+<BR><BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_SystickConfig
+</UL>
+
+<P><STRONG><a name="[f]"></a>TIMER_ISR</STRONG> (Thumb, 94 bytes, Stack size 8 bytes, timer.o(i.TIMER_ISR))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = TIMER_ISR
+</UL>
+<BR>[Calls]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerIntClear
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> timer.o(i.Timer_Init)
+</UL>
+<P><STRONG><a name="[95]"></a>TIMER_RegisterEvent</STRONG> (Thumb, 62 bytes, Stack size 0 bytes, timer.o(i.TIMER_RegisterEvent))
+<BR><BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_Runtimeout
+<LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button_Runtimeout
+<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ir_Runtimeout
+<LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;battery_Runtimeout
+<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_Runtimeout
+<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speed_control_runtimeout
+</UL>
+
+<P><STRONG><a name="[96]"></a>TIMER_UnregisterEvent</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, timer.o(i.TIMER_UnregisterEvent))
+<BR><BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_Stoptimeout
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button_Stoptimeout
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ir_Stoptimeout
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;battery_Stoptimeout
+<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_StopTimeout
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speed_control_stoptimeout
+</UL>
+
+<P><STRONG><a name="[58]"></a>TimerConfigure</STRONG> (Thumb, 88 bytes, Stack size 4 bytes, timer.o(i.TimerConfigure))
+<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = TimerConfigure
+</UL>
+<BR>[Called By]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_init
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer_Init
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Config_PWM
+</UL>
+
+<P><STRONG><a name="[5c]"></a>TimerControlLevel</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, timer.o(i.TimerControlLevel))
+<BR><BR>[Called By]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Config_PWM
+</UL>
+
+<P><STRONG><a name="[90]"></a>TimerControlStall</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, timer.o(i.TimerControlStall))
+<BR><BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer_Init
+</UL>
+
+<P><STRONG><a name="[5b]"></a>TimerEnable</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, timer.o(i.TimerEnable))
+<BR><BR>[Called By]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_init
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer_Init
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Config_PWM
+</UL>
+
+<P><STRONG><a name="[8c]"></a>TimerIntClear</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, timer.o(i.TimerIntClear))
+<BR><BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer_Init
+<LI><a href="#[f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIMER_ISR
+</UL>
+
+<P><STRONG><a name="[8f]"></a>TimerIntEnable</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, timer.o(i.TimerIntEnable))
+<BR><BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer_Init
+</UL>
+
+<P><STRONG><a name="[8d]"></a>TimerIntRegister</STRONG> (Thumb, 88 bytes, Stack size 16 bytes, timer.o(i.TimerIntRegister))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = TimerIntRegister &rArr; IntRegister
+</UL>
+<BR>[Calls]<UL><LI><a href="#[2f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntEnable
+<LI><a href="#[2e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntRegister
+</UL>
+<BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer_Init
+</UL>
+
+<P><STRONG><a name="[59]"></a>TimerLoadSet</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, timer.o(i.TimerLoadSet))
+<BR><BR>[Called By]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_setsound
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_init
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer_Init
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPWM
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Config_PWM
+</UL>
+
+<P><STRONG><a name="[5a]"></a>TimerMatchSet</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, timer.o(i.TimerMatchSet))
+<BR><BR>[Called By]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_setsound
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_init
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPWM
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Config_PWM
+</UL>
+
+<P><STRONG><a name="[8e]"></a>Timer_Init</STRONG> (Thumb, 90 bytes, Stack size 8 bytes, timer.o(i.Timer_Init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = Timer_Init &rArr; TimerIntRegister &rArr; IntRegister
+</UL>
+<BR>[Calls]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerLoadSet
+<LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerEnable
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerConfigure
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;u32_UsrSystemClockGet
+<LI><a href="#[2f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntEnable
+<LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlPeripheralEnable
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerIntRegister
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerIntEnable
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerIntClear
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerControlStall
+</UL>
+<BR>[Called By]<UL><LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[40]"></a>UARTCharGet</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, uart.o(i.UARTCharGet))
+<BR><BR>[Calls]<UL><LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTCharGet
+</UL>
+<BR>[Called By]<UL><LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTCharGet
+<LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Bluetooth_RxHandler
+</UL>
+
+<P><STRONG><a name="[41]"></a>UARTCharsAvail</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, uart.o(i.UARTCharsAvail))
+<BR><BR>[Called By]<UL><LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Bluetooth_RxHandler
+</UL>
+
+<P><STRONG><a name="[91]"></a>UARTConfigSetExpClk</STRONG> (Thumb, 110 bytes, Stack size 0 bytes, uart.o(i.UARTConfigSetExpClk))
+<BR><BR>[Calls]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTConfigSetExpClk
+</UL>
+<BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTConfigSetExpClk
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bluetooth_init
+</UL>
+
+<P><STRONG><a name="[3f]"></a>UARTIntClear</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, uart.o(i.UARTIntClear))
+<BR><BR>[Called By]<UL><LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Bluetooth_RxHandler
+</UL>
+
+<P><STRONG><a name="[98]"></a>UARTIntEnable</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, uart.o(i.UARTIntEnable))
+<BR><BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bluetooth_init
+</UL>
+
+<P><STRONG><a name="[92]"></a>UARTIntRegister</STRONG> (Thumb, 70 bytes, Stack size 8 bytes, uart.o(i.UARTIntRegister))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = UARTIntRegister &rArr; IntRegister
+</UL>
+<BR>[Calls]<UL><LI><a href="#[2f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntEnable
+<LI><a href="#[2e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntRegister
+</UL>
+<BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bluetooth_init
+</UL>
+
+<P><STRONG><a name="[3e]"></a>UARTIntStatus</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, uart.o(i.UARTIntStatus))
+<BR><BR>[Called By]<UL><LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Bluetooth_RxHandler
+</UL>
+
+<P><STRONG><a name="[7b]"></a>Uocluong</STRONG> (Thumb, 1422 bytes, Stack size 560 bytes, uocluong.o(i.Uocluong))
+<BR><BR>[Stack]<UL><LI>Max Depth = 592<LI>Call Chain = Uocluong &rArr; __aeabi_dmul
+</UL>
+<BR>[Calls]<UL><LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
+<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
+<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dneg
+</UL>
+<BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProcessSpeedControl
+</UL>
+
+<P><STRONG><a name="[7c]"></a>Uocluong2</STRONG> (Thumb, 1422 bytes, Stack size 560 bytes, uocluong.o(i.Uocluong2))
+<BR><BR>[Stack]<UL><LI>Max Depth = 592<LI>Call Chain = Uocluong2 &rArr; __aeabi_dmul
+</UL>
+<BR>[Calls]<UL><LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
+<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
+<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dneg
+</UL>
+<BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProcessSpeedControl
+</UL>
+
+<P><STRONG><a name="[97]"></a>bluetooth_init</STRONG> (Thumb, 82 bytes, Stack size 16 bytes, bluetooth.o(i.bluetooth_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = bluetooth_init &rArr; GPIOPinTypeUART &rArr; GPIOPadConfigSet
+</UL>
+<BR>[Calls]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;u32_UsrSystemClockGet
+<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTIntRegister
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTIntEnable
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTConfigSetExpClk
+<LI><a href="#[2f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntEnable
+<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeUART
+<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinConfigure
+<LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlPeripheralEnable
+</UL>
+<BR>[Called By]<UL><LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[9b]"></a>buzzer_init</STRONG> (Thumb, 78 bytes, Stack size 8 bytes, buzzer.o(i.buzzer_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = buzzer_init &rArr; GPIOPinTypeTimer &rArr; GPIOPadConfigSet
+</UL>
+<BR>[Calls]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerMatchSet
+<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerLoadSet
+<LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerEnable
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerConfigure
+<LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeTimer
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;u32_UsrSystemClockGet
+<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinConfigure
+<LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlPeripheralEnable
+</UL>
+<BR>[Called By]<UL><LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[34]"></a>buzzer_low_batterry_notify</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, buzzer.o(i.buzzer_low_batterry_notify))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = buzzer_low_batterry_notify &rArr; buzzer_Runtimeout &rArr; buzzer_Stoptimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_setsound
+<LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_Runtimeout
+</UL>
+<BR>[Called By]<UL><LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BattSenseISR
+</UL>
+
+<P><STRONG><a name="[33]"></a>buzzer_low_battery_shutdown</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, buzzer.o(i.buzzer_low_battery_shutdown))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = buzzer_low_battery_shutdown &rArr; buzzer_Runtimeout &rArr; buzzer_Stoptimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_setsound
+<LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_Runtimeout
+</UL>
+<BR>[Called By]<UL><LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BattSenseISR
+</UL>
+
+<P><STRONG><a name="[53]"></a>buzzer_setsound</STRONG> (Thumb, 70 bytes, Stack size 16 bytes, buzzer.o(i.buzzer_setsound))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = buzzer_setsound
+</UL>
+<BR>[Calls]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerMatchSet
+<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerLoadSet
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;u32_UsrSystemClockGet
+</UL>
+<BR>[Called By]<UL><LI><a href="#[c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Buzzer_lowbat_shutdown_handler
+<LI><a href="#[b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Buzzer_lowbat_notify_handler
+<LI><a href="#[33]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_low_battery_shutdown
+<LI><a href="#[34]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_low_batterry_notify
+</UL>
+
+<P><STRONG><a name="[23]"></a>main</STRONG> (Thumb, 176 bytes, Stack size 64 bytes, main.o(i.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 696<LI>Call Chain = main &rArr; system_Process_System_State &rArr; ProcessSpeedControl &rArr; Uocluong2 &rArr; __aeabi_dmul
+</UL>
+<BR>[Calls]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qei_init
+<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;param_init
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_init
+<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Button_init
+<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ButtonRegisterCallback
+<LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IRDetector_init
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bluetooth_init
+<LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BattSense_init
+<LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_SetState
+<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_Process_System_State
+<LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlDelay
+<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Display_init
+<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Config_System
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer_Init
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_Wallfollow_init
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_init
+<LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speed_set
+<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speed_control_init
+<LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speed_Enable_Hbridge
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
+</UL>
+<BR>[Called By]<UL><LI><a href="#[22]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
+</UL>
+
+<P><STRONG><a name="[50]"></a>param_Get</STRONG> (Thumb, 58 bytes, Stack size 24 bytes, parameters.o(i.param_Get))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = param_Get &rArr; EEPROMReadWords
+</UL>
+<BR>[Calls]<UL><LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EEPROMReadWords
+</UL>
+<BR>[Called By]<UL><LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Button_init
+<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ir_LoadfromParams
+</UL>
+
+<P><STRONG><a name="[9e]"></a>param_Set</STRONG> (Thumb, 58 bytes, Stack size 24 bytes, parameters.o(i.param_Set))
+<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = param_Set &rArr; EEPROMWrite &rArr; EEPROMProgram
+</UL>
+<BR>[Calls]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EEPROMWrite
+</UL>
+<BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ir_SavetoParams
+</UL>
+
+<P><STRONG><a name="[9f]"></a>param_init</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, parameters.o(i.param_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = param_init &rArr; EEPROM_Init &rArr; EEPROMInit &rArr; SysCtlPeripheralReset
+</UL>
+<BR>[Calls]<UL><LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;param_software_init
+<LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EEPROM_Init
+</UL>
+<BR>[Called By]<UL><LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[a2]"></a>pid_Wallfollow_init</STRONG> (Thumb, 64 bytes, Stack size 48 bytes, wallfollow.o(i.pid_Wallfollow_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = pid_Wallfollow_init &rArr; pid_set_parameters &rArr; __aeabi_memcpy4
+</UL>
+<BR>[Calls]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_Runtimeout
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_set_parameters
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_init
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
+</UL>
+<BR>[Called By]<UL><LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[a1]"></a>pid_init</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, pid.o(i.pid_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = pid_init &rArr; __aeabi_memclr4
+</UL>
+<BR>[Calls]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
+</UL>
+<BR>[Called By]<UL><LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_Wallfollow_init
+</UL>
+
+<P><STRONG><a name="[a9]"></a>pid_set_parameters</STRONG> (Thumb, 20 bytes, Stack size 24 bytes, pid.o(i.pid_set_parameters))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = pid_set_parameters &rArr; __aeabi_memcpy4
+</UL>
+<BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
+</UL>
+<BR>[Called By]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_Wallfollow_init
+</UL>
+
+<P><STRONG><a name="[76]"></a>qei_getVelocity</STRONG> (Thumb, 56 bytes, Stack size 0 bytes, qei.o(i.qei_getVelocity))
+<BR><BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProcessSpeedControl
+</UL>
+
+<P><STRONG><a name="[a3]"></a>qei_init</STRONG> (Thumb, 256 bytes, Stack size 16 bytes, qei.o(i.qei_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = qei_init &rArr; GPIOPinTypeQEI &rArr; GPIOPadConfigSet
+</UL>
+<BR>[Calls]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEIVelocityEnable
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEIVelocityConfigure
+<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEIIntRegister
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEIIntEnable
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEIEnable
+<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEIConfigure
+<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeQEI
+<LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPadConfigSet
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;u32_UsrSystemClockGet
+<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinConfigure
+<LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlPeripheralEnable
+</UL>
+<BR>[Called By]<UL><LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[b0]"></a>rtGetInf</STRONG> (Thumb, 138 bytes, Stack size 32 bytes, rtgetinf.o(i.rtGetInf))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = rtGetInf &rArr; __aeabi_f2d
+</UL>
+<BR>[Calls]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtGetInfF
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
+</UL>
+<BR>[Called By]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_InitInfAndNaN
+</UL>
+
+<P><STRONG><a name="[b1]"></a>rtGetInfF</STRONG> (Thumb, 14 bytes, Stack size 8 bytes, rtgetinf.o(i.rtGetInfF))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = rtGetInfF
+</UL>
+<BR>[Called By]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtGetInf
+<LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_InitInfAndNaN
+</UL>
+
+<P><STRONG><a name="[b3]"></a>rtGetMinusInf</STRONG> (Thumb, 138 bytes, Stack size 32 bytes, rtgetinf.o(i.rtGetMinusInf))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = rtGetMinusInf &rArr; __aeabi_f2d
+</UL>
+<BR>[Calls]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtGetMinusInfF
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
+</UL>
+<BR>[Called By]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_InitInfAndNaN
+</UL>
+
+<P><STRONG><a name="[b4]"></a>rtGetMinusInfF</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, rtgetinf.o(i.rtGetMinusInfF))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = rtGetMinusInfF
+</UL>
+<BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtGetMinusInf
+<LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_InitInfAndNaN
+</UL>
+
+<P><STRONG><a name="[b5]"></a>rtGetNaN</STRONG> (Thumb, 142 bytes, Stack size 32 bytes, rtgetnan.o(i.rtGetNaN))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = rtGetNaN &rArr; __aeabi_f2d
+</UL>
+<BR>[Calls]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtGetNaNF
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
+</UL>
+<BR>[Called By]<UL><LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_InitInfAndNaN
+</UL>
+
+<P><STRONG><a name="[b6]"></a>rtGetNaNF</STRONG> (Thumb, 56 bytes, Stack size 12 bytes, rtgetnan.o(i.rtGetNaNF))
+<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = rtGetNaNF
+</UL>
+<BR>[Called By]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtGetNaN
+<LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rt_InitInfAndNaN
+</UL>
+
+<P><STRONG><a name="[64]"></a>rt_InitInfAndNaN</STRONG> (Thumb, 66 bytes, Stack size 8 bytes, rt_nonfinite.o(i.rt_InitInfAndNaN))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = rt_InitInfAndNaN &rArr; rtGetNaN &rArr; __aeabi_f2d
+</UL>
+<BR>[Calls]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtGetNaNF
+<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtGetNaN
+<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtGetMinusInfF
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtGetMinusInf
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtGetInfF
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtGetInf
+</UL>
+<BR>[Called By]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Control_initialize
+</UL>
+
+<P><STRONG><a name="[44]"></a>speed_Enable_Hbridge</STRONG> (Thumb, 50 bytes, Stack size 8 bytes, speed_control.o(i.speed_Enable_Hbridge))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = speed_Enable_Hbridge
+</UL>
+<BR>[Calls]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinWrite
+</UL>
+<BR>[Called By]<UL><LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[11]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ButtonHandler
+</UL>
+
+<P><STRONG><a name="[a0]"></a>speed_control_init</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, speed_control.o(i.speed_control_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = speed_control_init &rArr; Control_initialize &rArr; rt_InitInfAndNaN &rArr; rtGetNaN &rArr; __aeabi_f2d
+</UL>
+<BR>[Calls]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Control_initialize
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPWM
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Config_PWM
+</UL>
+<BR>[Called By]<UL><LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[47]"></a>speed_set</STRONG> (Thumb, 30 bytes, Stack size 16 bytes, speed_control.o(i.speed_set))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = speed_set &rArr; speed_control_runtimeout &rArr; speed_control_stoptimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speed_control_runtimeout
+</UL>
+<BR>[Called By]<UL><LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[11]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ButtonHandler
+</UL>
+
+<P><STRONG><a name="[43]"></a>system_GetState</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, systemconfig.o(i.system_GetState))
+<BR><BR>[Called By]<UL><LI><a href="#[12]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ButtonRightHandler
+<LI><a href="#[11]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ButtonHandler
+</UL>
+
+<P><STRONG><a name="[a5]"></a>system_Process_System_State</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, systemconfig.o(i.system_Process_System_State))
+<BR><BR>[Stack]<UL><LI>Max Depth = 632<LI>Call Chain = system_Process_System_State &rArr; ProcessSpeedControl &rArr; Uocluong2 &rArr; __aeabi_dmul
+</UL>
+<BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProcessSpeedControl
+</UL>
+<BR>[Called By]<UL><LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[45]"></a>system_SetState</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, systemconfig.o(i.system_SetState))
+<BR><BR>[Called By]<UL><LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[11]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ButtonHandler
+</UL>
+
+<P><STRONG><a name="[8a]"></a>u32_UsrSystemClockGet</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, systemconfig.o(i.u32_UsrSystemClockGet))
+<BR><BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;qei_init
+<LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_setsound
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_init
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bluetooth_init
+<LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_SystickConfig
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer_Init
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetPWM
+</UL>
+
+<P><STRONG><a name="[86]"></a>__aeabi_dneg</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, basic.o(x$fpl$basic))
+<BR><BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uocluong2
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uocluong
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;STR_Indirect
+</UL>
+
+<P><STRONG><a name="[fe]"></a>_dneg</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, basic.o(x$fpl$basic), UNUSED)
+
+<P><STRONG><a name="[ff]"></a>__aeabi_fneg</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, basic.o(x$fpl$basic), UNUSED)
+
+<P><STRONG><a name="[100]"></a>_fneg</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, basic.o(x$fpl$basic), UNUSED)
+
+<P><STRONG><a name="[101]"></a>_dabs</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, basic.o(x$fpl$basic), UNUSED)
+
+<P><STRONG><a name="[102]"></a>_fabs</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, basic.o(x$fpl$basic), UNUSED)
+
+<P><STRONG><a name="[87]"></a>__aeabi_dadd</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, daddsub_clz.o(x$fpl$dadd))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = __aeabi_dadd
+</UL>
+<BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uocluong2
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uocluong
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;STR_Indirect
+</UL>
+
+<P><STRONG><a name="[bc]"></a>_dadd</STRONG> (Thumb, 332 bytes, Stack size 16 bytes, daddsub_clz.o(x$fpl$dadd), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsub1
+<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dretinf
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
+</UL>
+
+<P><STRONG><a name="[c2]"></a>__fpl_dcmp_Inf</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, dcmpi.o(x$fpl$dcmpinf), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dcmple
+<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dcmpeq
+</UL>
+
+<P><STRONG><a name="[84]"></a>__aeabi_ddiv</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, ddiv.o(x$fpl$ddiv))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_ddiv
+</UL>
+<BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uocluong2
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uocluong
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;STR_Indirect
+</UL>
+
+<P><STRONG><a name="[c0]"></a>_ddiv</STRONG> (Thumb, 552 bytes, Stack size 32 bytes, ddiv.o(x$fpl$ddiv), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dretinf
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
+</UL>
+
+<P><STRONG><a name="[82]"></a>__aeabi_cdcmpeq</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, deqf.o(x$fpl$deqf))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_cdcmpeq
+</UL>
+<BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;STR_Indirect
+</UL>
+
+<P><STRONG><a name="[c1]"></a>_dcmpeq</STRONG> (Thumb, 120 bytes, Stack size 32 bytes, deqf.o(x$fpl$deqf), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
+<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dcmp_Inf
+</UL>
+
+<P><STRONG><a name="[79]"></a>__aeabi_d2iz</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dfix.o(x$fpl$dfix))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_d2iz
+</UL>
+<BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProcessSpeedControl
+</UL>
+
+<P><STRONG><a name="[c3]"></a>_dfix</STRONG> (Thumb, 94 bytes, Stack size 32 bytes, dfix.o(x$fpl$dfix), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
+</UL>
+
+<P><STRONG><a name="[77]"></a>__aeabi_i2d</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dflt))
+<BR><BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProcessSpeedControl
+</UL>
+
+<P><STRONG><a name="[103]"></a>_dflt</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dflt), UNUSED)
+
+<P><STRONG><a name="[89]"></a>__aeabi_cdcmple</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dleqf.o(x$fpl$dleqf))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_cdcmple
+</UL>
+<BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;STR_Indirect
+</UL>
+
+<P><STRONG><a name="[c4]"></a>_dcmple</STRONG> (Thumb, 120 bytes, Stack size 32 bytes, dleqf.o(x$fpl$dleqf), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
+<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dcmp_Inf
+</UL>
+
+<P><STRONG><a name="[c7]"></a>__fpl_dcmple_InfNaN</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, dleqf.o(x$fpl$dleqf), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_drcmple
+</UL>
+
+<P><STRONG><a name="[85]"></a>__aeabi_dmul</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dmul.o(x$fpl$dmul))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_dmul
+</UL>
+<BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uocluong2
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uocluong
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;STR_Indirect
+</UL>
+
+<P><STRONG><a name="[c5]"></a>_dmul</STRONG> (Thumb, 332 bytes, Stack size 32 bytes, dmul.o(x$fpl$dmul), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dretinf
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
+</UL>
+
+<P><STRONG><a name="[bf]"></a>__fpl_dnaninf</STRONG> (Thumb, 156 bytes, Stack size 16 bytes, dnaninf.o(x$fpl$dnaninf), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dmul
+<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dcmple
+<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dfix
+<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dcmpeq
+<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_ddiv
+<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsub
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dadd
+</UL>
+
+<P><STRONG><a name="[be]"></a>__fpl_dretinf</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, dretinf.o(x$fpl$dretinf), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_f2d
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dmul
+<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_ddiv
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dadd
+</UL>
+
+<P><STRONG><a name="[88]"></a>__aeabi_cdrcmple</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, drleqf.o(x$fpl$drleqf))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = __aeabi_cdrcmple
+</UL>
+<BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;STR_Indirect
+</UL>
+
+<P><STRONG><a name="[c6]"></a>_drcmple</STRONG> (Thumb, 108 bytes, Stack size 16 bytes, drleqf.o(x$fpl$drleqf), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dcmple_InfNaN
+</UL>
+
+<P><STRONG><a name="[93]"></a>__aeabi_drsub</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, daddsub_clz.o(x$fpl$drsb))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = __aeabi_drsub
+</UL>
+<BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uocluong2
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uocluong
+</UL>
+
+<P><STRONG><a name="[c8]"></a>_drsb</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, daddsub_clz.o(x$fpl$drsb), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsub1
+<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dadd1
+</UL>
+
+<P><STRONG><a name="[83]"></a>__aeabi_dsub</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, daddsub_clz.o(x$fpl$dsub))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_dsub
+</UL>
+<BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uocluong2
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Uocluong
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;STR_Indirect
+</UL>
+
+<P><STRONG><a name="[ca]"></a>_dsub</STRONG> (Thumb, 464 bytes, Stack size 32 bytes, daddsub_clz.o(x$fpl$dsub), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dadd1
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
+</UL>
+
+<P><STRONG><a name="[b2]"></a>__aeabi_f2d</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, f2d.o(x$fpl$f2d))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = __aeabi_f2d
+</UL>
+<BR>[Called By]<UL><LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtGetNaN
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtGetMinusInf
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rtGetInf
+</UL>
+
+<P><STRONG><a name="[cb]"></a>_f2d</STRONG> (Thumb, 86 bytes, Stack size 16 bytes, f2d.o(x$fpl$f2d), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_fnaninf
+<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dretinf
+</UL>
+
+<P><STRONG><a name="[cc]"></a>__fpl_fnaninf</STRONG> (Thumb, 140 bytes, Stack size 8 bytes, fnaninf.o(x$fpl$fnaninf), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_f2d
+</UL>
+
+<P><STRONG><a name="[1d]"></a>_fp_init</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, fpinit.o(x$fpl$fpinit))
+<BR><BR>[Called By]<UL><LI><a href="#[1c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_init_fp_1
+</UL>
+
+<P><STRONG><a name="[104]"></a>__fplib_config_fpu_vfp</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, fpinit.o(x$fpl$fpinit), UNUSED)
+
+<P><STRONG><a name="[105]"></a>__fplib_config_pureend_doubles</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, fpinit.o(x$fpl$fpinit), UNUSED)
+<P>
+<H3>
+Local Symbols
+</H3>
+<P><STRONG><a name="[4]"></a>NmiSR</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup_rvmdk.o(RESET))
+<BR><BR>[Calls]<UL><LI><a href="#[4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NmiSR
+</UL>
+<BR>[Called By]<UL><LI><a href="#[4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NmiSR
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_rvmdk.o(RESET)
+</UL>
+<P><STRONG><a name="[5]"></a>FaultISR</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup_rvmdk.o(RESET))
+<BR><BR>[Calls]<UL><LI><a href="#[5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FaultISR
+</UL>
+<BR>[Called By]<UL><LI><a href="#[5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FaultISR
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_rvmdk.o(RESET)
+</UL>
+<P><STRONG><a name="[6]"></a>IntDefaultHandler</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, startup_rvmdk.o(RESET))
+<BR><BR>[Calls]<UL><LI><a href="#[6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntDefaultHandler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IntDefaultHandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_rvmdk.o(RESET)
+</UL>
+<P><STRONG><a name="[31]"></a>battery_Runtimeout</STRONG> (Thumb, 24 bytes, Stack size 16 bytes, battery.o(i.battery_Runtimeout))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = battery_Runtimeout &rArr; battery_Stoptimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIMER_RegisterEvent
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;battery_Stoptimeout
+</UL>
+<BR>[Called By]<UL><LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BattSense_init
+<LI><a href="#[8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BattSenseISR
+</UL>
+
+<P><STRONG><a name="[94]"></a>battery_Stoptimeout</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, battery.o(i.battery_Stoptimeout))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = battery_Stoptimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIMER_UnregisterEvent
+</UL>
+<BR>[Called By]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;battery_Runtimeout
+</UL>
+
+<P><STRONG><a name="[10]"></a>Bluetooth_RxHandler</STRONG> (Thumb, 112 bytes, Stack size 8 bytes, bluetooth.o(i.Bluetooth_RxHandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = Bluetooth_RxHandler
+</UL>
+<BR>[Calls]<UL><LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTIntStatus
+<LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTIntClear
+<LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTCharsAvail
+<LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UARTCharGet
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> bluetooth.o(i.bluetooth_init)
+</UL>
+<P><STRONG><a name="[d]"></a>IR_Detector_ISR</STRONG> (Thumb, 220 bytes, Stack size 8 bytes, ir.o(i.IR_Detector_ISR))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = IR_Detector_ISR &rArr; ir_Runtimeout &rArr; ir_Stoptimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinWrite
+<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ir_Runtimeout
+<LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCSequenceDataGet
+<LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCIntClear
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> ir.o(i.IRDetector_init)
+</UL>
+<P><STRONG><a name="[e]"></a>IR_Timer_Timeout</STRONG> (Thumb, 116 bytes, Stack size 8 bytes, ir.o(i.IR_Timer_Timeout))
+<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = IR_Timer_Timeout &rArr; ADCSequenceStepConfigure
+</UL>
+<BR>[Calls]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCSequenceStepConfigure
+<LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADCProcessorTrigger
+</UL>
+<BR>[Address Reference Count : 2]<UL><LI> ir.o(i.IRDetector_init)
+<LI> ir.o(i.IR_Detector_ISR)
+</UL>
+<P><STRONG><a name="[71]"></a>ir_LoadfromParams</STRONG> (Thumb, 26 bytes, Stack size 72 bytes, ir.o(i.ir_LoadfromParams))
+<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = ir_LoadfromParams &rArr; param_Get &rArr; EEPROMReadWords
+</UL>
+<BR>[Calls]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;param_Get
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
+</UL>
+<BR>[Called By]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IRDetector_init
+</UL>
+
+<P><STRONG><a name="[70]"></a>ir_Runtimeout</STRONG> (Thumb, 28 bytes, Stack size 16 bytes, ir.o(i.ir_Runtimeout))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = ir_Runtimeout &rArr; ir_Stoptimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ir_Stoptimeout
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIMER_RegisterEvent
+</UL>
+<BR>[Called By]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IRDetector_init
+<LI><a href="#[d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IR_Detector_ISR
+</UL>
+
+<P><STRONG><a name="[73]"></a>ir_SavetoParams</STRONG> (Thumb, 26 bytes, Stack size 72 bytes, ir.o(i.ir_SavetoParams))
+<BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = ir_SavetoParams &rArr; param_Set &rArr; EEPROMWrite &rArr; EEPROMProgram
+</UL>
+<BR>[Calls]<UL><LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;param_Set
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
+</UL>
+<BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IR_set_calib_value
+</UL>
+
+<P><STRONG><a name="[9d]"></a>ir_Stoptimeout</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, ir.o(i.ir_Stoptimeout))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = ir_Stoptimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIMER_UnregisterEvent
+</UL>
+<BR>[Called By]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ir_Runtimeout
+</UL>
+
+<P><STRONG><a name="[a]"></a>ButtonDebounceCallback</STRONG> (Thumb, 80 bytes, Stack size 8 bytes, button.o(i.ButtonDebounceCallback))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = ButtonDebounceCallback
+</UL>
+<BR>[Calls]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinRead
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> button.o(i.ButtonsISR)
+</UL>
+<P><STRONG><a name="[9]"></a>ButtonsISR</STRONG> (Thumb, 68 bytes, Stack size 8 bytes, button.o(i.ButtonsISR))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = ButtonsISR &rArr; button_Runtimeout &rArr; button_Stoptimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOIntStatus
+<LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOIntClear
+<LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button_Runtimeout
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> button.o(i.Button_init)
+</UL>
+<P><STRONG><a name="[52]"></a>button_Runtimeout</STRONG> (Thumb, 24 bytes, Stack size 16 bytes, button.o(i.button_Runtimeout))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = button_Runtimeout &rArr; button_Stoptimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button_Stoptimeout
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIMER_RegisterEvent
+</UL>
+<BR>[Called By]<UL><LI><a href="#[9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ButtonsISR
+</UL>
+
+<P><STRONG><a name="[99]"></a>button_Stoptimeout</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, button.o(i.button_Stoptimeout))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = button_Stoptimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIMER_UnregisterEvent
+</UL>
+<BR>[Called By]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;button_Runtimeout
+</UL>
+
+<P><STRONG><a name="[b]"></a>Buzzer_lowbat_notify_handler</STRONG> (Thumb, 112 bytes, Stack size 8 bytes, buzzer.o(i.Buzzer_lowbat_notify_handler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = Buzzer_lowbat_notify_handler &rArr; buzzer_Runtimeout &rArr; buzzer_Stoptimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_setsound
+<LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_Runtimeout
+</UL>
+<BR>[Address Reference Count : 2]<UL><LI> buzzer.o(i.Buzzer_lowbat_notify_handler)
+<LI> buzzer.o(i.buzzer_low_batterry_notify)
+</UL>
+<P><STRONG><a name="[c]"></a>Buzzer_lowbat_shutdown_handler</STRONG> (Thumb, 112 bytes, Stack size 8 bytes, buzzer.o(i.Buzzer_lowbat_shutdown_handler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = Buzzer_lowbat_shutdown_handler &rArr; buzzer_Runtimeout &rArr; buzzer_Stoptimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_setsound
+<LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_Runtimeout
+</UL>
+<BR>[Address Reference Count : 2]<UL><LI> buzzer.o(i.Buzzer_lowbat_shutdown_handler)
+<LI> buzzer.o(i.buzzer_low_battery_shutdown)
+</UL>
+<P><STRONG><a name="[54]"></a>buzzer_Runtimeout</STRONG> (Thumb, 28 bytes, Stack size 16 bytes, buzzer.o(i.buzzer_Runtimeout))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = buzzer_Runtimeout &rArr; buzzer_Stoptimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_Stoptimeout
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIMER_RegisterEvent
+</UL>
+<BR>[Called By]<UL><LI><a href="#[c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Buzzer_lowbat_shutdown_handler
+<LI><a href="#[b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Buzzer_lowbat_notify_handler
+<LI><a href="#[33]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_low_battery_shutdown
+<LI><a href="#[34]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_low_batterry_notify
+</UL>
+
+<P><STRONG><a name="[9a]"></a>buzzer_Stoptimeout</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, buzzer.o(i.buzzer_Stoptimeout))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = buzzer_Stoptimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIMER_UnregisterEvent
+</UL>
+<BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buzzer_Runtimeout
+</UL>
+
+<P><STRONG><a name="[a6]"></a>param_software_init</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, parameters.o(i.param_software_init))
+<BR><BR>[Called By]<UL><LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;param_init
+</UL>
+
+<P><STRONG><a name="[14]"></a>QEI0_VelocityIsr</STRONG> (Thumb, 48 bytes, Stack size 8 bytes, qei.o(i.QEI0_VelocityIsr))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = QEI0_VelocityIsr
+</UL>
+<BR>[Calls]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEIVelocityGet
+<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEIIntStatus
+<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEIIntClear
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEIDirectionGet
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> qei.o(i.qei_init)
+</UL>
+<P><STRONG><a name="[15]"></a>QEI1_VelocityIsr</STRONG> (Thumb, 48 bytes, Stack size 8 bytes, qei.o(i.QEI1_VelocityIsr))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = QEI1_VelocityIsr
+</UL>
+<BR>[Calls]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEIVelocityGet
+<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEIIntStatus
+<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEIIntClear
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;QEIDirectionGet
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> qei.o(i.qei_init)
+</UL>
+<P><STRONG><a name="[55]"></a>Config_PWM</STRONG> (Thumb, 182 bytes, Stack size 8 bytes, speed_control.o(i.Config_PWM))
+<BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = Config_PWM &rArr; GPIOPinTypeTimer &rArr; GPIOPadConfigSet
+</UL>
+<BR>[Calls]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerMatchSet
+<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerLoadSet
+<LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerEnable
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerConfigure
+<LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeTimer
+<LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinWrite
+<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinTypeGPIOOutput
+<LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIOPinConfigure
+<LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysCtlPeripheralEnable
+<LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerControlLevel
+</UL>
+<BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speed_control_init
+</UL>
+
+<P><STRONG><a name="[7a]"></a>SetPWM</STRONG> (Thumb, 78 bytes, Stack size 32 bytes, speed_control.o(i.SetPWM))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = SetPWM
+</UL>
+<BR>[Calls]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerMatchSet
+<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimerLoadSet
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;u32_UsrSystemClockGet
+</UL>
+<BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speed_control_init
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ProcessSpeedControl
+</UL>
+
+<P><STRONG><a name="[b7]"></a>speed_control_runtimeout</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, speed_control.o(i.speed_control_runtimeout))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = speed_control_runtimeout &rArr; speed_control_stoptimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIMER_RegisterEvent
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speed_control_stoptimeout
+</UL>
+<BR>[Called By]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speed_set
+<LI><a href="#[16]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speed_update_setpoint
+</UL>
+
+<P><STRONG><a name="[b8]"></a>speed_control_stoptimeout</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, speed_control.o(i.speed_control_stoptimeout))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = speed_control_stoptimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIMER_UnregisterEvent
+</UL>
+<BR>[Called By]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speed_control_runtimeout
+</UL>
+
+<P><STRONG><a name="[16]"></a>speed_update_setpoint</STRONG> (Thumb, 106 bytes, Stack size 8 bytes, speed_control.o(i.speed_update_setpoint))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = speed_update_setpoint &rArr; speed_control_runtimeout &rArr; speed_control_stoptimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;speed_control_runtimeout
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> speed_control.o(i.speed_control_runtimeout)
+</UL>
+<P><STRONG><a name="[13]"></a>Pid_process_callback</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, wallfollow.o(i.Pid_process_callback))
+<BR>[Address Reference Count : 1]<UL><LI> wallfollow.o(i.pid_Wallfollow_init)
+</UL>
+<P><STRONG><a name="[a7]"></a>pid_Runtimeout</STRONG> (Thumb, 28 bytes, Stack size 16 bytes, wallfollow.o(i.pid_Runtimeout))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = pid_Runtimeout &rArr; pid_StopTimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIMER_RegisterEvent
+<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_StopTimeout
+</UL>
+<BR>[Called By]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_Wallfollow_init
+</UL>
+
+<P><STRONG><a name="[a8]"></a>pid_StopTimeout</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, wallfollow.o(i.pid_StopTimeout))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = pid_StopTimeout
+</UL>
+<BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIMER_UnregisterEvent
+</UL>
+<BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;pid_Runtimeout
+</UL>
+
+<P><STRONG><a name="[17]"></a>SysTickIntHandle</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, systemconfig.o(i.SysTickIntHandle))
+<BR>[Address Reference Count : 1]<UL><LI> systemconfig.o(i.system_SystickConfig)
+</UL>
+<P><STRONG><a name="[62]"></a>system_SystickConfig</STRONG> (Thumb, 40 bytes, Stack size 16 bytes, systemconfig.o(i.system_SystickConfig))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = system_SystickConfig &rArr; SysTickIntRegister &rArr; IntRegister
+</UL>
+<BR>[Calls]<UL><LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;u32_UsrSystemClockGet
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTickPeriodSet
+<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTickIntRegister
+<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTickIntEnable
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTickEnable
+</UL>
+<BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Config_System
+</UL>
+
+<P><STRONG><a name="[c9]"></a>_dadd1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, daddsub_clz.o(x$fpl$dadd), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dsub
+<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_drsb
+</UL>
+
+<P><STRONG><a name="[bd]"></a>_dsub1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, daddsub_clz.o(x$fpl$dsub), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_drsb
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dadd
+</UL>
+<P>
+<H3>
+Undefined Global Symbols
+</H3><HR></body></html>

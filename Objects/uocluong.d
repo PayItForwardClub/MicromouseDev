@@ -1,0 +1,9 @@
+.\objects\uocluong.o: Source\STR\Uocluong.c
+.\objects\uocluong.o: .\Include\Uocluong.h
+.\objects\uocluong.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+.\objects\uocluong.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\uocluong.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\uocluong.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\uocluong.o: .\Include\rtwtypes.h
+.\objects\uocluong.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\limits.h
+.\objects\uocluong.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
