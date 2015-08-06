@@ -1,14 +1,11 @@
 #include "include.h"
 
-//#define ESTIMATE_MOTOR_MODEL
 
 extern void SetPWM(uint32_t ulBaseAddr, uint32_t ulTimer, uint32_t ulFrequency, int32_t ucDutyCycle);
 
 extern volatile float BatteryVoltage;
 uint8_t IR_Calib_Step = 0;
 
-//PID_PARAMETERS pid_wall = {.Kp = 0.3, .Kd = 0.0, .Ki = 0.0005,
-//		.Ts = 0.020, .PID_Saturation = 200};
 
 void ButtonLeftHandler(void)
 {
@@ -41,7 +38,7 @@ void ButtonLeftHandler(void)
 				system_SetState(SYSTEM_ESTIMATE_MOTOR_MODEL);
 				speed_Enable_Hbridge(true);
 				speed_set(MOTOR_LEFT,200);
-				speed_set(MOTOR_RIGHT,200);
+				speed_set(MOTOR_RIGHT,400);
 			}
 			else
 			{
@@ -124,9 +121,10 @@ void main(void){
 	EEPROMConfig();
 	Timer_Init();
 	speed_control_init();
-	pid_wallfollow_init();
-	HostCommInit();
 	qei_init(20);
+	wallFollow_init();
+	HostCommInit();
+
 	buzzer_init();
 //	BattSense_init();
 	LED_Display_init();
@@ -157,9 +155,9 @@ void main(void){
 
 	while (1)
 	{
-		//speed_Enable_Hbridge(false);
-		//bluetooth_print("Left:%d, right:%d\r\n",qei_getPosLeft(),qei_getPosRight());
-		//SysCtlDelay(SysCtlClockGet()/15);
+		//speed_Enable_Hbridge(true);
+//		bluetooth_print("Left:%d, right:%d\r\n",qei_getPosLeft(),qei_getPosRight());
+
 
 		system_Process_System_State();
 
