@@ -16,18 +16,77 @@ static real_T udk = 0;
 static TIMER_ID speed_control_timID = INVALID_TIMER_ID;
 
 static void Config_PWM(void);
-static void SetPWM(uint32_t ulBaseAddr, uint32_t ulTimer, uint32_t ulFrequency, int32_t ucDutyCycle);
+//static void SetPWM(uint32_t ulBaseAddr, uint32_t ulTimer, uint32_t ulFrequency, int32_t ucDutyCycle);
 static void speed_update_setpoint(void);
 static void speed_control_runtimeout(uint32_t ms);
 static void speed_control_stoptimeout(void);
 
 void speed_control_init(void)
 {
+	float buf[64/4];
 	qei_init(20);
 	Control_initialize();
 	Config_PWM();
 	SetPWM(PWM_MOTOR_LEFT, DEFAULT, 0);
 	SetPWM(PWM_MOTOR_RIGHT, DEFAULT, 0);
+	
+	param_Get(PARAM_ID_STR_INFO, (uint8_t *)buf);
+	
+	Theta[0] = buf[0];
+	Theta[1] = buf[1];
+	Theta[2] = buf[2];
+	Theta[3] = buf[3];
+
+	Theta_[0] = buf[4];
+	Theta_[1] = buf[5];
+	Theta_[2] = buf[6];
+	Theta_[3] = buf[7];
+
+	Theta2[0] = buf[8];
+	Theta2[1] = buf[9];
+	Theta2[2] = buf[10];
+	Theta2[3] = buf[11];
+
+	Theta2_[0] = buf[12];
+	Theta2_[1] = buf[13];
+	Theta2_[2] = buf[14];
+	Theta2_[3] = buf[15];
+	
+	if (Theta[2] == 0)
+	{
+		Theta[2] = 1;
+	}
+	if (Theta2[2] == 0)
+	{
+		Theta2[2] = 1;
+	}
+}
+
+void speed_control_save_STR(void)
+{
+	float buf[64/4];
+	
+	buf[0] = Theta[0];
+	buf[1] = Theta[1];
+	buf[2] = Theta[2];
+	buf[3] = Theta[3];
+
+	buf[4] = Theta_[0];
+	buf[5] = Theta_[1];
+	buf[6] = Theta_[2];
+	buf[7] = Theta_[3];
+	
+	buf[8] = Theta2[0];
+	buf[9] = Theta2[1];
+	buf[10] = Theta2[2];
+	buf[11] = Theta2[3];
+
+	buf[12] = Theta2_[0];
+	buf[13] = Theta2_[1];
+	buf[14] = Theta2_[2];
+	buf[15] = Theta2_[3];
+	
+	param_Set(PARAM_ID_STR_INFO, (uint8_t *) buf);
 }
 
 void ProcessSpeedControl(void)
@@ -36,18 +95,32 @@ void ProcessSpeedControl(void)
 //	SetPoint = 250;
 	if (qei_getVelocity(0, &Velocity[0]) == true)
 	{
-		udk = STR_Indirect(MOTOR_RIGHT, Theta, RealSpeedSet[0], Velocity[0]);
-		SetPWM(PWM_MOTOR_RIGHT, DEFAULT, udk);
-		Uocluong(udk, Velocity[0], Theta, Theta_);
+		if (RealSpeedSet[0] != 0)
+		{
+			udk = STR_Indirect(MOTOR_RIGHT, Theta, RealSpeedSet[0], Velocity[0]);
+			SetPWM(PWM_MOTOR_RIGHT, DEFAULT, udk);
+			Uocluong(udk, Velocity[0], Theta, Theta_);
+		}
+		else
+		{
+			SetPWM(PWM_MOTOR_RIGHT, DEFAULT, 0);
+		}
 #ifdef _DEBUG_SPEED_
 		bluetooth_print("Right: %d\r\n", Velocity[0]);
 #endif
 	}
 	if (qei_getVelocity(1, &Velocity[1]) == true)
 	{
-		udk = STR_Indirect(MOTOR_LEFT, Theta2, RealSpeedSet[1], Velocity[1]);
-		SetPWM(PWM_MOTOR_LEFT, DEFAULT, udk);
-		Uocluong2(udk, Velocity[1], Theta2, Theta2_);
+		if (RealSpeedSet[1] != 0)
+		{
+			udk = STR_Indirect(MOTOR_LEFT, Theta2, RealSpeedSet[1], Velocity[1]);
+			SetPWM(PWM_MOTOR_LEFT, DEFAULT, udk);
+			Uocluong2(udk, Velocity[1], Theta2, Theta2_);
+		}
+		else
+		{
+			SetPWM(PWM_MOTOR_LEFT, DEFAULT, 0);
+		}
 #ifdef _DEBUG_SPEED_
 		bluetooth_print("Left: %d\r\n", Velocity[1]);
 #endif
@@ -114,13 +187,21 @@ void speed_set(MOTOR_SELECT Select, int32_t speed)
 {
 	if (Select == MOTOR_RIGHT)
 	{
-		SetPoint[0] = speed;
+		if (SetPoint[0] != speed)
+		{
+			speed_control_runtimeout(20);
+			SetPoint[0] = speed;
+		}
 	}
 	else if (Select == MOTOR_LEFT)
 	{
-		SetPoint[1] = speed;
+		if (SetPoint[1] != speed)
+		{
+			speed_control_runtimeout(20);
+			SetPoint[1] = speed;
+		}
 	}
-	speed_control_runtimeout(20);
+	
 }
 
 static void speed_update_setpoint(void)
@@ -131,9 +212,9 @@ static void speed_update_setpoint(void)
 
 	for (i = 0; i < 2; i++)
 	{
-		if (RealSpeedSet[i] + 20 < SetPoint[i])
+		if ((RealSpeedSet[i] + 20 < SetPoint[i]) && (SetPoint[i] > 0))
 			RealSpeedSet[i] += 20;
-		else if (RealSpeedSet[i] > SetPoint[i] + 20)
+		else if ((RealSpeedSet[i] > SetPoint[i] + 20) && (SetPoint[i] < 0))
 			RealSpeedSet[i] -= 20;
 		else
 			RealSpeedSet[i] = SetPoint[i];

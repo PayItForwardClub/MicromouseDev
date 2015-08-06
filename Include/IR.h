@@ -59,5 +59,7 @@ extern bool IR_set_calib_value(IR_CALIB select);
 extern void vIR_BatteryIntRegister(void (*ISR)(void));
 extern uint32_t vIR_Battery_ADCGet(void);
 extern void vIR_BattSenseTrigger(void);
+extern void ir_SetParam(void);
+extern void ir_GetParam(void);
 
 #endif /* IR_H_ */

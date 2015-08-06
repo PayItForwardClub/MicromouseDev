@@ -40,7 +40,7 @@ void param_init(void)
 
 static void param_software_init(void)
 {
-	param_Reset();
+//	param_Reset();
 }
 
 void param_Set(E_PARAM_ID param_id, uint8_t *au8_value)
@@ -77,6 +77,11 @@ void param_Get(E_PARAM_ID param_id, uint8_t *au8_value)
 	ui32_paramStartAddress >>= 2;
 	
 	EEPROMReadWords((uint32_t *)au8_value, ui32_paramStartAddress, ui16_param_length[param_id] >> 2);
+}
+
+uint16_t param_Get_Param_Size(E_PARAM_ID param_id)
+{
+	return (ui16_param_length[param_id]);
 }
 
 void param_Reset(void)

@@ -20,5 +20,6 @@ typedef enum
 
 extern void Button_init(void);
 extern bool ButtonRegisterCallback(BUTTON_TYPE ButtonSelect, void (*ButtonCallback)());
+extern void button_SetDebounceTime(uint32_t debounce);
 
 #endif /* BUTTON_BUTTON_H_ */

@@ -17,11 +17,14 @@ static uint32_t ui32_msLoop = 0;
 
 static TIMER_ID pid_TimerID = INVALID_TIMER_ID;
 
-void pid_Wallfollow_init(PID_PARAMETERS pid_param)
+void pid_Wallfollow_init(void)
 {
+	PID_PARAMETERS pid_param;
 	pid_init();
-	pid_set_parameters(pid_param);
+//	pid_set_parameters(pid_param);
 
+	pid_get_parameters(&pid_param);
+	
 	ui32_msLoop =  pid_param.Ts * 1000;	//ui32_msLoop(ms) = pid_param.Ts(s)*1000
 	pid_Runtimeout(&Pid_process_callback, ui32_msLoop);
 }
@@ -78,7 +81,7 @@ void pid_Wallfollow_process(void)
 	{
 		pid_Runtimeout(&Pid_process_callback, ui32_msLoop);
 		ControlFlag = false;
-		pid_wallfollow((float)IR_get_calib_value(IR_CALIB_BASE_LEFT) - (float)IR_GetIrDetectorValue(1), (float)IR_get_calib_value(IR_CALIB_BASE_RIGHT) - (float)IR_GetIrDetectorValue(2), 500);
+		pid_wallfollow((float)IR_get_calib_value(IR_CALIB_BASE_LEFT) - (float)IR_GetIrDetectorValue(1), (float)IR_get_calib_value(IR_CALIB_BASE_RIGHT) - (float)IR_GetIrDetectorValue(2), 200);
 #if defined _DEBUG_IR_ || defined _DEBUG_PID_
 		PrintStep++;
 		if (PrintStep > (500 / ui32_msLoop))

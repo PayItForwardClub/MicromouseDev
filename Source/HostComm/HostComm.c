@@ -153,7 +153,7 @@ void HostComm_StopTimeout()
 }
 
 
-#define SIZEOF_TEMP_RX_BUF  512
+#define SIZEOF_TEMP_RX_BUF  2048
 unsigned long HostComm_SplitRemainRx;
 unsigned long HostComm_SplitRxSize;
 unsigned char HostComm_SplitRxMsg[SIZEOF_TEMP_RX_BUF];
@@ -288,7 +288,6 @@ void HostComm_HandleRxMsgData(unsigned char *RxMsg)
     HostComm_Dev_HandleRxMsg(&SrvMsg);
   }
 }
-
 
 void HostComm_Dev_HandleRxMsg(HOSTCOMM_SRV_MSG * SrvMsg)
 {

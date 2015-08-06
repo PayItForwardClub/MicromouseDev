@@ -45,3 +45,5 @@
 .\objects\positioncontrol.o: .\Include\parameters.h
 .\objects\positioncontrol.o: .\Include\EEPROM.h
 .\objects\positioncontrol.o: .\Include\HostComm_ext.h
+.\objects\positioncontrol.o: .\Include\Estimation_position.h
+.\objects\positioncontrol.o: .\Include\STR_Position.h

@@ -26,5 +26,7 @@ extern void speed_set(MOTOR_SELECT Select, int32_t speed);
 extern void speed_Enable_Hbridge(bool Enable);
 extern void speed_SetMotorModel(MOTOR_SELECT select, real_T Theta[4]);
 extern void speed_GetMotorModel(MOTOR_SELECT select, real_T Theta[4]);
+extern void speed_control_save_STR(void);
+extern void SetPWM(uint32_t ulBaseAddr, uint32_t ulTimer, uint32_t ulFrequency, int32_t ucDutyCycle);
 
 #endif /* STR_SPEED_CONTROL_H_ */

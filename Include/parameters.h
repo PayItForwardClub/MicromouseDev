@@ -45,5 +45,6 @@ extern void param_init(void);
 extern void param_Set(E_PARAM_ID param_id, uint8_t *au8_value);
 extern void param_Get(E_PARAM_ID param_id, uint8_t *au8_value);
 extern void param_Reset(void);
+extern uint16_t param_Get_Param_Size(E_PARAM_ID param_id);
 
 #endif /* EEPROM_PARAMETERS_H_ */

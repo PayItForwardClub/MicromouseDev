@@ -18,21 +18,25 @@ void ButtonHandler(void)
 			break;
 		case SYSTEM_CALIB_SENSOR:
 			speed_Enable_Hbridge(false);
+			ir_SetParam();
 			system_SetState(SYSTEM_SAVE_CALIB_SENSOR);
 		case SYSTEM_SAVE_CALIB_SENSOR:
 			system_SetState(SYSTEM_ESTIMATE_MOTOR_MODEL);
+			SysCtlDelay(10000000);
 			speed_Enable_Hbridge(true);
 			speed_set(MOTOR_LEFT,500);
 			speed_set(MOTOR_RIGHT, 500);
 			break;
 		case SYSTEM_ESTIMATE_MOTOR_MODEL:
+			speed_control_save_STR();
 //			system_SetState(SYSTEM_SAVE_MOTOR_MODEL);
 			system_SetState(SYSTEM_WAIT_TO_RUN);
 			speed_Enable_Hbridge(false);
 			break;
 		case SYSTEM_WAIT_TO_RUN:
+			SysCtlDelay(20000000);
 			speed_Enable_Hbridge(true);
-			system_SetState(SYSTEM_RUN_IMAGE_PROCESSING);
+			system_SetState(SYSTEM_RUN_SOLVE_MAZE);
 			break;
 		case SYSTEM_RUN_SOLVE_MAZE:
 		case SYSTEM_RUN_IMAGE_PROCESSING:
@@ -95,12 +99,12 @@ int main(void)
 	volatile uint32_t temp;
 	volatile uint8_t Data_temp[24];
 	
-	PID_PARAMETERS pid_param;
-	pid_param.Kp = 0.3;
-	pid_param.Kd = 0.0;
-	pid_param.Ki = 0.001;
-	pid_param.Ts = 0.020;
-	pid_param.PID_Saturation = 400;
+//	PID_PARAMETERS pid_param;
+//	pid_param.Kp = 5;
+//	pid_param.Kd = 0.0;
+//	pid_param.Ki = 0.001;
+//	pid_param.Ts = 0.020;
+//	pid_param.PID_Saturation = 400;
 	
 	system_SetState(SYSTEM_INITIALIZE);
 	Config_System();
@@ -108,7 +112,8 @@ int main(void)
 	SysCtlDelay(10000);
 	Timer_Init();
 	speed_control_init();
-	pid_Wallfollow_init(pid_param);
+	pid_Wallfollow_init();
+	position_Control_Init();
 	
 	buzzer_init();
 	BattSense_init();
@@ -133,7 +138,7 @@ int main(void)
 //	bluetooth_print("AT+UART=115200,0,0\r\n");
 	pid_Wallfollow_set_follow(WALL_FOLLOW_RIGHT);
 //	system_SetState(SYSTEM_ESTIMATE_MOTOR_MODEL);
-//	speed_Enable_Hbridge(true);
+	speed_Enable_Hbridge(true);
 //	speed_set(MOTOR_LEFT,100);
 //	speed_set(MOTOR_RIGHT, 100);
 //buzzer_low_battery_shutdown();
@@ -143,7 +148,8 @@ int main(void)
 	HostComm_Dev_SendEvent(UPDATE_BOT_EVENT, (unsigned char *)Data_temp, 24);
 	while (1)
 	{
-		system_Process_System_State();
-		HostComm_EventProcessing();
+		position_Control_Process();
+//		system_Process_System_State();
+//		HostComm_EventProcessing();
 	}
 }

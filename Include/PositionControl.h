@@ -11,4 +11,7 @@
 //#define WHEEL_DISTANCE		
 //#define 
 
+extern void position_Control_Init(void);
+extern void position_Control_Process(void);
+
 #endif /* POSITION_CONTROL_H_ */

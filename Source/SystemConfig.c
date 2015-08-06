@@ -23,6 +23,7 @@ void Config_System(void)
 	FPULazyStackingEnable();
 	// Config clock
 	SysCtlClockSet(SYSCTL_SYSDIV_2_5 | SYSCTL_USE_PLL | SYSCTL_OSC_MAIN | SYSCTL_XTAL_16MHZ);
+	Sysclock = SysCtlClockGet();
 	Sysclock=80000000;
 	system_SystickConfig(1);
 	//

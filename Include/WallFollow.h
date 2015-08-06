@@ -16,7 +16,7 @@ typedef enum
 	WALL_FOLLOW_BOTH
 } WALL_FOLLOW_SELECT;
 
-extern void pid_Wallfollow_init(PID_PARAMETERS pid_param);
+extern void pid_Wallfollow_init(void);
 extern void pid_Wallfollow_process(void);
 extern void pid_Wallfollow_set_follow(WALL_FOLLOW_SELECT follow_sel);
 

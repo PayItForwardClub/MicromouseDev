@@ -18,8 +18,8 @@ static void IR_Detector_ISR(void);
 static void IR_Timer_Timeout(void);
 static void ir_Stoptimeout(void);
 static TIMER_ID ir_Runtimeout(TIMER_CALLBACK_FUNC TimeoutCallback, uint32_t msTime);
-static void ir_SetParam(void);
-static void ir_GetParam(void);
+//static void ir_SetParam(void);
+//static void ir_GetParam(void);
 
 static TIMER_ID ir_TimerID = INVALID_TIMER_ID;
 

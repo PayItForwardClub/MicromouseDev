@@ -110,18 +110,24 @@ static void Bluetooth_RxTxHandler(void)
 				b_is_has_new_data = true;
         if (rxHead + 1 < MAX_RX_BUF)
         {
-          if((rxHead + 1) != rxTail){
+          if((rxHead + 1) != rxTail)
+						{
                rxBuffer[rxHead++] = UARTCharGet(UART0_BASE);
 							 ui16_rxSize++;
           }
+					else
+						UARTCharGet(UART0_BASE);
         }
         else
         {
-          if(0 != rxTail){
+          if(0 != rxTail)
+						{
             rxBuffer[rxHead] = UARTCharGet(UART0_BASE);
 						ui16_rxSize++;
             rxHead = 0;
           }
+					else
+						UARTCharGet(UART0_BASE);
         }
     }
 }
@@ -368,7 +374,7 @@ void HC05_EventProcessing(void)
 	
 	if (hc05_currentRxAction == HC05_RX_GET_DATA)
 	{
-		if (HC05_GetRxSize() > 50)
+		if (HC05_GetRxSize() > 1024)
 		{
 			HC05_NotifyUpperLayer(HC05_RX_TX_INFO, HC05_READ_DONE);
 			HC05_StopTimeout();

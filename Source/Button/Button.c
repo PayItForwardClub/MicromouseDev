@@ -108,5 +108,5 @@ static void button_Runtimeout(TIMER_CALLBACK_FUNC TimeoutCallback, uint32_t msTi
 void button_SetDebounceTime(uint32_t debounce)
 {
 	ui32_button_debounce_time = debounce;
-	param_Get(PARAM_ID_BUTTON_INFO, (uint8_t *)&ui32_button_debounce_time);
+	param_Set(PARAM_ID_BUTTON_INFO, (uint8_t *)&ui32_button_debounce_time);
 }

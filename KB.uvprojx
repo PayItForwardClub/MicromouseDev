@@ -309,7 +309,7 @@
               </OCR_RVCT3>
               <OCR_RVCT4>
                 <Type>1</Type>
-                <StartAddress>0x1000</StartAddress>
+                <StartAddress>0x0</StartAddress>
                 <Size>0x40000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
@@ -553,6 +553,11 @@
               <FileType>1</FileType>
               <FilePath>.\Source\WallFollow\MazeRun.c</FilePath>
             </File>
+            <File>
+              <FileName>PID_AutoTune_v0.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\WallFollow\PID_AutoTune_v0.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -597,6 +602,16 @@
               <FileName>PositionControl.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Source\ImageProcess\PositionControl.c</FilePath>
+            </File>
+            <File>
+              <FileName>Estimation_position.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\ImageProcess\Estimation_position.c</FilePath>
+            </File>
+            <File>
+              <FileName>STR_Position.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\ImageProcess\STR_Position.c</FilePath>
             </File>
           </Files>
         </Group>
