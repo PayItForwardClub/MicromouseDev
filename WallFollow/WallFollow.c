@@ -78,21 +78,21 @@ static bool isWallLeft, isWallRight, isWallFrontLeft,isWallFrontRight;
 static bool rqTurnLeft=false,rqTurnRight=false;
 static float leftError, rightError;
 
-void clearPosition()
+static void clearPosition()
 {
 	encLeftTmp=0;
 	//encRightTmp=0;
 	qei_setPosLeft(9000);//head of robot
 	qei_setPosRight(9000);
 }
-void initPos()
+static void initPos()
 {
 	robotX=0;
 	robotY=0;
 	clearPosition();
 }
 
-void pid_Wallfollow_init()
+static void pid_Wallfollow_init()
 {
 	ui32_msLoop =  pid_wall.Ts * 1000;
 	pid_Runtimeout(&pid_process_callback, ui32_msLoop);
@@ -152,8 +152,17 @@ static void pid_process_callback(void)
 	pid_TimerID = INVALID_TIMER_ID;
 	ControlFlag = true;
 }
-
-void forwardUpdate()
+//*****************************************************************************
+//
+//! Update robot position when moving in straight line
+//!
+//! \param none
+//!
+//!
+//! \return none
+//
+//*****************************************************************************
+static void forwardUpdate()
 {
 	if (qei_getPosLeft()-encLeftTmp>CELL_ENC)
 	{
@@ -178,7 +187,17 @@ void forwardUpdate()
 #endif
 	}
 }
-void updatePos()
+//*****************************************************************************
+//
+//! Update robot position, modify it to get better precision
+//!
+//! \param none
+//!
+//!
+//! \return none
+//
+//*****************************************************************************
+static void updatePos()
 {
 	switch(eMove)
 	{
@@ -251,15 +270,15 @@ void updatePos()
 	}
 
 }
-int getRobotX()
+static int getRobotX()
 {
 	return robotX;
 }
-int getRobotY()
+static int getRobotY()
 {
 	return robotY;
 }
-DIRECTION getCurrentDir()
+static DIRECTION getCurrentDir()
 {
 	return currentDir;
 }
@@ -314,8 +333,21 @@ static MOVE getMove(bool wallLeft,bool wallFront,bool wallRight)
 	}
 	return FORWARD;
 }
-//clear pos truoc khi xai
-bool move(int deltaLeft,int deltaRight,int velLeftMax, int velRightMax)
+
+//*****************************************************************************
+//
+//! Move robot a little bit (error +-500 pulses). Robot velocity is equal 0 after moving.
+//! Make sure this function return true before calling it again.
+//!
+//! \param deltaLeft distance left motor will go
+//! \param deltaRight distance right motor will go
+//! \param velLeftMax max left velocity
+//! \param velRightMax max right velocity
+//!
+//! \return true if done
+//
+//*****************************************************************************
+static bool move(int deltaLeft,int deltaRight,int velLeftMax, int velRightMax)
 {
 	static int origLeft, origRight;
 	static bool done = true;
@@ -360,7 +392,6 @@ bool move(int deltaLeft,int deltaRight,int velLeftMax, int velRightMax)
 //! \param avrSpeedLeft is the speed of left motor.
 //! \param avrSpeedRight is the speed of right motor.
 //! \param turnPulse is the total pulse of two encoder after turn
-//! \param fwdPulse2 is the distance robot will go straight after turning
 //!
 //! \return true if finish
 //!			false if not
@@ -445,6 +476,20 @@ static bool TurnRight(int fwdPulse,int avrSpeedLeft,int avrSpeedRight,int turnPu
 	}
 	return false;
 }
+//*****************************************************************************
+//
+//! Control two motor to make robot turn left 90 degree
+//!
+//! \param fwdPulse is the distance robot will go straight before turn right
+//!, the robot will stand between the next cell of maze.
+//! \param avrSpeedLeft is the speed of left motor.
+//! \param avrSpeedRight is the speed of right motor.
+//! \param turnPulse is the total pulse of two encoder after turn
+//!
+//! \return true if finish
+//!			false if not
+//
+//*****************************************************************************
 static bool TurnLeft(int fwdPulse,int avrSpeedLeft,int avrSpeedRight,int turnPulse)
 {
 	static int vt,vp;
@@ -537,9 +582,9 @@ static bool TurnLeft(int fwdPulse,int avrSpeedLeft,int avrSpeedRight,int turnPul
 //! \param avrSpeedLeft is the speed of left motor.
 //! \param avrSpeedRight is the speed of left motor.
 //! \param NumPulse is the total pulse of two encoder after turn
-//! \param bwdPulseLeft is the number of pulse
 //!
-//! \return 0 (zero).
+//! \return true if finish
+//!			false if not
 //
 static bool TurnBack(int fwdPulse, int avrSpeedLeft,int avrSpeedRight,int turnPulse
 )
@@ -630,6 +675,14 @@ static bool TurnBack(int fwdPulse, int avrSpeedLeft,int avrSpeedRight,int turnPu
 	}
 	return false;
 }
+//*****************************************************************************
+//
+//! Control robot to go straight forward by following wall
+//!
+//!
+//! \return true if left/right wall is detected
+//!			false if no left/right wall is detected
+//
 static bool Forward()
 {
 	LED1_OFF();LED2_ON();LED3_OFF();
