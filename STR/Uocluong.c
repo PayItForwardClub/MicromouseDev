@@ -43,7 +43,6 @@ void Uocluong(real_T u_, real_T y, real_T Theta[4], real_T Theta_[4])
 			0, 0, 10000, 0,
 			0, 0, 0, 10000
   };
-//  static real_T Theta_[4] = {-1, 1, 1, 1};
 
   PHI[0] = -y_[0];
   PHI[1] = -y_[1];
@@ -145,7 +144,6 @@ void Uocluong2(real_T u_, real_T y, real_T Theta[4], real_T Theta_[4])
 			0, 0, 10000, 0,
 			0, 0, 0, 10000
   };
-//  static real_T Theta_[4] = {-1, 1, 1, 1};
 
   PHI[0] = -y_[0];
   PHI[1] = -y_[1];

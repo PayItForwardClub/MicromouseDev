@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "speed_control.h"
 
 #include "rtwtypes.h"
 
@@ -26,7 +27,6 @@
 /* Variable Definitions */
 
 /* Function Declarations */
-extern real_T STR_Indirect(real_T Theta[4], real_T uc, real_T y);
-extern real_T STR_Indirect2(real_T Theta[4], real_T uc, real_T y);
+extern real_T STR_Indirect(MOTOR_SELECT Motor_Sel, real_T Theta[4], real_T uc, real_T y);
 #endif
 /* End of code generation (STR_Indirect.h) */

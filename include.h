@@ -43,5 +43,6 @@
 #include "WallFollow/WallFollow.h"
 #include "Buzzer/Buzzer.h"
 #include "Battery/Battery.h"
-
+#include "HostComm/HostComm.h"
+#include "Eeprom/EEPROM.h"
 #endif /* INCLUDE_H_ */

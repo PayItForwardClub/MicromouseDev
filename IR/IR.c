@@ -10,7 +10,8 @@
 static uint8_t ADC_Step = 0;
 static IR_CALIB_VALUE ir_calib_values;
 
-static uint32_t IR_Result[4];
+static int32_t IR_Result[4];
+static uint32_t IR_ResultTmp[4];
 static void IR_Detector_ISR(void);
 static void IR_Timer_Timeout(void);
 static void ir_Stoptimeout(void);
@@ -36,7 +37,6 @@ void IRDetector_init(void)
  	ADCIntRegister(ADC0_BASE, 2, &IR_Detector_ISR);
  	ROM_ADCIntEnable(ADC0_BASE, 2);
 
- 	Timer_Init();
 
  	ADC_Step = 0;
  	TURN_ON_IRD1();
@@ -48,39 +48,54 @@ static void IR_Detector_ISR(void)
 	volatile uint32_t ADCResult;
 	ROM_ADCIntClear(ADC0_BASE, 2);
 	ROM_ADCSequenceDataGet(ADC0_BASE, 2, (uint32_t *)&ADCResult);
+
 	ADC_Step++;
-	ADC_Step %= 4;
+	ADC_Step %= 8;
 
 	switch (ADC_Step)
 	{
 		case 0:
-			IR_Result[3] = ADCResult;
+			IR_Result[3] = -ADCResult+IR_ResultTmp[3];
 			TURN_ON_IRD1();
-			TURN_OFF_IRD4();
 			break;
 		case 1:
-			IR_Result[0] = ADCResult;
-			TURN_ON_IRD2();
+			IR_ResultTmp[0] = ADCResult;
 			TURN_OFF_IRD1();
 			break;
 		case 2:
-			IR_Result[1] = ADCResult;
-			TURN_ON_IRD3();
-			TURN_OFF_IRD2();
+			IR_Result[0] = -ADCResult+IR_ResultTmp[0];
+			TURN_ON_IRD2();
 			break;
 		case 3:
-			IR_Result[2] = ADCResult;
-			TURN_ON_IRD4();
+			IR_ResultTmp[1] = ADCResult;
+			TURN_OFF_IRD2();
+			break;
+		case 4:
+			IR_Result[1] = -ADCResult+IR_ResultTmp[1];
+			TURN_ON_IRD3();
+			break;
+		case 5:
+			IR_ResultTmp[2] = ADCResult;
 			TURN_OFF_IRD3();
 			break;
+		case 6:
+			IR_Result[2] = -ADCResult+IR_ResultTmp[2];
+			TURN_ON_IRD4();
+			break;
+		case 7:
+			IR_ResultTmp[3] = ADCResult;
+			TURN_OFF_IRD4();
+			break;
+
+
 		default:
 			//Code should never reach this statement
 			ADC_Step = 0;
 			TURN_ON_IRD1();
-			TURN_OFF_IRD4();
+
 			break;
 	}
-	ir_Runtimeout(&IR_Timer_Timeout, 1);
+ 	ir_Runtimeout(&IR_Timer_Timeout, 1);
 }
 
 static void IR_Timer_Timeout(void)
@@ -89,15 +104,19 @@ static void IR_Timer_Timeout(void)
 	switch (ADC_Step)
 	{
 		case 0:
+		case 1:
 			ROM_ADCSequenceStepConfigure(ADC0_BASE, 2, 0, ADC_CTL_END | ADC_CTL_CH3 | ADC_CTL_IE);
 			break;
-		case 1:
+		case 2:
+		case 3:
 			ROM_ADCSequenceStepConfigure(ADC0_BASE, 2, 0, ADC_CTL_END | ADC_CTL_CH2 | ADC_CTL_IE);
 			break;
-		case 2:
+		case 4:
+		case 5:
 			ROM_ADCSequenceStepConfigure(ADC0_BASE, 2, 0, ADC_CTL_END | ADC_CTL_CH1 | ADC_CTL_IE);
 			break;
-		case 3:
+		case 6:
+		case 7:
 			ROM_ADCSequenceStepConfigure(ADC0_BASE, 2, 0, ADC_CTL_END | ADC_CTL_CH0 | ADC_CTL_IE);
 			break;
 		default:
@@ -106,6 +125,7 @@ static void IR_Timer_Timeout(void)
 			break;
 	}
 	ROM_ADCProcessorTrigger(ADC0_BASE, 2);
+
 }
 
 uint32_t IR_GetIrDetectorValue(uint8_t Select)
@@ -114,7 +134,25 @@ uint32_t IR_GetIrDetectorValue(uint8_t Select)
 		Select = 3;
 	return IR_Result[3 - Select];
 }
-
+void IR_load_calib_value(int* IRData)
+{
+	ir_calib_values.BaseFrontLeft=IRData[0];
+	bluetooth_print("IR_CALIB_BASE_FRONT_LEFT: %d\r\n", ir_calib_values.BaseFrontLeft);
+	ir_calib_values.BaseFrontRight=IRData[1];
+	bluetooth_print("IR_CALIB_BASE_FRONT_RIGHT: %d\r\n", ir_calib_values.BaseFrontRight);
+	ir_calib_values.BaseLeft=IRData[2];
+	bluetooth_print("IR_CALIB_BASE_LEFT: %d\r\n", ir_calib_values.BaseLeft);
+	ir_calib_values.BaseRight=IRData[3];
+	bluetooth_print("IR_CALIB_BASE_RIGHT: %d\r\n", ir_calib_values.BaseRight);
+	ir_calib_values.MaxFrontLeft=IRData[4];
+	bluetooth_print("IR_CALIB_MAX_FRONT_LEFT: %d\r\n", ir_calib_values.MaxFrontLeft);
+	ir_calib_values.MaxFrontRight=IRData[5];
+	bluetooth_print("IR_CALIB_MAX_FRONT_RIGHT: %d\r\n", ir_calib_values.MaxFrontRight);
+	ir_calib_values.MaxLeft=IRData[6];
+	bluetooth_print("IR_CALIB_MAX_LEFT: %d\r\n", ir_calib_values.MaxLeft);
+	ir_calib_values.MaxRight=IRData[7];
+	bluetooth_print("IR_CALIB_MAX_RIGHT: %d\r\n", ir_calib_values.MaxRight);
+}
 bool IR_set_calib_value(IR_CALIB select)
 {
 	switch (select)

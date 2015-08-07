@@ -23,6 +23,11 @@
 #define TURN_ON_IRD_ALL()		ROM_GPIOPinWrite(GPIO_PORTD_BASE, GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3, 0xff);
 #define TURN_OFF_IRD_ALL()		ROM_GPIOPinWrite(GPIO_PORTD_BASE, GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3, 0x00);
 
+#define IR_LEFT 1
+#define IR_RIGHT 2
+#define IR_FRONT_LEFT 0
+#define IR_FRONT_RIGHT 3
+
 typedef enum
 {
 	IR_CALIB_NONE = 0,
@@ -53,5 +58,5 @@ extern void IRDetector_init(void);
 extern uint32_t IR_GetIrDetectorValue(uint8_t Select);
 extern uint32_t IR_get_calib_value(IR_CALIB select);
 extern bool IR_set_calib_value(IR_CALIB select);
-
+extern void IR_load_calib_value(int* IRData);
 #endif /* IR_H_ */
