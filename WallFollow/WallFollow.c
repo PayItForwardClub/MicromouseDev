@@ -22,7 +22,7 @@
 
 //#define _DEBUG_IR_
 //#define _DEBUG_PID_
-//#define _DEBUG_POS_
+#define _DEBUG_POS_
 
 #define CELL_ENC 13500
 #define AVG_SPEED_FWD 200
@@ -55,7 +55,6 @@ typedef enum{
 
 static DIRECTION currentDir=UP_DIR;
 static MOVE eMove=FORWARD;
-static MOVE preMove=NONE;
 
 static void pid_process_callback(void);
 static void pid_StopTimeout(void);
@@ -67,13 +66,13 @@ static TIMER_ID pid_TimerID = INVALID_TIMER_ID;
 
 static int32_t PrintStep=0;
 static int32_t CtrlStep=1;
+static int32_t moveStage=1;
 static int32_t robotX=0,robotY=0;
 static int32_t posLeftTmp=0,posRightTmp=0;
-static int32_t encLeftTmp=0,encRightTmp=0;
+static int32_t encLeftTmp=0;
 
 //static int32_t avrSpeedLeft,avrSpeedRight;
 static int32_T avrSpeed, avrSpeedTmp;
-static int32_t fwdEnc;
 
 static bool isWallLeft, isWallRight, isWallFrontLeft,isWallFrontRight;
 static bool rqTurnLeft=false,rqTurnRight=false;
@@ -82,9 +81,9 @@ static float leftError, rightError;
 void clearPosition()
 {
 	encLeftTmp=0;
-	encRightTmp=0;
-	qei_setPosLeft(6500);//robot center
-	qei_setPosRight(6500);
+	//encRightTmp=0;
+	qei_setPosLeft(9000);//head of robot
+	qei_setPosRight(9000);
 }
 void initPos()
 {
@@ -154,87 +153,158 @@ static void pid_process_callback(void)
 	ControlFlag = true;
 }
 
-//static void setParams(MOVE move)
-//{
-//	switch (move)
-//	{
-//	case TURN_RIGHT:
-//		fwdPulse=9500;
-//		avrSpeedLeft=160;
-//		avrSpeedRight=40;
-//		turnPulse=11000;
-//		fwdPulse2=0;
-//		CtrlStep=1;
-//		break;
-//	case TURN_LEFT:
-//		fwdPulse=11000;
-//		avrSpeedRight=160;
-//		avrSpeedLeft=40;
-//		turnPulse=8000;
-//		fwdPulse2=0;
-//		CtrlStep=1;
-//		break;
-//	case TURN_BACK:
-//		fwdPulse = 6000;
-//		avrSpeedLeft=-70;
-//		avrSpeedRight=60;
-//		turnPulse = 8000;
-//		bwdPulseLeft = 7000;
-//		bwdPulseRight = 5000;
-//		CtrlStep=1;
-//		break;
-//	case FORWARD:
-//		CtrlStep=1;
-//		fwdPulse = 6000;
-//		break;
-//	}
-//}
-
-//add your algorithm code and set parameter for movement here
-static MOVE getMove(bool isWallLeft,bool isWallFront,bool isWallRight)
+void forwardUpdate()
 {
-	MOVE temp;
-	if ((!isWallLeft) && (!isWallFront) && (!isWallRight))
+	if (qei_getPosLeft()-encLeftTmp>CELL_ENC)
+	{
+		encLeftTmp += CELL_ENC;
+		switch (currentDir)
+		{
+		case 0:
+			robotY++;
+			break;
+		case 1:
+			robotX++;
+			break;
+		case 2:
+			robotY--;
+			break;
+		case 3:
+			robotX--;
+			break;
+		}
+#ifdef _DEBUG_POS_
+		bluetooth_print("pos %d %d %d",robotX,robotY,currentDir);
+#endif
+	}
+}
+void updatePos()
+{
+	switch(eMove)
+	{
+	case FORWARD:
+	{
+		forwardUpdate();
+		break;
+	}
+	case TURN_LEFT:
+	{
+		switch (CtrlStep)
+		{
+		case 2:
+			forwardUpdate();
+			break;
+		case 4:
+			currentDir=(currentDir+3)%4;
+			clearPosition();
+			qei_setPosLeft(16500);//head of robot
+			qei_setPosRight(16500);
+			forwardUpdate();
+#ifdef _DEBUG_POS_
+		bluetooth_print("pos %d %d %d",robotX,robotY,currentDir);
+#endif
+			break;
+		}
+		break;
+	}
+	case TURN_RIGHT:
+	{
+		switch (CtrlStep)
+		{
+		case 2:
+			forwardUpdate();
+			break;
+		case 4:
+			currentDir=(currentDir+1)%4;
+			clearPosition();
+			qei_setPosLeft(16500);
+			qei_setPosRight(16500);
+			forwardUpdate();
+#ifdef _DEBUG_POS_
+		bluetooth_print("pos %d %d %d",robotX,robotY,currentDir);
+#endif
+			break;
+		}
+		break;
+	}
+	case TURN_BACK:
+	{
+		switch (CtrlStep)
+		{
+		case 2:
+			forwardUpdate();
+			break;
+		case 4:
+			currentDir=(currentDir+3)%4;
+#ifdef _DEBUG_POS_
+		bluetooth_print("pos %d %d %d",robotX,robotY,currentDir);
+#endif
+			break;
+		case 6:
+			currentDir=(currentDir+3)%4;
+#ifdef _DEBUG_POS_
+		bluetooth_print("pos %d %d %d",robotX,robotY,currentDir);
+#endif
+			break;
+		}
+	}
+	}
+
+}
+int getRobotX()
+{
+	return robotX;
+}
+int getRobotY()
+{
+	return robotY;
+}
+DIRECTION getCurrentDir()
+{
+	return currentDir;
+}
+//add your algorithm here
+//using getCurrentDir and getRobotX, getRobotY
+static MOVE getMove(bool wallLeft,bool wallFront,bool wallRight)
+{
+	if ((!wallLeft) && (!wallFront) && (!wallRight))
 	{
 		avrSpeed = AVG_SPEED_FWD;
-		temp = SIMPLE_FORWARD;
+		return SIMPLE_FORWARD;
 	}
 	if (e_wall_follow_select == WALL_FOLLOW_RIGHT)
 	{
-		if (!isWallRight)
+		if (!wallRight)
 		{
-			fwdEnc = 9500;
 			return TURN_RIGHT;
 		}
-		else if (!isWallFront)
+		else if (!wallFront)
 		{
 			return FORWARD;
 		}
-		else if (!isWallLeft)
+		else if (!wallLeft)
 		{
-			fwdEnc = 4000;
 			return TURN_LEFT;
 		}
 		else
 		{
-
 			return TURN_BACK;
 		}
 	}
 	else if (e_wall_follow_select == WALL_FOLLOW_LEFT)
 	{
-		if (!isWallLeft)
+		if (!wallLeft)
 		{
-			fwdEnc = 10500;
+
 			return TURN_LEFT;
 		}
-		else if (!isWallFront)
+		else if (!wallFront)
 		{
 			return FORWARD;
 		}
-		else if (!isWallRight)
+		else if (!wallRight)
 		{
-			fwdEnc = 4000;
+
 			return TURN_RIGHT;
 		}
 		else
@@ -281,88 +351,22 @@ bool move(int deltaLeft,int deltaRight,int velLeftMax, int velRightMax)
 	return done;
 }
 
-void forwardUpdate()
-{
-	if (qei_getPosLeft()-encLeftTmp>CELL_ENC)
-	{
-		encLeftTmp += CELL_ENC;
-		switch (currentDir)
-		{
-		case 0:
-			robotY++;
-			break;
-		case 1:
-			robotX++;
-			break;
-		case 2:
-			robotY--;
-			break;
-		case 3:
-			robotX--;
-			break;
-		}
-		bluetooth_print("pos %d %d %d",robotX,robotY,currentDir);
-	}
-}
-void updatePos()
-{
-	switch(eMove)
-	{
-	case FORWARD:
-	{
-		forwardUpdate();
-		break;
-	}
-	case TURN_LEFT:
-	{
-		switch (CtrlStep)
-		{
-		case 2:
-			forwardUpdate();
-			break;
-		case 4:
-			currentDir=(currentDir+3)%4;
-			bluetooth_print("pos %d %d %d",robotX,robotY,currentDir);
-			break;
-		case 6:
-			forwardUpdate();
-			break;
-		}
-		break;
-	}
-	case TURN_RIGHT:
-	{
-		switch (CtrlStep)
-		{
-		case 2:
-			forwardUpdate();
-			break;
-		case 4:
-			currentDir=(currentDir+1)%4;
-			bluetooth_print("pos %d %d %d",robotX,robotY,currentDir);
-			break;
-		case 6:
-			forwardUpdate();
-			break;
-		}
-		break;
-	}
-	case TURN_BACK:
-	{
-		switch (CtrlStep)
-		{
-		case 2:
-			forwardUpdate();
-			break;
-		case 8:
-			currentDir=(currentDir+2)%4;
-			bluetooth_print("pos %d %d %d",robotX,robotY,currentDir);
-			break;
-		}
-	}
-	}
-}
-bool TurnRight(int fwdPulse,int avrSpeedLeft,int avrSpeedRight,int turnPulse, int fwdPulse2)
+//*****************************************************************************
+//
+//! Control two motor to make robot turn right 90 degree
+//!
+//! \param fwdPulse is the distance robot will go straight before turn right
+//!, the robot will stand between the next cell of maze.
+//! \param avrSpeedLeft is the speed of left motor.
+//! \param avrSpeedRight is the speed of right motor.
+//! \param turnPulse is the total pulse of two encoder after turn
+//! \param fwdPulse2 is the distance robot will go straight after turning
+//!
+//! \return true if finish
+//!			false if not
+//
+//*****************************************************************************
+static bool TurnRight(int fwdPulse,int avrSpeedLeft,int avrSpeedRight,int turnPulse)
 {
 	static int vt,vp;
 	LED1_OFF();LED2_OFF();LED3_ON();
@@ -376,12 +380,17 @@ bool TurnRight(int fwdPulse,int avrSpeedLeft,int avrSpeedRight,int turnPulse, in
 		vp=1;
 		avrSpeedTmp=avrSpeed;
 	case 2://go straight
-		if (abs(qei_getPosLeft()-posLeftTmp)<fwdPulse &&
+
+		if ((abs(qei_getPosLeft()-posLeftTmp)<fwdPulse) ||
+				((isWallFrontLeft|isWallFrontRight)&&
 				(IR_GetIrDetectorValue(3)>IR_get_calib_value(IR_CALIB_BASE_FRONT_RIGHT))&&
-				(IR_GetIrDetectorValue(0)>IR_get_calib_value(IR_CALIB_BASE_FRONT_LEFT)))
+				(IR_GetIrDetectorValue(0)>IR_get_calib_value(IR_CALIB_BASE_FRONT_LEFT))))
 		{
-			avrSpeed = ((abs(fwdPulse + posLeftTmp - qei_getPosLeft()) / (fwdPulse / avrSpeedTmp)) / 2)
-					+ (abs(avrSpeedLeft) + abs(avrSpeedRight)) / 2;
+			if (qei_getPosLeft()<fwdPulse+posLeftTmp)
+				avrSpeed = ((abs(fwdPulse + posLeftTmp - qei_getPosLeft()) / (fwdPulse / avrSpeedTmp)) / 2)
+				+ (abs(avrSpeedLeft) + abs(avrSpeedRight)) / 2;
+			else
+				avrSpeed = (abs(avrSpeedLeft) + abs(avrSpeedRight)) / 2;
 			if (isWallLeft)
 				pid_wallfollow(leftError,rightError,avrSpeed,WALL_FOLLOW_LEFT);
 			else
@@ -392,6 +401,10 @@ bool TurnRight(int fwdPulse,int avrSpeedLeft,int avrSpeedRight,int turnPulse, in
 		}
 		else
 		{
+#ifdef TEST_TURNRIGHT_MOVE1
+		speed_Enable_Hbridge(false);
+#endif
+			pid_reset(&pid_wall);
 			updatePos();
 			CtrlStep++;
 		}
@@ -401,9 +414,6 @@ bool TurnRight(int fwdPulse,int avrSpeedLeft,int avrSpeedRight,int turnPulse, in
 		posRightTmp=qei_getPosRight();
 		CtrlStep++;
 	case 4://turn 90 degree
-#ifdef TEST_TURNRIGHT_MOVE1
-		speed_Enable_Hbridge(false);
-#endif
 		if (abs(qei_getPosLeft()-posLeftTmp) + abs(qei_getPosRight()-posRightTmp) < turnPulse)
 		{
 			speed_set(MOTOR_LEFT, avrSpeedLeft);
@@ -423,32 +433,19 @@ bool TurnRight(int fwdPulse,int avrSpeedLeft,int avrSpeedRight,int turnPulse, in
 		}
 		else
 		{
-			updatePos();
-			clearPosition();
-			CtrlStep++;
-		}
-		break;
-	case 5://go straight
 #ifdef TEST_TURNRIGHT_TURN
 		speed_Enable_Hbridge(false);
 #endif
-		if (move(fwdPulse2,fwdPulse2,AVG_SPEED_BWD,AVG_SPEED_BWD))
-		{
-#ifdef TEST_TURNRIGHT_MOVE2
-		speed_Enable_Hbridge(false);
-#endif
-			CtrlStep++;
+			updatePos();
+			CtrlStep=1;
+			pid_reset(&pid_wall);
+			return true;
 		}
 		break;
-	case 6:
-		updatePos();
-		CtrlStep=1;
-		pid_reset(&pid_wall);
-		return true;
 	}
 	return false;
 }
-bool TurnLeft(int fwdPulse,int avrSpeedLeft,int avrSpeedRight,int turnPulse, int fwdPulse2)
+static bool TurnLeft(int fwdPulse,int avrSpeedLeft,int avrSpeedRight,int turnPulse)
 {
 	static int vt,vp;
 	LED1_ON();LED2_OFF();LED3_OFF();
@@ -462,12 +459,17 @@ bool TurnLeft(int fwdPulse,int avrSpeedLeft,int avrSpeedRight,int turnPulse, int
 		vp=1;
 		avrSpeedTmp=avrSpeed;
 	case 2://go straight
-		if ((abs(qei_getPosLeft()-posLeftTmp)<fwdPulse) &&
+		if ((abs(qei_getPosLeft()-posLeftTmp)<fwdPulse) ||
+				((isWallFrontLeft|isWallFrontRight)&&
 				(IR_GetIrDetectorValue(3)>IR_get_calib_value(IR_CALIB_BASE_FRONT_RIGHT))&&
-				(IR_GetIrDetectorValue(0)>IR_get_calib_value(IR_CALIB_BASE_FRONT_LEFT)))
+				(IR_GetIrDetectorValue(0)>IR_get_calib_value(IR_CALIB_BASE_FRONT_LEFT))))
 		{
-			avrSpeed = ((abs(fwdPulse + posLeftTmp - qei_getPosLeft()) / (fwdPulse / avrSpeedTmp)) / 2)
+			if (qei_getPosLeft()<fwdPulse+posLeftTmp)
+				avrSpeed = ((abs(fwdPulse + posLeftTmp - qei_getPosLeft()) / (fwdPulse / avrSpeedTmp)) / 2)
 					+ (abs(avrSpeedLeft) + abs(avrSpeedRight)) / 2;
+			else
+				avrSpeed = (abs(avrSpeedLeft) + abs(avrSpeedRight)) / 2;
+
 			if (isWallRight)
 				pid_wallfollow(leftError,rightError,avrSpeed,WALL_FOLLOW_RIGHT);
 			else
@@ -478,6 +480,10 @@ bool TurnLeft(int fwdPulse,int avrSpeedLeft,int avrSpeedRight,int turnPulse, int
 		}
 		else
 		{
+#ifdef TEST_TURNLEFT_MOVE1
+		speed_Enable_Hbridge(false);
+#endif
+			pid_reset(&pid_wall);
 			updatePos();
 			CtrlStep++;
 		}
@@ -487,9 +493,7 @@ bool TurnLeft(int fwdPulse,int avrSpeedLeft,int avrSpeedRight,int turnPulse, int
 		posRightTmp=qei_getPosRight();
 		CtrlStep++;
 	case 4://turn 90 degree
-#ifdef TEST_TURNLEFT_MOVE1
-		speed_Enable_Hbridge(false);
-#endif
+
 		if (abs(qei_getPosLeft()-posLeftTmp) + abs(qei_getPosRight()-posRightTmp) < turnPulse)
 
 		{
@@ -511,36 +515,34 @@ bool TurnLeft(int fwdPulse,int avrSpeedLeft,int avrSpeedRight,int turnPulse, int
 		}
 		else
 		{
-			updatePos();
-			clearPosition();
-			CtrlStep++;
-		}
-		break;
-
-	case 5://go straight again to check left/right wall
 #ifdef TEST_TURNLEFT_TURN
 		speed_Enable_Hbridge(false);
 #endif
-		if (move(fwdPulse2,fwdPulse2,AVG_SPEED_BWD,AVG_SPEED_BWD))
-		{
-#ifdef TEST_TURNLEFT_MOVE2
-		speed_Enable_Hbridge(false);
-#endif
-			CtrlStep++;
+			updatePos();
+			CtrlStep=1;
+			pid_reset(&pid_wall);
+			return true;
 		}
 		break;
-
-	case 6:
-
-		updatePos();
-		CtrlStep=1;
-		pid_reset(&pid_wall);
-		return true;
 	}
 	return false;
+
 }
-bool TurnBack(int fwdPulse, int avrSpeedLeft,int avrSpeedRight,int turnPulse
-		,int bwdPulseLeft, int bwdPulseRight)
+//*****************************************************************************
+//
+//! Control two motor to make robot turn back 180 degree.
+//!
+//! \param fwdPulse is the distance robot will go straight before turn right
+//!, the robot will stand between the next cell of maze.
+//! \param avrSpeedLeft is the speed of left motor.
+//! \param avrSpeedRight is the speed of left motor.
+//! \param NumPulse is the total pulse of two encoder after turn
+//! \param bwdPulseLeft is the number of pulse
+//!
+//! \return 0 (zero).
+//
+static bool TurnBack(int fwdPulse, int avrSpeedLeft,int avrSpeedRight,int turnPulse
+)
 {
 	LED1_ON();LED2_ON();LED3_ON();
 	switch (CtrlStep)
@@ -572,6 +574,7 @@ bool TurnBack(int fwdPulse, int avrSpeedLeft,int avrSpeedRight,int turnPulse
 		}
 		else
 		{
+			pid_reset(&pid_wall);
 			updatePos();
 			CtrlStep++;
 		}
@@ -581,7 +584,7 @@ bool TurnBack(int fwdPulse, int avrSpeedLeft,int avrSpeedRight,int turnPulse
 		posLeftTmp=qei_getPosLeft();
 		posRightTmp=qei_getPosRight();
 		CtrlStep++;
-	case 4:
+	case 4://turing 90 degree
 	{
 #ifdef TEST_TURNBACK_FWD
 		speed_Enable_Hbridge(false);
@@ -593,6 +596,7 @@ bool TurnBack(int fwdPulse, int avrSpeedLeft,int avrSpeedRight,int turnPulse
 		}
 		else
 		{
+			updatePos();
 			CtrlStep++;
 		}
 		break;
@@ -601,50 +605,58 @@ bool TurnBack(int fwdPulse, int avrSpeedLeft,int avrSpeedRight,int turnPulse
 		posLeftTmp=qei_getPosLeft();
 		posRightTmp=qei_getPosRight();
 		CtrlStep++;
-	case 6:
+	case 6://turning another 90 degree
 	{
 #ifdef TEST_TURNBACK_TURN1
 		speed_Enable_Hbridge(false);
 #endif
 
-		if (((abs(qei_getPosLeft()-posLeftTmp)+abs(qei_getPosRight()-posRightTmp))<turnPulse) &&
-				(isWallFrontLeft|isWallFrontRight))
+		if ((abs(qei_getPosLeft()-posLeftTmp)+abs(qei_getPosRight()-posRightTmp))<turnPulse)
 		{
 			speed_set(MOTOR_RIGHT, -avrSpeedLeft);
 			speed_set(MOTOR_LEFT, -avrSpeedRight);
 		}
 		else
 		{
-			CtrlStep++;
-		}
-		break;
-	}
-
-	case 7:
-	{
 #ifdef TEST_TURNBACK_TURN2
 		speed_Enable_Hbridge(false);
 #endif
-		if (move(-bwdPulseLeft,-bwdPulseRight,AVG_SPEED_BWD+20,AVG_SPEED_BWD-20))
-		{
-#ifdef TEST_TURNBACK_BACKWARD
-			speed_Enable_Hbridge(false);
-#endif
-			CtrlStep++;
+			updatePos();
+			CtrlStep=1;
+			return true;
 		}
 		break;
 	}
-	case 8:
-	{
-		updatePos();
-		CtrlStep=1;
-		clearPosition();
-		pid_reset(&pid_wall);
-		speed_set(MOTOR_RIGHT, AVG_SPEED_FWD_SLOW);
-		speed_set(MOTOR_LEFT, AVG_SPEED_FWD_SLOW);
+	}
+	return false;
+}
+static bool Forward()
+{
+	LED1_OFF();LED2_ON();LED3_OFF();
+	updatePos();
+	//bluetooth_print("%d\r\n",avrSpeed);
+	if ((!isWallLeft) || (!isWallRight))
 		return true;
+
+	if (avrSpeed<AVG_SPEED_FWD-30)
+		avrSpeed+=30;
+	else
+		avrSpeed=AVG_SPEED_FWD;
+
+	if (isWallRight)
+	{
+		pid_wallfollow(leftError,rightError, avrSpeed,WALL_FOLLOW_RIGHT);
 	}
+	else if (isWallLeft)
+	{
+		pid_wallfollow(leftError,rightError, avrSpeed,WALL_FOLLOW_LEFT);
 	}
+	else
+	{
+		speed_set(MOTOR_RIGHT, avrSpeed);
+		speed_set(MOTOR_LEFT, avrSpeed);
+	}
+
 	return false;
 }
 void pid_Wallfollow_process(void)
@@ -675,56 +687,28 @@ void pid_Wallfollow_process(void)
 
 		switch(eMove)
 		{
+		case SIMPLE_FORWARD:
+			speed_set(MOTOR_RIGHT,AVG_SPEED_FWD);
+			speed_set(MOTOR_LEFT,AVG_SPEED_FWD);
+			if (isWallFrontRight|isWallFrontLeft|isWallRight|isWallLeft)
+				eMove=getMove(isWallLeft,isWallFrontLeft|isWallFrontRight,isWallRight);
+			break;
 		case FORWARD:
-
-			LED1_OFF();LED2_ON();LED3_OFF();
-			updatePos();
-			//bluetooth_print("%d\r\n",avrSpeed);
-			switch (CtrlStep)
+			switch (moveStage)
 			{
-
 			case 1:
-				if (avrSpeed<AVG_SPEED_FWD-30)
-					avrSpeed+=30;
-				else
-					avrSpeed=AVG_SPEED_FWD;
-				if (isWallRight)
-				{
-					pid_wallfollow(leftError,rightError, avrSpeed,WALL_FOLLOW_RIGHT);
-				}
-				else if (isWallLeft)
-				{
-					pid_wallfollow(leftError,rightError, avrSpeed,WALL_FOLLOW_LEFT);
-				}
-				else
-				{
-					speed_set(MOTOR_RIGHT, avrSpeed);
-					speed_set(MOTOR_LEFT, avrSpeed);
-				}
-				if (!isWallLeft)
-				{
-					rqTurnLeft=true;
-				}
-				if (!isWallRight)
-				{
-					rqTurnRight=true;
-				}
-				if (rqTurnLeft | rqTurnRight)
-					CtrlStep++;
-				if (isWallFrontLeft | isWallFrontRight)
-				{
-					eMove=getMove(!rqTurnLeft,isWallFrontLeft|isWallFrontRight,!rqTurnRight);
-					rqTurnLeft=false;
-					rqTurnRight=false;
-					CtrlStep=1;
-				}
+				if (Forward())
+					moveStage++;
+				if (isWallFrontLeft| isWallFrontRight)
+					eMove=getMove(isWallLeft,isWallFrontLeft|isWallFrontRight,isWallRight);
 				break;
 			case 2:
 				posLeftTmp=qei_getPosLeft();
-				CtrlStep++;
+				moveStage++;
 				i=1;
 				avrSpeedTmp=avrSpeed;
 			case 3://slow down
+				forwardUpdate();
 				if (!isWallLeft)
 				{
 					rqTurnLeft=true;
@@ -734,11 +718,11 @@ void pid_Wallfollow_process(void)
 					rqTurnRight=true;
 				}
 				if ((abs(qei_getPosLeft()-posLeftTmp)<5000)
-					&& (!isWallFrontLeft) && (!isWallFrontRight))
+						&& (!isWallFrontLeft) && (!isWallFrontRight))
 				{
 					if (abs(qei_getPosLeft()-posLeftTmp)>i*1000)
 					{
-						avrSpeed -= avrSpeedTmp/10;
+						avrSpeed -= 10;
 						i++;
 					}
 					if (isWallRight)
@@ -754,38 +738,139 @@ void pid_Wallfollow_process(void)
 						speed_set(MOTOR_RIGHT, avrSpeed);
 						speed_set(MOTOR_LEFT, avrSpeed);
 					}
-
 				}
 				else
 				{
 #ifdef TEST_FORWARD_MOVE
 					speed_Enable_Hbridge(false);
 #endif
+
 					eMove=getMove(!rqTurnLeft,isWallFrontLeft|isWallFrontRight,!rqTurnRight);
+					if (eMove==FORWARD)
+						avrSpeed=AVG_SPEED_FWD;
 					rqTurnLeft=false;
 					rqTurnRight=false;
-					CtrlStep=1;
+					moveStage=1;
 				}
 				break;
 			}
 			break;
 
 		case TURN_LEFT:
-			if (TurnLeft(5500,40,160,8500,1500))
-				eMove=getMove(isWallLeft,isWallFrontLeft|isWallFrontRight,isWallRight);
+			switch (moveStage)
+			{
+			case 1:
+				if (TurnLeft(4000,30,200,8500))
+				{
+					moveStage++;
+				}
+				break;
+			case 2:
+				posLeftTmp=qei_getPosLeft();
+				moveStage++;
+			case 3:
+				//go straight again to check left/right wall
+				forwardUpdate();
+				if (abs(qei_getPosLeft()-posLeftTmp)<2000)
+				{
+					if (!isWallLeft)
+						rqTurnLeft=true;
+					if (!isWallRight)
+						rqTurnRight=true;
+
+					if (isWallRight)
+						pid_wallfollow(leftError,rightError,AVG_SPEED_FWD_SLOW,WALL_FOLLOW_RIGHT);
+					else if (isWallLeft)
+						pid_wallfollow(leftError,rightError,AVG_SPEED_FWD_SLOW,WALL_FOLLOW_LEFT);
+					else
+					{
+						speed_set(MOTOR_RIGHT, AVG_SPEED_FWD_SLOW);
+						speed_set(MOTOR_LEFT, AVG_SPEED_FWD_SLOW);
+					}
+				}
+				else
+				{
+#ifdef TEST_TURNLEFT_MOVE2
+					speed_Enable_Hbridge(false);
+#endif
+					eMove=getMove(!rqTurnLeft,isWallFrontLeft|isWallFrontRight,!rqTurnRight);
+					rqTurnLeft=false;
+					rqTurnRight=false;
+					moveStage=1;
+					pid_reset(&pid_wall);
+				}
+			}
 			break;
 
 		case TURN_RIGHT:
-			if (TurnRight(6000,160,40,8500,2000))
-				eMove=getMove(isWallLeft,isWallFrontLeft|isWallFrontRight,isWallRight);
+			switch (moveStage)
+			{
+			case 1:
+				if (TurnRight(4000,200,30,8500))
+				{
+					moveStage++;
+				}
+				break;
+			case 2:
+				posLeftTmp=qei_getPosLeft();
+				moveStage++;
+			case 3:
+				//go straight again to check left/right wall
+				forwardUpdate();
+				if (abs(qei_getPosLeft()-posLeftTmp)<2000)
+				{
+					if (!isWallLeft)
+						rqTurnLeft=true;
+					if (!isWallRight)
+						rqTurnRight=true;
+
+					if (isWallRight)
+						pid_wallfollow(leftError,rightError,AVG_SPEED_FWD_SLOW,WALL_FOLLOW_RIGHT);
+					else if (isWallLeft)
+						pid_wallfollow(leftError,rightError,AVG_SPEED_FWD_SLOW,WALL_FOLLOW_LEFT);
+					else
+					{
+						speed_set(MOTOR_RIGHT, AVG_SPEED_FWD_SLOW);
+						speed_set(MOTOR_LEFT, AVG_SPEED_FWD_SLOW);
+					}
+				}
+				else
+				{
+#ifdef TEST_TURNRIGHT_MOVE2
+					speed_Enable_Hbridge(false);
+#endif
+					eMove=getMove(!rqTurnLeft,isWallFrontLeft|isWallFrontRight,!rqTurnRight);
+					rqTurnLeft=false;
+					rqTurnRight=false;
+					moveStage=1;
+					pid_reset(&pid_wall);
+				}
+			}
 			break;
 		case TURN_BACK:
-			if (TurnBack(7000,-80,40,10500,6000,6000))
-				eMove=getMove(isWallLeft,isWallFrontLeft|isWallFrontRight,isWallRight);
+			switch (moveStage)
+			{
+			case 1:
+				if (TurnBack(7000,-80,60,9000))
+				{
+					//rotate more if we still detect front wall: do it yourself ;D
+					moveStage++;
+				}
+				break;
+			case 2:
+				if (move(-7000,-7000,AVG_SPEED_BWD,AVG_SPEED_BWD))
+				{
+#ifdef TEST_TURNBACK_BACKWARD
+					speed_Enable_Hbridge(false);
+#endif
+					clearPosition();
+					avrSpeed = AVG_SPEED_FWD_SLOW;
+					eMove=FORWARD;
+					moveStage = 1;
+				}
+			}
 			break;
 		}
-
-		preMove=eMove;
 
 		PrintStep++;
 		if (PrintStep > (200 / ui32_msLoop))
@@ -807,13 +892,6 @@ void pid_Wallfollow_process(void)
 		}
 #endif
 
-#ifdef _DEBUG_POS_
-
-			if (PrintStep == 0)
-			{
-				bluetooth_print("pos: %3d.%03d\r\n", (int32_t)pid_params.u, (int32_t)(pid_params.u * 1000) % 1000);
-			}
-#endif
 
 		//bluetooth_print("IR: %d, %d, %d, %d\r\n", IR_GetIrDetectorValue(0), IR_GetIrDetectorValue(1), IR_GetIrDetectorValue(2), IR_GetIrDetectorValue(3));
 	}
